@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Login to your PaddleNest Basecamp">
+    <title>Login | PaddleNest Adventures</title>
+    <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00D4FF',   /* Electric Cyan */
+                        secondary: '#FF6B35', /* Sunset Orange */
+                        bgLight: '#FFFFFF',   /* Pure White */
+                        bgDark: '#0A0A0A',    /* Space Black */
+                        cardLight: '#F9FAFB', /* Light Card */
+                        cardDark: '#121212',  /* Dark Card */
+                        textLight: '#0A0A0A', /* Space Black Text */
+                        textDark: '#FFFFFF',  /* Pure White Text */
+                        mutedLight: '#4B5563',
+                        mutedDark: '#9CA3AF',
+                        borderLight: '#E5E7EB',
+                        borderDark: '#262626',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    animation: {
+                        'fadeInUp': 'fadeInUp 0.4s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            'from': { opacity: '0', transform: 'translateY(20px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer components {
+            .form-input {
+                @apply w-full pl-10 pr-10 py-3 border bg-transparent rounded-xl focus:border-primary focus:ring-1 focus:ring-primary transition-all outline-none text-sm font-bold text-[var(--text-color)] border-[var(--border-color)];
+            }
+            .social-btn {
+                @apply flex-1 flex items-center justify-center py-2.5 border rounded-xl transition-all duration-300 shadow-sm bg-[var(--card-bg)] border-[var(--border-color)] hover:border-primary hover:shadow-sm;
+            }
+            .input-icon {
+                @apply absolute top-1/2 -translate-y-1/2 text-[var(--text-muted)] left-4 text-sm transition-colors;
+            }
+            .form-group:focus-within .input-icon {
+                @apply text-primary;
+            }
+            .form-label {
+                @apply block text-[var(--text-color)] font-black mb-1.5 text-[10px] uppercase tracking-widest;
+            }
+        }
+    </style>
+    
+    <style>
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #0A0A0A;
+            --text-muted: #4B5563;
+            --card-bg: #F9FAFB;
+            --border-color: #E5E7EB;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --hover-highlight: #00D4FF;
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #0A0A0A;
+            --text-color: #FFFFFF;
+            --text-muted: #9CA3AF;
+            --card-bg: #121212;
+            --border-color: #262626;
+            --nav-bg: rgba(10, 10, 10, 0.85);
+            --hover-highlight: #00D4FF;
+        }
+
+        html, body {
+            margin: 0; 
+            padding: 0; 
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden; /* Strictly prevents scrolling to fit viewport */
+            background-color: var(--bg-color); 
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .form-input::placeholder { color: var(--text-muted); opacity: 0.7; font-weight: 500; }
+        
+        .glass-nav {
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body class="w-full h-screen overflow-hidden antialiased relative flex flex-col">
+
+    <nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 md:px-8 py-4 glass-nav transition-colors duration-300">
+        <a href="index.html" class="flex items-center gap-2 group no-underline">
+            <div class="w-9 h-9 md:w-10 md:h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110 shrink-0">
+                <i class="fa-solid fa-water text-base md:text-lg"></i>
+            </div>
+            <span class="font-display text-xl md:text-2xl font-black tracking-tight text-[var(--text-color)] block">Paddle<span class="text-primary">Nest</span></span>
+        </a>
+        
+        <div class="flex items-center gap-3 shrink-0">
+            <button id="rtlToggle" class="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:border-primary hover:text-primary shadow-sm" title="Toggle RTL">
+                <span class="text-[10px] font-black">RTL</span>
+            </button>
+            <button id="themeToggle" class="w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-all duration-300 border border-[var(--border-color)] bg-[var(--card-bg)] text-[var(--text-color)] hover:border-primary hover:text-primary shadow-sm" title="Toggle Dark Mode">
+                <i class="fas fa-sun text-sm hidden dark:inline-block"></i>
+                <i class="fas fa-moon text-sm dark:hidden"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section class="flex flex-col items-center justify-center h-screen w-full px-4 relative overflow-hidden">
+        
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1544111756-31a89c92cc22?auto=format&fit=crop&q=80&w=1920" alt="Background" class="w-full h-full object-cover blur-sm opacity-20 dark:opacity-30 scale-105 grayscale">
+            <div class="absolute inset-0 bg-gradient-to-b from-[var(--bg-color)] via-[var(--bg-color)]/80 to-[var(--bg-color)]"></div>
+        </div>
+
+        <div class="absolute top-1/4 left-1/4 w-80 h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+        <div class="w-full max-w-[380px] bg-[var(--card-bg)] rounded-[2rem] shadow-2xl border border-[var(--border-color)] opacity-0 animate-fadeInUp p-6 md:p-8 relative z-10 flex flex-col mt-10 backdrop-blur-xl">
+            
+            <div class="mb-6 text-center">
+                <h1 class="font-display text-2xl md:text-3xl font-black text-[var(--text-color)] mb-1">Welcome Back.</h1>
+                <p class="text-[var(--text-muted)] text-[10px] md:text-xs font-bold uppercase tracking-widest">Sign in to your Basecamp</p>
+            </div>
+
+            <div class="flex-1 flex flex-col justify-between">
+                <form id="loginFormElement" class="space-y-4">
+                    
+                    <div class="form-group relative">
+                        <label class="form-label" for="loginEmail">Email Address</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" placeholder="explorer@example.com" required class="form-input" id="loginEmail" autocomplete="username">
+                        </div>
+                    </div>
+
+                    <div class="form-group relative">
+                        <label class="form-label" for="loginPassword">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="loginPassword" placeholder="Enter your password" required class="form-input" autocomplete="current-password">
+                            <button type="button" onclick="togglePasswordVisibility('loginPassword', 'loginEyeIcon')" class="absolute top-1/2 -translate-y-1/2 right-4 text-[var(--text-muted)] hover:text-primary focus:outline-none cursor-pointer bg-transparent border-0 p-0 transition-colors">
+                                <i class="fas fa-eye text-sm" id="loginEyeIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs font-bold pt-1 pb-1">
+                        <label class="flex items-center gap-2 cursor-pointer group">
+                            <input type="checkbox" class="w-3.5 h-3.5 text-primary rounded border-[var(--border-color)] focus:ring-primary bg-transparent cursor-pointer transition-colors">
+                            <span class="text-[var(--text-muted)] group-hover:text-[var(--text-color)] transition-colors">Keep me logged in</span>
+                        </label>
+                        <button type="button" onclick="showPasswordReset()" class="text-primary hover:text-secondary bg-transparent border-0 p-0 transition-colors cursor-pointer tracking-wide">Lost Password?</button>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary text-[#0A0A0A] hover:bg-white py-3.5 rounded-xl font-black text-sm transition-all duration-300 shadow-[0_5px_20px_rgba(0,212,255,0.3)] transform hover:-translate-y-0.5 border-0 cursor-pointer mt-2 flex items-center justify-center gap-2" id="loginButton">
+                        Enter Basecamp <i class="fas fa-arrow-right text-xs ml-1"></i>
+                    </button>
+                </form>
+
+                <div class="mt-6">
+                    <div class="relative flex items-center py-2 mb-5">
+                        <div class="flex-grow border-t border-[var(--border-color)]"></div>
+                        <span class="flex-shrink-0 mx-3 text-[var(--text-muted)] text-[10px] font-black uppercase tracking-widest">Or Continue</span>
+                        <div class="flex-grow border-t border-[var(--border-color)]"></div>
+                    </div>
+
+                    <div class="flex gap-3 w-full mb-5">
+                        <button class="social-btn cursor-pointer group" title="Sign in with Google">
+                            <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-4 h-4 group-hover:scale-110 transition-transform" alt="Google">
+                        </button>
+                        <button class="social-btn cursor-pointer group" title="Sign in with Facebook">
+                            <i class="fab fa-facebook text-[#1877F2] text-lg group-hover:scale-110 transition-transform"></i>
+                        </button>
+                        <button class="social-btn cursor-pointer group" title="Sign in with Apple">
+                            <i class="fab fa-apple text-[var(--text-color)] text-lg group-hover:scale-110 transition-transform"></i>
+                        </button>
+                    </div>
+
+                    <p class="text-center text-xs text-[var(--text-muted)] font-bold">
+                        Need a manifest? 
+                        <a href="register.html" class="text-primary font-black hover:text-secondary transition-colors border-b border-primary hover:border-secondary pb-0.5 ml-1">Join the Crew</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="passwordResetModal" class="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-[100] hidden p-4 transition-opacity">
+        <div class="bg-[var(--card-bg)] rounded-[2rem] p-6 md:p-8 max-w-[380px] w-full shadow-2xl transform transition-all duration-300 scale-95 border border-[var(--border-color)] relative overflow-hidden">
+            
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-secondary"></div>
+            
+            <div class="flex justify-between items-center mb-5 mt-2">
+                <h3 class="font-display text-xl font-black text-[var(--text-color)]">Reset Password</h3>
+                <button onclick="closePasswordReset()" class="w-8 h-8 rounded-full bg-[var(--bg-color)] border border-[var(--border-color)] flex items-center justify-center text-[var(--text-muted)] hover:text-secondary hover:border-secondary transition-all cursor-pointer">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+            
+            <p class="text-[var(--text-muted)] mb-6 text-xs font-medium leading-relaxed">
+                Enter your email address associated with your PaddleNest account and we'll send you a secure link to reset your password.
+            </p>
+            
+            <div class="space-y-4">
+                <div class="form-group relative">
+                    <label class="form-label">Email Address</label>
+                    <div class="relative">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" placeholder="explorer@example.com" class="form-input" id="resetEmail">
+                    </div>
+                </div>
+                
+                <button onclick="sendResetLink(event)" class="w-full bg-primary hover:bg-secondary text-[#0A0A0A] py-3.5 rounded-xl font-black transition-all duration-300 text-sm shadow-[0_5px_15px_rgba(0,212,255,0.3)] cursor-pointer border-0 mt-2">
+                    Send Reset Link
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Theme Logic ---
+        const themeToggle = document.getElementById("themeToggle");
+        const htmlElement = document.documentElement;
+        
+        function updateThemeIcon() {
+            const isDark = htmlElement.classList.contains('dark');
+            const sunIcon = themeToggle.querySelector('.fa-sun');
+            const moonIcon = themeToggle.querySelector('.fa-moon');
+            if (isDark) {
+                if(sunIcon) sunIcon.classList.remove('hidden');
+                if(moonIcon) moonIcon.classList.add('hidden');
+            } else {
+                if(sunIcon) sunIcon.classList.add('hidden');
+                if(moonIcon) moonIcon.classList.remove('hidden');
+            }
+        }
+
+        function toggleDarkMode() {
+            htmlElement.classList.toggle('dark');
+            const isDark = htmlElement.classList.contains('dark');
+            htmlElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeIcon();
+        }
+        
+        if (themeToggle) themeToggle.addEventListener("click", toggleDarkMode);
+        
+        const savedTheme = localStorage.getItem('theme') || 'light'; 
+        if (savedTheme === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add("dark");
+            htmlElement.setAttribute('data-theme', 'dark');
+        } else {
+            htmlElement.classList.remove("dark");
+            htmlElement.setAttribute('data-theme', 'light');
+        }
+        updateThemeIcon();
+
+        // --- RTL Logic ---
+        const rtlToggle = document.getElementById("rtlToggle");
+        
+        function toggleRTL() {
+            const current = htmlElement.getAttribute("dir") || "ltr";
+            const next = current === "rtl" ? "ltr" : "rtl";
+            htmlElement.setAttribute("dir", next);
+            localStorage.setItem("direction", next);
+        }
+        
+        if (rtlToggle) rtlToggle.addEventListener("click", toggleRTL);
+        if (localStorage.getItem("direction") === "rtl") {
+            htmlElement.setAttribute("dir", "rtl");
+        }
+
+        // --- Modal Logic ---
+        function showPasswordReset() {
+            if(window.event) window.event.preventDefault();
+            const modal = document.getElementById('passwordResetModal');
+            modal.classList.remove('hidden');
+            setTimeout(() => { 
+                modal.querySelector('div').style.transform = 'scale(1)'; 
+                modal.style.opacity = '1';
+            }, 10);
+        }
+
+        function closePasswordReset() {
+            const modal = document.getElementById('passwordResetModal');
+            modal.querySelector('div').style.transform = 'scale(0.95)';
+            modal.style.opacity = '0';
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        document.getElementById('passwordResetModal').addEventListener('click', function(e) {
+            if (e.target === this) closePasswordReset();
+        });
+
+        function sendResetLink(event) {
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sending...';
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            setTimeout(() => {
+                alert('A secure reset link has been sent to your email!');
+                btn.textContent = originalText;
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                closePasswordReset();
+                document.getElementById('resetEmail').value = '';
+            }, 1500);
+        }
+
+        // --- Login Submission ---
+        document.getElementById('loginFormElement').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('loginButton');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Authenticating...';
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            // Redirect to the User Dashboard after fake auth
+            setTimeout(() => { window.location.href = 'user-dashboard.html'; }, 1500);
+        });
+
+        // --- Password Visibility Toggle ---
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash', 'text-primary');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash', 'text-primary');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html> 

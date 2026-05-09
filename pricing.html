@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="PaddleNest - Transparent Pricing & Packages">
+    <title>Pricing | PaddleNest Minimalist Adventures</title>
+     <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00D4FF',   /* Electric Cyan */
+                        secondary: '#FF6B35', /* Sunset Orange */
+                        bgLight: '#FFFFFF',   /* Pure White */
+                        bgDark: '#0A0A0A',    /* Space Black */
+                        cardLight: '#F9FAFB', /* Light Card */
+                        cardDark: '#121212',  /* Dark Card */
+                        textLight: '#0A0A0A', /* Space Black Text */
+                        textDark: '#FFFFFF'   /* Pure White Text */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    screens: {
+                        'xs': '360px', 
+                        'sm': '390px', 
+                        'md': '768px', 
+                        'lg': '1024px', 
+                        'xl': '1280px', 
+                        '2xl': '1536px', 
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #0A0A0A;
+            --text-muted: #4B5563;
+            --card-bg: #F9FAFB;
+            --border-color: #E5E7EB;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #0A0A0A;
+            --text-color: #FFFFFF;
+            --text-muted: #9CA3AF;
+            --card-bg: #121212;
+            --border-color: #262626;
+            --nav-bg: rgba(10, 10, 10, 0.85);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .text-body-muted { color: var(--text-muted); transition: color 0.3s ease; }
+        .bg-card { background-color: var(--card-bg); border-color: var(--border-color); }
+        .border-theme { border-color: var(--border-color); }
+
+        /* Minimalist Glass Navbar */
+        .glass-nav {
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Clean Animated Nav Links */
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            transition: color 0.3s;
+            color: var(--text-color);
+            padding: 0.5rem 0;
+            white-space: nowrap;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #00D4FF; 
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover::after, .nav-link.active::after { 
+            transform: scaleX(1); 
+            transform-origin: left;
+        }
+        .nav-link:hover, .nav-link.active { color: #00D4FF; }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%); 
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: var(--bg-color); 
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        
+        .mobile-dropdown-content {
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: var(--card-bg); 
+            border-radius: 8px;
+        }
+        .mobile-dropdown-content.active { 
+            max-height: 300px; 
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            margin: 4px 0; 
+        }
+
+        .dropdown-arrow { transition: transform 0.3s ease; }
+        .mobile-dropdown-btn.active .dropdown-arrow { transform: rotate(180deg); }
+
+        /* Text Gradients */
+        .text-gradient { background: linear-gradient(to right, #00D4FF, #FF6B35); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #00D4FF; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF6B35; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden w-full relative">
+
+    <nav class="fixed w-full top-0 z-[100] glass-nav transition-all duration-300 py-2">
+        <div class="max-w-[1920px] mx-auto px-4 md:px-6">
+            <div class="flex items-center justify-between h-16 md:h-20 w-full gap-4">
+                
+                <a href="index.html" class="flex items-center gap-2 group flex-shrink-0 w-auto lg:w-[200px]">
+                    <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
+                        <i class="fa-solid fa-water text-lg"></i>
+                    </div>
+                    <span class="font-display text-2xl font-semibold tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
+                </a>
+
+                <div class="hidden xl:flex flex-1 justify-center items-center gap-4 2xl:gap-6 px-4">
+                    <a href="index.html" class="nav-link text-sm 2xl:text-base">Home</a>
+                    <a href="about.html" class="nav-link text-sm 2xl:text-base">About</a>
+                    <a href="packages.html" class="nav-link text-sm 2xl:text-base">Packages</a>
+                    <a href="routes.html" class="nav-link text-sm 2xl:text-base">Routes</a>
+                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base">Rentals</a>
+                    <a href="guidelines.html" class="nav-link text-sm 2xl:text-base">Guidelines</a>
+                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base">Adventure</a>
+                    <a href="faq.html" class="nav-link text-sm 2xl:text-base">FAQ</a>
+                    <a href="pricing.html" class="nav-link active text-sm 2xl:text-base">Pricing</a>
+                    <a href="contact.html" class="nav-link text-sm 2xl:text-base">Contact</a>
+
+                    <div class="relative group cursor-pointer py-6">
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <div class="dropdown-menu absolute z-50 top-full right-0 mt-[-10px] w-48 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
+                            <a href="user-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1"><i class="fas fa-user w-5 text-primary mr-2"></i> User</a>
+                            <a href="admin-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium"><i class="fas fa-shield-halved w-5 text-secondary mr-2"></i> Admin</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden xl:flex items-center justify-end gap-2 2xl:gap-3 flex-shrink-0 w-auto lg:w-[250px] 2xl:w-[300px]">
+                    <button class="rtl-toggle-btn w-9 h-9 rounded-full items-center justify-center border border-theme hover:border-primary hover:text-primary transition-all text-[var(--text-color)] bg-transparent font-medium text-xs">
+                        RTL
+                    </button>
+
+                    <button class="theme-toggle w-9 h-9 rounded-full items-center justify-center border border-theme hover:border-primary hover:text-primary transition-all text-[var(--text-color)] bg-transparent">
+                        <i class="fas fa-moon transition-transform hover:rotate-[360deg] duration-500 text-sm"></i>
+                    </button>
+
+                    <a href="login.html" class="font-medium text-[var(--text-color)] hover:text-primary transition-colors px-2 text-sm">Login</a>
+                    <a href="register.html" class="bg-primary text-[#0A0A0A] px-5 py-2.5 rounded-full font-medium text-sm hover:bg-secondary hover:text-[#0A0A0A] transition-all duration-300 shadow-md hover:shadow-secondary/40 transform hover:-translate-y-0.5 whitespace-nowrap border-2 border-transparent">Register</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="flex xl:hidden items-center justify-center text-[var(--text-color)] hover:text-primary transition-colors bg-transparent border-0 cursor-pointer p-2 shrink-0">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/80 z-[9998] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div>
+    
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 left-0 z-[9999] w-[85%] max-w-sm border-r border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-color)]">
+        <div class="p-5 flex flex-col h-full">
+            
+            <div class="flex items-center justify-between pb-6 border-b border-theme shrink-0">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
+                        <i class="fa-solid fa-water text-xs"></i>
+                    </div>
+                    <span class="font-display text-xl font-semibold text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
+                </a>
+                
+                <div class="flex items-center gap-2 shrink-0">
+                    <button class="rtl-toggle-btn w-9 h-9 rounded-full bg-card border border-theme flex items-center justify-center text-[var(--text-color)] font-medium text-[10px] hover:text-primary hover:border-primary transition-colors">
+                        RTL
+                    </button>
+                    <button class="theme-toggle w-9 h-9 rounded-full bg-card border border-theme flex items-center justify-center text-[var(--text-color)] hover:text-primary hover:border-primary transition-colors">
+                        <i class="fas fa-moon text-sm"></i>
+                    </button>
+                    <a href="register.html" class="w-9 h-9 rounded-full bg-primary border border-primary flex items-center justify-center text-[#0A0A0A] shadow-md shadow-primary/20 hover:bg-secondary hover:border-secondary transition-colors" title="Register">
+                        <i class="fas fa-user-plus text-sm"></i>
+                    </a>
+                    <button id="close-mobile-menu" class="w-9 h-9 flex items-center justify-center text-xl text-[var(--text-color)] hover:text-secondary transition-colors bg-transparent border-0 cursor-pointer ml-1">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto py-6">
+                <a href="index.html" class="block font-sans text-base py-1.5 font-medium text-[var(--text-color)] hover:text-primary">Home</a>
+                <a href="about.html" class="block font-sans text-base py-1.5 font-medium text-[var(--text-color)] hover:text-primary">About</a>
+                <a href="packages.html" class="block font-sans text-base py-1.5 font-medium text-[var(--text-color)] hover:text-primary">Packages</a>
+                <a href="routes.html" class="block font-sans text-base py-1.5 font-medium text-[var(--text-color)] hover:text-primary">Routes</a>
+                <a href="rentals.html" class="block font-sans text-base py-1.5 font-medium text-[var(--text-color)] hover:text-primary">Rentals</a>
+                <a href="guidelines.html" class="block font-sans text-base py-1.5 font-medium text-[var(--text-color)] hover:text-primary">Guidelines</a>
+                <a href="adventure.html" class="block font-sans text-base py-1.5 font-medium text-[var(--text-color)] hover:text-primary">Adventure</a>
+                <a href="faq.html" class="block font-sans text-base py-1.5 font-medium text-[var(--text-color)] hover:text-primary">FAQ</a>
+                <a href="pricing.html" class="block font-sans text-base py-1.5 font-medium text-primary">Pricing</a>
+                <a href="contact.html" class="block font-sans text-base py-1.5 font-medium text-[var(--text-color)] hover:text-primary">Contact</a>
+                
+                <div class="pt-4 mt-2 border-t border-theme">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-left font-sans text-base py-1.5 text-[var(--text-color)] font-medium" onclick="toggleMobileDropdown(this, 'dashboard-mobile')">
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
+                    </button>
+                    <div id="dashboard-mobile" class="mobile-dropdown-content px-4">
+                        <a href="user-dashboard.html" class="flex items-center gap-2 py-2 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5 text-center"></i> User Dashboard</a>
+                        <a href="admin-dashboard.html" class="flex items-center gap-2 py-2 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5 text-center"></i> Admin Panel</a>
+                    </div>
+                </div>
+
+                <a href="login.html" class="flex items-center gap-2 font-sans text-base py-1.5 font-medium text-secondary hover:text-primary transition-colors mt-2">
+                    <i class="fas fa-sign-in-alt w-5 text-center"></i> Login Account
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="w-full flex-grow overflow-x-hidden">
+
+        <section class="relative w-full h-[100dvh] flex flex-col items-center justify-center pt-20 overflow-hidden bg-bgDark border-b border-[#121212]">
+            <div class="absolute inset-0 z-0">
+                <img src="Images/pricing.jpg" class="w-full h-full object-cover opacity-40 mix-blend-overlay grayscale" alt="PaddleNest Pricing">
+            </div>
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-[#0A0A0A]/40 z-10"></div>
+            
+            <div class="container mx-auto px-4 md:px-8 relative z-20 text-center flex flex-col items-center w-full">
+                
+                <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[#121212]/80 border border-primary/30 mb-8 backdrop-blur-md">
+                    <i class="fas fa-tag text-primary"></i>
+                    <span class="text-white font-medium text-xs tracking-widest uppercase">No Hidden Fees</span>
+                </div>
+                
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-white mb-6 leading-[1.05]">
+                    Transparent <br/>
+                    <span class="text-gradient">Pricing.</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-400 font-medium max-w-2xl mx-auto mb-12">
+                    Whether you're renting gear for a solo trip or booking a multi-day guided expedition, you'll know exactly what you're paying for.
+                </p>
+
+                <div class="flex gap-4">
+                    <a href="#tiers" class="bg-primary text-[#0A0A0A] px-8 py-4 rounded-full font-semibold text-lg hover:bg-secondary transition-all shadow-[0_0_20px_rgba(0,212,255,0.4)] transform hover:-translate-y-1">
+                        View Rates
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="tiers" class="py-24 md:py-32 bg-[var(--bg-color)] border-b border-theme transition-colors relative z-30">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="text-center mb-20 max-w-2xl mx-auto">
+                    <span class="text-primary font-semibold tracking-widest uppercase text-sm block mb-2">Our Offerings</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4">Choose Your <span class="border-b-4 border-primary">Adventure</span></h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
+                    
+                    <div class="bg-card border border-theme rounded-[2.5rem] p-10 flex flex-col hover:border-primary/50 transition-colors duration-300 shadow-sm relative overflow-hidden group">
+                        <h3 class="text-2xl font-display font-semibold text-[var(--text-color)] mb-2">Self-Guided Rentals</h3>
+                        <p class="text-body-muted font-medium mb-8 text-sm">For those who want to explore independently.</p>
+                        
+                        <div class="mb-8 border-b border-theme pb-8 flex items-baseline gap-2">
+                            <span class="text-sm font-medium text-body-muted">From</span>
+                            <span class="text-5xl font-semibold text-[var(--text-color)]">$45</span>
+                            <span class="text-body-muted font-medium text-sm">/ 4 hours</span>
+                        </div>
+                        
+                        <ul class="space-y-4 mb-10 flex-grow font-medium text-sm text-[var(--text-color)]">
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> Premium Board & Paddle</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> Coast Guard PFD</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> Local Route Maps</li>
+                            <li class="flex items-center gap-3 text-body-muted line-through"><i class="fas fa-times opacity-50"></i> Professional Guide</li>
+                        </ul>
+                        
+                        <a href="rentals.html" class="w-full py-4 rounded-xl border-2 border-[var(--text-color)] text-[var(--text-color)] font-medium hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition-colors text-center">View Rental Fleet</a>
+                    </div>
+
+                    <!-- FIXED: Removed overflow-hidden from here and added an absolute wrapper for the background blur -->
+                    <div class="bg-card border-2 border-primary rounded-[2.5rem] p-10 flex flex-col transform md:-translate-y-6 shadow-[0_0_40px_rgba(0,212,255,0.3)] relative">
+                        
+                        <!-- NEW: Container to clip the background blur effect so it doesn't spill out of the rounded card -->
+                        <div class="absolute inset-0 rounded-[2.5rem] overflow-hidden pointer-events-none">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-[40px]"></div>
+                        </div>
+
+                        <!-- MODIFIED: Added z-20 and whitespace-nowrap to ensure it stays above the card and doesn't get clipped -->
+                        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-primary text-[#0A0A0A] px-6 py-1.5 rounded-full font-semibold text-xs uppercase tracking-widest shadow-lg z-20 whitespace-nowrap">Most Popular</div>
+                        
+                        <h3 class="text-2xl font-display font-semibold text-[var(--text-color)] mb-2 relative z-10">Guided Day Tours</h3>
+                        <p class="text-body-muted font-medium mb-8 text-sm relative z-10">Fully curated coastal and mangrove experiences.</p>
+                        
+                        <div class="mb-8 border-b border-theme pb-8 flex items-baseline gap-2 relative z-10">
+                            <span class="text-sm font-medium text-body-muted">From</span>
+                            <span class="text-5xl font-semibold text-primary">$89</span>
+                            <span class="text-body-muted font-medium text-sm">/ person</span>
+                        </div>
+                        
+                        <ul class="space-y-4 mb-10 flex-grow font-medium text-sm text-[var(--text-color)] relative z-10">
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> All Premium Gear Included</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> Expert Local Guide</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> 4K Pro Photography</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> Local Organic Snacks</li>
+                        </ul>
+                        
+                        <a href="packages.html" class="w-full py-4 rounded-xl bg-primary text-[#0A0A0A] font-semibold hover:bg-secondary transition-colors text-center relative z-10 shadow-lg shadow-primary/20">Book a Tour</a>
+                    </div>
+
+                    <div class="bg-card border border-theme rounded-[2.5rem] p-10 flex flex-col hover:border-secondary/50 transition-colors duration-300 shadow-sm relative overflow-hidden group">
+                        <h3 class="text-2xl font-display font-semibold text-[var(--text-color)] mb-2">Extreme Expeditions</h3>
+                        <p class="text-body-muted font-medium mb-8 text-sm">Multi-day, unassisted endurance challenges.</p>
+                        
+                        <div class="mb-8 border-b border-theme pb-8 flex items-baseline gap-2">
+                            <span class="text-sm font-medium text-body-muted">From</span>
+                            <span class="text-5xl font-semibold text-[var(--text-color)]">$450</span>
+                            <span class="text-body-muted font-medium text-sm">/ 3 days</span>
+                        </div>
+                        
+                        <ul class="space-y-4 mb-10 flex-grow font-medium text-sm text-[var(--text-color)]">
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> Pro-Level Touring Gear</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> Survival & Camping Kit</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> GPS Comm Devices</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> Catered Camp Meals</li>
+                        </ul>
+                        
+                        <a href="adventure.html" class="w-full py-4 rounded-xl border-2 border-[var(--text-color)] text-[var(--text-color)] font-medium hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition-colors text-center">View Expeditions</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-[var(--bg-color)] border-b border-theme transition-colors">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="mb-16 border-l-4 border-primary pl-6">
+                    <span class="text-primary font-semibold tracking-widest uppercase text-sm block mb-2">Base Value</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)]">The PaddleNest <span class="border-b-4 border-primary">Standard</span></h2>
+                    <p class="text-body-muted text-lg mt-4 font-medium">Included free with every single guided tour and expedition.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-card border border-theme p-8 rounded-[2rem] text-center hover:border-primary transition-colors">
+                        <div class="w-14 h-14 bg-[var(--bg-color)] border border-theme rounded-xl flex items-center justify-center text-primary text-xl mx-auto mb-4 shadow-sm"><i class="fas fa-camera"></i></div>
+                        <h4 class="font-semibold text-[var(--text-color)] mb-2">Pro Photography</h4>
+                        <p class="text-xs text-body-muted font-medium">4K photos delivered instantly.</p>
+                    </div>
+                    
+                    <div class="bg-card border border-theme p-8 rounded-[2rem] text-center hover:border-secondary transition-colors">
+                        <div class="w-14 h-14 bg-[var(--bg-color)] border border-theme rounded-xl flex items-center justify-center text-secondary text-xl mx-auto mb-4 shadow-sm"><i class="fas fa-shield-heart"></i></div>
+                        <h4 class="font-semibold text-[var(--text-color)] mb-2">Safety Gear</h4>
+                        <p class="text-xs text-body-muted font-medium">High-end PFDs & leashes.</p>
+                    </div>
+                    
+                    <div class="bg-card border border-theme p-8 rounded-[2rem] text-center hover:border-primary transition-colors">
+                        <div class="w-14 h-14 bg-[var(--bg-color)] border border-theme rounded-xl flex items-center justify-center text-primary text-xl mx-auto mb-4 shadow-sm"><i class="fas fa-apple-whole"></i></div>
+                        <h4 class="font-semibold text-[var(--text-color)] mb-2">Trail Snacks</h4>
+                        <p class="text-xs text-body-muted font-medium">Organic local energy bars.</p>
+                    </div>
+                    
+                    <div class="bg-card border border-theme p-8 rounded-[2rem] text-center hover:border-secondary transition-colors">
+                        <div class="w-14 h-14 bg-[var(--bg-color)] border border-theme rounded-xl flex items-center justify-center text-secondary text-xl mx-auto mb-4 shadow-sm"><i class="fas fa-graduation-cap"></i></div>
+                        <h4 class="font-semibold text-[var(--text-color)] mb-2">Quick Lesson</h4>
+                        <p class="text-xs text-body-muted font-medium">15-min technique coaching.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-0">
+            <div class="flex flex-col lg:flex-row w-full">
+                <div class="w-full lg:w-1/2 h-[400px] lg:h-auto overflow-hidden border-y border-theme lg:border-y-0">
+                    <img src="Images/Marcus Thorne.jpg" alt="Group Paddleboarding" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                </div>
+                <div class="w-full lg:w-1/2 bg-card p-12 md:p-24 flex flex-col justify-center border-y border-theme lg:border-l">
+                    <span class="text-secondary font-semibold tracking-widest uppercase text-sm block mb-4">Volume Pricing</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-6 leading-tight">Group & Corporate <br/><span class="text-secondary">Rates.</span></h2>
+                    <p class="text-body-muted text-lg mb-8 font-medium leading-relaxed">
+                        Planning a retreat, family reunion, or team-building event? We offer exclusive discounts and dedicated guides for large groups to ensure a seamless, private experience.
+                    </p>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex justify-between items-center border-b border-theme pb-2">
+                            <span class="font-medium text-[var(--text-color)]">Groups of 6 - 10</span>
+                            <span class="font-semibold text-secondary">10% Off Total</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-theme pb-2">
+                            <span class="font-medium text-[var(--text-color)]">Groups of 11 - 20</span>
+                            <span class="font-semibold text-secondary">15% Off Total</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-theme pb-2">
+                            <span class="font-medium text-[var(--text-color)]">Corporate Full Buyout</span>
+                            <span class="font-semibold text-primary">Custom Quote</span>
+                        </div>
+                    </div>
+
+                    <a href="contact.html" class="inline-block bg-[var(--text-color)] text-[var(--bg-color)] hover:bg-secondary hover:text-[#0A0A0A] px-8 py-4 rounded-xl font-semibold text-center transition-all shadow-md lg:self-start">Request Group Quote</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-[#0A0A0A] text-white border-y border-[#171717] transition-colors relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px] mix-blend-screen pointer-events-none -translate-y-1/2"></div>
+            
+            <div class="container mx-auto px-4 md:px-8 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                    <div class="max-w-2xl border-l-4 border-primary pl-6">
+                        <span class="text-primary font-semibold tracking-widest uppercase text-sm block mb-2">Enhancements</span>
+                        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white">Gear <span class="text-primary">Add-Ons</span></h2>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    <div class="bg-[#121212] border border-[#262626] p-6 rounded-[1.5rem] hover:border-primary transition-colors text-center shadow-sm">
+                        <div class="text-4xl text-primary mb-4"><i class="fas fa-camera"></i></div>
+                        <h4 class="font-semibold text-white mb-1">Action Camera</h4>
+                        <p class="text-xs text-gray-400 font-medium mb-3">With floating mount</p>
+                        <span class="font-semibold text-lg text-white">+$25 <span class="text-xs font-normal text-gray-500">/ day</span></span>
+                    </div>
+                    <div class="bg-[#121212] border border-[#262626] p-6 rounded-[1.5rem] hover:border-secondary transition-colors text-center shadow-sm">
+                        <div class="text-4xl text-secondary mb-4"><i class="fas fa-mask"></i></div>
+                        <h4 class="font-semibold text-white mb-1">Snorkel Set</h4>
+                        <p class="text-xs text-gray-400 font-medium mb-3">Mask & Fins</p>
+                        <span class="font-semibold text-lg text-white">+$15 <span class="text-xs font-normal text-gray-500">/ day</span></span>
+                    </div>
+                    <div class="bg-[#121212] border border-[#262626] p-6 rounded-[1.5rem] hover:border-primary transition-colors text-center shadow-sm">
+                        <div class="text-4xl text-primary mb-4"><i class="fas fa-suitcase"></i></div>
+                        <h4 class="font-semibold text-white mb-1">YETI Cooler</h4>
+                        <p class="text-xs text-gray-400 font-medium mb-3">Ice included</p>
+                        <span class="font-semibold text-lg text-white">+$20 <span class="text-xs font-normal text-gray-500">/ day</span></span>
+                    </div>
+                    <div class="bg-[#121212] border border-[#262626] p-6 rounded-[1.5rem] hover:border-secondary transition-colors text-center shadow-sm">
+                        <div class="text-4xl text-secondary mb-4"><i class="fas fa-car-side"></i></div>
+                        <h4 class="font-semibold text-white mb-1">Roof Racks</h4>
+                        <p class="text-xs text-gray-400 font-medium mb-3">Soft tie-down system</p>
+                        <span class="font-semibold text-lg text-white">+$10 <span class="text-xs font-normal text-gray-500">/ flat</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-[var(--bg-color)] transition-colors">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="flex flex-col lg:flex-row gap-16 items-center">
+                    
+                    <div class="w-full lg:w-1/2">
+                        <h2 class="text-4xl font-display font-semibold text-[var(--text-color)] mb-8">Payment <span class="text-primary border-b-4 border-primary">FAQs</span></h2>
+                        <div class="space-y-6">
+                            <div class="border-b border-theme pb-4">
+                                <h4 class="font-semibold text-[var(--text-color)] text-lg mb-2">Do you require a deposit?</h4>
+                                <p class="text-body-muted font-medium text-sm leading-relaxed">For rentals, we place a $100 temporary hold on your credit card for incidentals. For guided tours, payment is collected in full at the time of booking.</p>
+                            </div>
+                            <div class="border-b border-theme pb-4">
+                                <h4 class="font-semibold text-[var(--text-color)] text-lg mb-2">What is your refund policy?</h4>
+                                <p class="text-body-muted font-medium text-sm leading-relaxed">Cancel 48+ hours in advance for a 100% refund. Cancellations within 48 hours receive a 50% credit. Weather-related cancellations by PaddleNest are always fully refunded.</p>
+                            </div>
+                            <div class="border-b border-theme pb-4">
+                                <h4 class="font-semibold text-[var(--text-color)] text-lg mb-2">Are there any hidden booking fees?</h4>
+                                <p class="text-body-muted font-medium text-sm leading-relaxed">No. The price you see includes all taxes, safety equipment, and transaction fees. Gratuity for your guide is entirely optional.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-1/2 bg-card rounded-[3rem] p-10 md:p-16 text-center border border-theme shadow-lg">
+                        <i class="fas fa-lock text-5xl text-[var(--text-color)] mb-6"></i>
+                        <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-6 leading-tight">Secure Your <br/>Booking.</h2>
+                        <p class="text-body-muted font-medium mb-10">Our tours and premium rental fleet book up fast during peak season. Don't miss out.</p>
+                        <a href="packages.html" class="bg-primary text-[#0A0A0A] px-10 py-5 rounded-full font-semibold text-lg hover:bg-secondary transition-all shadow-[0_0_20px_rgba(0,212,255,0.3)] hover:-translate-y-1 block w-full sm:w-max mx-auto">
+                            Book Now
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-bgDark text-gray-300 pt-20 pb-10 border-t border-[#121212]">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <a href="index.html" class="flex items-center gap-3 mb-6 group inline-flex">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
+                            <i class="fa-solid fa-water"></i>
+                        </div>
+                        <span class="font-display text-2xl font-semibold text-white">Paddle<span class="text-primary">Nest</span></span>
+                    </a>
+                    <p class="text-gray-400 font-medium mb-6 text-sm leading-relaxed">
+                        Premium eco-tours and paddleboard rentals bridging the gap between humans and nature.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#121212] border border-white/5 flex items-center justify-center hover:bg-primary hover:text-[#0A0A0A] transition-all"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#121212] border border-white/5 flex items-center justify-center hover:bg-primary hover:text-[#0A0A0A] transition-all"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#121212] border border-white/5 flex items-center justify-center hover:bg-primary hover:text-[#0A0A0A] transition-all"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Navigation</h4>
+                    <ul class="space-y-3 font-medium text-sm">
+                        <li><a href="about.html" class="hover:text-primary transition-colors block">About Us</a></li>
+                        <li><a href="packages.html" class="hover:text-primary transition-colors block">Tours & Packages</a></li>
+                        <li><a href="rentals.html" class="hover:text-primary transition-colors block">Rentals</a></li>
+                        <li><a href="faq.html" class="hover:text-primary transition-colors block">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Legal</h4>
+                    <ul class="space-y-3 font-medium text-sm">
+                        <li><a href="privacy.html" class="hover:text-primary transition-colors block">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-primary transition-colors block">Terms of Service</a></li>
+                        <li><a href="guidelines.html" class="hover:text-primary transition-colors block">Guidelines</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Contact HQ</h4>
+                    <ul class="space-y-4 font-medium text-sm">
+                        <li class="flex items-start gap-3 cursor-default">
+                            <i class="fas fa-map-marker-alt mt-1 text-primary"></i>
+                            <span>123 Ocean Drive,<br>Coastal Bay, FL 33101</span>
+                        </li>
+                        <li class="flex items-center gap-3 hover:text-secondary transition-colors cursor-pointer">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <a href="mailto:hello@paddlenest.com">hello@paddlenest.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-[#121212] pt-6 flex flex-col md:flex-row justify-between items-center text-xs font-semibold text-gray-500">
+                <p>&copy; 2026 PaddleNest. Minimalist Adventure Co.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Theme Toggle Logic ---
+        const htmlElement = document.documentElement;
+        const themeToggleBtns = document.querySelectorAll('.theme-toggle');
+
+        function updateTheme() {
+            const isDark = htmlElement.classList.contains('dark');
+            htmlElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            
+            themeToggleBtns.forEach(btn => {
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    if (isDark) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                }
+            });
+            
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        themeToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                updateTheme();
+            });
+        });
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        }
+        updateTheme();
+
+        // --- RTL Toggle Logic ---
+        const rtlToggleBtns = document.querySelectorAll('.rtl-toggle-btn');
+        rtlToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const currentDir = htmlElement.getAttribute('dir');
+                htmlElement.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+            });
+        });
+
+        // --- Navbar Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // --- Mobile Menu Logic ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                mobileOverlay.classList.remove('opacity-0');
+                mobileOverlay.classList.add('opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeMobileMenuFunc() {
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('opacity-100');
+            mobileOverlay.classList.add('opacity-0');
+            setTimeout(() => {
+                mobileOverlay.classList.add('hidden');
+            }, 300); 
+            document.body.style.overflow = '';
+            
+            document.querySelectorAll('.mobile-dropdown-content.active').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.mobile-dropdown-btn.active').forEach(btn => btn.classList.remove('active'));
+        }
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+        if (closeMobileMenu) closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenuFunc);
+
+        window.toggleMobileDropdown = function(btnElement, targetId) {
+            const targetContent = document.getElementById(targetId);
+            
+            document.querySelectorAll('.mobile-dropdown-content').forEach(el => {
+                if (el.id !== targetId && el.classList.contains('active')) {
+                    el.classList.remove('active');
+                    const prevBtn = document.querySelector(`[onclick="toggleMobileDropdown(this, '${el.id}')"]`);
+                    if(prevBtn) prevBtn.classList.remove('active');
+                }
+            });
+
+            targetContent.classList.toggle('active');
+            btnElement.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

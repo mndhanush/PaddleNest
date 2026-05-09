@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="PaddleNest - Extreme Ocean Adventures">
+    <title>Adventures | PaddleNest Minimalist Expeditions</title>
+     <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00D4FF',   /* Electric Cyan */
+                        secondary: '#FF6B35', /* Sunset Orange */
+                        bgLight: '#FFFFFF',   /* Pure White */
+                        bgDark: '#0A0A0A',    /* Space Black */
+                        cardLight: '#F9FAFB', /* Light Card */
+                        cardDark: '#121212',  /* Dark Card */
+                        textLight: '#0A0A0A', /* Space Black Text */
+                        textDark: '#FFFFFF'   /* Pure White Text */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    screens: {
+                        'xs': '360px', 
+                        'sm': '390px', 
+                        'md': '768px', 
+                        'lg': '1024px', 
+                        'xl': '1280px', 
+                        '2xl': '1536px', 
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #0A0A0A;
+            --text-muted: #4B5563;
+            --card-bg: #F9FAFB;
+            --border-color: #E5E7EB;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #0A0A0A;
+            --text-color: #FFFFFF;
+            --text-muted: #9CA3AF;
+            --card-bg: #121212;
+            --border-color: #262626;
+            --nav-bg: rgba(10, 10, 10, 0.85);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .text-body-muted { color: var(--text-muted); transition: color 0.3s ease; }
+        .bg-card { background-color: var(--card-bg); border-color: var(--border-color); }
+        .border-theme { border-color: var(--border-color); }
+
+        /* Minimalist Glass Navbar */
+        .glass-nav {
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Clean Animated Nav Links */
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            transition: color 0.3s;
+            color: var(--text-color);
+            padding: 0.5rem 0;
+            white-space: nowrap;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #00D4FF; 
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover::after, .nav-link.active::after { 
+            transform: scaleX(1); 
+            transform-origin: left;
+        }
+        .nav-link:hover, .nav-link.active { color: #00D4FF; }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .mobile-dropdown-content {
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: var(--card-bg); 
+            border-radius: 8px;
+        }
+        .mobile-dropdown-content.active { 
+            max-height: 300px; 
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            margin: 4px 0; 
+        }
+
+        .dropdown-arrow { transition: transform 0.3s ease; }
+        .mobile-dropdown-btn.active .dropdown-arrow { transform: rotate(180deg); }
+
+        /* Text Gradients */
+        .text-gradient { background: linear-gradient(to right, #00D4FF, #FF6B35); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #00D4FF; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF6B35; }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden w-full relative">
+
+    <nav class="fixed w-full top-0 z-[100] glass-nav transition-all duration-300 py-2">
+        <div class="max-w-[1920px] mx-auto px-4 md:px-6">
+            <div class="flex items-center justify-between h-16 md:h-20 w-full gap-4">
+                
+                <a href="index.html" class="flex items-center gap-2 group flex-shrink-0 w-auto lg:w-[200px]">
+                    <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
+                        <i class="fa-solid fa-water text-lg"></i>
+                    </div>
+                    <span class="font-display text-2xl font-semibold tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
+                </a>
+
+                <div class="hidden xl:flex flex-1 justify-center items-center gap-4 2xl:gap-6 px-4">
+                    <a href="index.html" class="nav-link text-sm 2xl:text-base">Home</a>
+                    <a href="about.html" class="nav-link text-sm 2xl:text-base">About</a>
+                    <a href="packages.html" class="nav-link text-sm 2xl:text-base">Packages</a>
+                    <a href="routes.html" class="nav-link text-sm 2xl:text-base">Routes</a>
+                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base">Rentals</a>
+                    <a href="guidelines.html" class="nav-link text-sm 2xl:text-base">Guidelines</a>
+                    <a href="adventure.html" class="nav-link active text-sm 2xl:text-base">Adventure</a>
+                    <a href="faq.html" class="nav-link text-sm 2xl:text-base">FAQ</a>
+                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base">Pricing</a>
+                    <a href="contact.html" class="nav-link text-sm 2xl:text-base">Contact</a>
+
+                    <div class="relative group cursor-pointer py-6">
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <div class="dropdown-menu absolute z-50 top-full right-0 mt-[-10px] w-48 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
+                            <a href="user-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1"><i class="fas fa-user w-5 text-primary mr-2"></i> User</a>
+                            <a href="admin-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium"><i class="fas fa-shield-halved w-5 text-secondary mr-2"></i> Admin</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden xl:flex items-center justify-end gap-2 2xl:gap-3 flex-shrink-0 w-auto lg:w-[250px] 2xl:w-[300px]">
+                    <button class="rtl-toggle-btn w-9 h-9 rounded-full items-center justify-center border border-theme hover:border-primary hover:text-primary transition-all text-[var(--text-color)] bg-transparent font-medium text-xs">
+                        RTL
+                    </button>
+
+                    <button class="theme-toggle w-9 h-9 rounded-full items-center justify-center border border-theme hover:border-primary hover:text-primary transition-all text-[var(--text-color)] bg-transparent">
+                        <i class="fas fa-moon transition-transform hover:rotate-[360deg] duration-500 text-sm"></i>
+                    </button>
+
+                    <a href="login.html" class="font-medium text-[var(--text-color)] hover:text-primary transition-colors px-2 text-sm">Login</a>
+                    <a href="register.html" class="bg-primary text-[#0A0A0A] px-5 py-2.5 rounded-full font-medium text-sm hover:bg-secondary hover:text-[#0A0A0A] transition-all duration-300 shadow-md hover:shadow-secondary/40 transform hover:-translate-y-0.5 whitespace-nowrap border-2 border-transparent">Register</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="flex xl:hidden items-center justify-center text-[var(--text-color)] hover:text-primary transition-colors bg-transparent border-0 cursor-pointer p-2 shrink-0">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/80 z-[9998] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div>
+    <div id="mobile-menu" class="fixed inset-y-0 ltr:left-0 rtl:right-0 z-[9999] w-[85%] max-w-sm border-r rtl:border-r-0 rtl:border-l border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-color)] transition-transform duration-400 ease-out transform -translate-x-full rtl:translate-x-full">
+        <div class="p-5 flex flex-col h-full">
+            
+            <div class="flex items-center justify-between pb-6 border-b border-theme shrink-0">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
+                        <i class="fa-solid fa-water text-xs"></i>
+                    </div>
+                    <span class="font-display text-xl font-semibold text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
+                </a>
+                
+                <div class="flex items-center gap-2 shrink-0">
+                    <button class="rtl-toggle-btn w-9 h-9 rounded-full bg-card border border-theme flex items-center justify-center text-[var(--text-color)] font-medium text-[10px] hover:text-primary hover:border-primary transition-colors">
+                        RTL
+                    </button>
+                    <button class="theme-toggle w-9 h-9 rounded-full bg-card border border-theme flex items-center justify-center text-[var(--text-color)] hover:text-primary hover:border-primary transition-colors">
+                        <i class="fas fa-moon text-sm"></i>
+                    </button>
+                    <a href="register.html" class="w-9 h-9 rounded-full bg-primary border border-primary flex items-center justify-center text-[#0A0A0A] shadow-md shadow-primary/20 hover:bg-secondary hover:border-secondary transition-colors" title="Register">
+                        <i class="fas fa-user-plus text-sm"></i>
+                    </a>
+                    <button id="close-mobile-menu" class="w-9 h-9 flex items-center justify-center text-xl text-[var(--text-color)] hover:text-secondary transition-colors bg-transparent border-0 cursor-pointer ml-1">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto py-6 space-y-1">
+                <a href="index.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Home</a>
+                <a href="about.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">About</a>
+                <a href="packages.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Packages</a>
+                <a href="routes.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Routes</a>
+                <a href="rentals.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Rentals</a>
+                <a href="guidelines.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Guidelines</a>
+                <a href="adventure.html" class="block font-sans text-base py-2 font-medium text-primary">Adventure</a>
+                <a href="faq.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">FAQ</a>
+                <a href="pricing.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Pricing</a>
+                <a href="contact.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Contact</a>
+                
+                <div class="pt-4 mt-2 border-t border-theme">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-left font-sans text-base py-2 text-[var(--text-color)] font-medium" onclick="toggleMobileDropdown(this, 'dashboard-mobile')">
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
+                    </button>
+                    <div id="dashboard-mobile" class="mobile-dropdown-content px-4">
+                        <a href="user-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5 text-center"></i> <span>User Dashboard</span></a>
+                        <a href="admin-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5 text-center"></i> <span>Admin Panel</span></a>
+                    </div>
+                </div>
+
+                <a href="login.html" class="flex items-center gap-2 font-sans text-base py-2 font-medium text-secondary hover:text-primary transition-colors mt-2">
+                    <i class="fas fa-sign-in-alt w-5 text-center"></i> <span>Login Account</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="w-full flex-grow overflow-x-hidden">
+
+        <section class="relative w-full h-screen min-h-[600px] flex items-center justify-center pt-20 overflow-hidden bg-bgDark border-b border-[#121212]">
+            <div class="absolute inset-0 z-0">
+                <img src="Images/adventure.jpg" class="w-full h-full object-cover opacity-50 mix-blend-overlay" alt="PaddleNest Adventures">
+            </div>
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent z-10"></div>
+            
+            <div class="container mx-auto px-4 md:px-8 relative z-20 text-center">
+                <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#121212]/80 border border-secondary/30 mb-6 backdrop-blur-md">
+                    <i class="fas fa-mountain-sun text-secondary"></i>
+                    <span class="text-white font-medium text-xs tracking-widest uppercase">The Next Level</span>
+                </div>
+                
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-white mb-6 leading-[1.05]">
+                    Beyond the <br/>
+                    <span class="text-gradient">Shoreline.</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-400 font-medium max-w-2xl mx-auto mb-10">
+                    Push your limits. Discover extreme coastal crossings, hidden marine caves, and multi-day endurance expeditions reserved for the bold.
+                </p>
+
+                <div class="flex items-center justify-center gap-4">
+                    <a href="#philosophy" class="bg-primary text-[#0A0A0A] px-8 py-4 rounded-full font-semibold text-lg hover:bg-secondary transition-all shadow-[0_0_20px_rgba(0,212,255,0.4)] transform hover:-translate-y-1">
+                        Explore Expeditions
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mastering the Elements Section (Aligned Perfectly) -->
+        <section id="philosophy" class="py-24 md:py-32 bg-[var(--bg-color)] border-b border-theme transition-colors flex flex-col items-center text-center">
+            <div class="container mx-auto px-4 md:px-8 max-w-5xl">
+                <span class="text-secondary font-medium tracking-widest uppercase text-sm block mb-4">Our Core Ethos</span>
+                <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-6">Mastering the Elements with <span class="text-primary">Precision.</span></h2>
+                <p class="text-lg text-body-muted font-medium mb-16 max-w-3xl mx-auto">
+                    We believe that true adventure begins where the map ends. Our minimalist approach ensures that nothing stands between you and the raw power of the ocean. Equipment is stripped to the essentials, training is rigorous, and respect for nature is paramount.
+                </p>
+                
+                <!-- Flex layout with stretch for perfect alignment -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left items-stretch">
+                    <div class="p-8 bg-card rounded-[2rem] border border-theme shadow-sm hover:border-primary transition-colors flex flex-col h-full">
+                        <i class="fas fa-leaf text-primary text-3xl mb-6 block"></i>
+                        <h3 class="text-2xl font-semibold text-[var(--text-color)] mb-3">Eco-Minimalism</h3>
+                        <p class="text-body-muted font-medium text-base flex-grow">Leaving zero trace. We use sustainable carbon gear and map routes that protect delicate marine ecosystems.</p>
+                    </div>
+                    <div class="p-8 bg-card rounded-[2rem] border border-theme shadow-sm hover:border-secondary transition-colors flex flex-col h-full">
+                        <i class="fas fa-compass text-secondary text-3xl mb-6 block"></i>
+                        <h3 class="text-2xl font-semibold text-[var(--text-color)] mb-3">Expert Navigation</h3>
+                        <p class="text-body-muted font-medium text-base flex-grow">Guided by veterans of the sea. Every route is meticulously planned factoring in swells, tides, and weather conditions.</p>
+                    </div>
+                    <div class="p-8 bg-card rounded-[2rem] border border-theme shadow-sm hover:border-primary transition-colors flex flex-col h-full">
+                        <i class="fas fa-anchor text-primary text-3xl mb-6 block"></i>
+                        <h3 class="text-2xl font-semibold text-[var(--text-color)] mb-3">Resilience Training</h3>
+                        <p class="text-body-muted font-medium text-base flex-grow">Physical and mental preparation to handle open ocean challenges with calm, sustained, and calculated action.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 md:py-32 bg-[#0A0A0A] border-y border-[#171717] overflow-hidden relative">
+            <div class="absolute top-1/2 left-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none -translate-y-1/2 -translate-x-1/2"></div>
+            
+            <div class="container mx-auto px-4 md:px-8 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+                    
+                    <div class="w-full lg:w-1/2 relative group">
+                        <div class="rounded-[3rem] overflow-hidden shadow-2xl border-2 border-primary/50 relative z-10 h-[500px] md:h-[650px]">
+                            <img src="Images/Elena Rostova.jpg" alt="Epic Journey" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 grayscale group-hover:grayscale-0">
+                            
+                            <div class="absolute inset-0 bg-[#0A0A0A]/30 group-hover:bg-transparent transition-colors duration-500"></div>
+                            
+                            <div class="absolute top-8 left-8 flex flex-col gap-3">
+                                <div class="bg-primary text-[#0A0A0A] px-4 py-2 rounded-full font-semibold text-sm tracking-widest uppercase shadow-[0_0_15px_rgba(0,212,255,0.4)]">3 Days</div>
+                                <div class="bg-[#121212] border border-[#262626] text-white px-4 py-2 rounded-full font-semibold text-sm tracking-widest uppercase shadow-lg">45 Miles</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full lg:w-1/2">
+                        <span class="text-primary font-medium tracking-widest uppercase text-sm block mb-4 border-l-4 border-primary pl-4">The Flagship Event</span>
+                        <h2 class="text-5xl md:text-6xl font-display font-semibold text-white mb-8 leading-tight">The <span class="text-secondary">Iron Coast</span> Crossing.</h2>
+                        
+                        <p class="text-lg text-gray-400 font-medium mb-8 leading-relaxed">
+                            This is not a tour; it is a test of will. A 3-day, 45-mile unassisted crossing along the most rugged shoreline in the territory. You will paddle through open swells, navigate by landmarks, and camp on isolated beaches.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-6 mb-10">
+                            <div class="border-t border-[#262626] pt-4">
+                                <span class="text-gray-500 font-medium uppercase text-xs tracking-widest block mb-1">Prerequisite</span>
+                                <span class="text-white font-semibold text-lg">Level 3 Certification</span>
+                            </div>
+                            <div class="border-t border-[#262626] pt-4">
+                                <span class="text-gray-500 font-medium uppercase text-xs tracking-widest block mb-1">Gear Type</span>
+                                <span class="text-white font-semibold text-lg">Carbon Touring</span>
+                            </div>
+                            <div class="border-t border-[#262626] pt-4">
+                                <span class="text-gray-500 font-medium uppercase text-xs tracking-widest block mb-1">Availability</span>
+                                <span class="text-primary font-semibold text-lg">Bi-Annually Only</span>
+                            </div>
+                            <div class="border-t border-[#262626] pt-4">
+                                <span class="text-gray-500 font-medium uppercase text-xs tracking-widest block mb-1">Survival Gear</span>
+                                <span class="text-white font-semibold text-lg">Included</span>
+                            </div>
+                        </div>
+
+                        <a href="#" class="inline-block bg-white text-[#0A0A0A] hover:bg-primary hover:text-[#0A0A0A] px-8 py-4 rounded-full font-semibold text-lg text-center transition-all w-full sm:w-auto shadow-[0_0_20px_rgba(255,255,255,0.2)]">Apply for the Crossing</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Level Up Section (Aligned Perfectly) -->
+        <section class="py-24 bg-[var(--bg-color)] border-b border-theme transition-colors">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="text-center mb-16 max-w-2xl mx-auto">
+                    <span class="text-[var(--text-color)] font-medium tracking-widest uppercase text-sm block mb-2">Level Up</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4">The Progression <span class="border-b-4 border-primary">Path</span></h2>
+                    <p class="text-lg text-body-muted font-medium">You don't start at the Iron Coast. Build your skills through our tiered adventure program.</p>
+                </div>
+                
+                <!-- Flex layout with stretch for perfect alignment -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+                    <div class="bg-card p-10 md:p-12 rounded-[2rem] border border-theme relative group hover:border-primary transition-colors flex flex-col h-full shadow-sm">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl md:text-3xl font-display font-semibold text-[var(--text-color)]">Initiation</h3>
+                            <span class="text-4xl font-display font-semibold text-primary opacity-20 group-hover:opacity-100 transition-opacity">01</span>
+                        </div>
+                        <p class="text-body-muted font-medium flex-grow mb-8 leading-relaxed">Master the fundamentals of balance, efficient stroke techniques, and self-rescue in calm, controlled environments.</p>
+                        <ul class="space-y-3 font-medium text-sm text-[var(--text-color)]">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary"></i> Lake Loops</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-primary"></i> Intro to Mangroves</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-card p-10 md:p-12 rounded-[2rem] border border-theme relative group hover:border-secondary transition-colors flex flex-col h-full shadow-lg">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl md:text-3xl font-display font-semibold text-[var(--text-color)]">Endurance</h3>
+                            <span class="text-4xl font-display font-semibold text-secondary opacity-20 group-hover:opacity-100 transition-opacity">02</span>
+                        </div>
+                        <p class="text-body-muted font-medium flex-grow mb-8 leading-relaxed">Paddling longer distances against mild currents and light chop. Focus shifts from balance to raw stamina and precise navigation.</p>
+                        <ul class="space-y-3 font-medium text-sm text-[var(--text-color)]">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-secondary"></i> 10-Mile Coastal Runs</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-secondary"></i> Bay Crossings</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-[var(--bg-color)] p-10 md:p-12 rounded-[2rem] border-2 border-primary relative group hover:border-secondary transition-colors flex flex-col h-full shadow-sm">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl md:text-3xl font-display font-semibold text-[var(--text-color)]">Mastery</h3>
+                            <span class="text-4xl font-display font-semibold text-primary opacity-20 group-hover:text-secondary transition-colors group-hover:opacity-100">03</span>
+                        </div>
+                        <p class="text-body-muted font-medium flex-grow mb-8 leading-relaxed">Unassisted, extreme environments. Dealing with open ocean swells, high winds, and survival camping logistics.</p>
+                        <ul class="space-y-3 font-medium text-sm text-[var(--text-color)] mt-auto">
+                            <li class="flex items-center gap-2"><i class="fas fa-circle-exclamation text-secondary"></i> Iron Coast Crossing</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-circle-exclamation text-secondary"></i> Deep Ocean Paddles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Engineered for the Extreme Section (Aligned Perfectly) -->
+        <section class="py-24 bg-card border-b border-theme transition-colors flex flex-col items-center text-center">
+            <div class="container mx-auto px-4 md:px-8 max-w-5xl">
+                <span class="text-primary font-medium tracking-widest uppercase text-sm block mb-4">Equipment & Safety</span>
+                <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-12">Engineered for the <span class="border-b-4 border-primary">Extreme.</span></h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left items-stretch">
+                    <div class="bg-[var(--bg-color)] p-10 rounded-[2rem] border border-theme shadow-sm flex flex-col h-full">
+                        <h3 class="text-2xl font-semibold text-[var(--text-color)] mb-4 flex items-center gap-3"><i class="fas fa-shield-alt text-secondary"></i> Pro-Grade Safety</h3>
+                        <p class="text-body-muted font-medium mb-8 leading-relaxed flex-grow">Every expedition is backed by military-grade communication devices, emergency transponders, and comprehensive med-kits. Safety is non-negotiable in deep waters.</p>
+                        <ul class="space-y-4 font-medium text-[var(--text-color)] mt-auto">
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> GPS & Satellite Tracking</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> Thermal Survival Gear</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-primary"></i> Certified Wilderness Responders</li>
+                        </ul>
+                    </div>
+                    <div class="bg-[var(--bg-color)] p-10 rounded-[2rem] border border-theme shadow-sm flex flex-col h-full">
+                        <h3 class="text-2xl font-semibold text-[var(--text-color)] mb-4 flex items-center gap-3"><i class="fas fa-tachometer-alt text-primary"></i> Carbon Touring Boards</h3>
+                        <p class="text-body-muted font-medium mb-8 leading-relaxed flex-grow">We exclusively utilize ultra-lightweight carbon fiber boards designed to cut through aggressive swells while maximizing stroke efficiency over long distances.</p>
+                        <ul class="space-y-4 font-medium text-[var(--text-color)] mt-auto">
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> V-Hull Displacement Designs</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> Multi-Point Gear Tie-Downs</li>
+                            <li class="flex items-center gap-3"><i class="fas fa-check text-secondary"></i> Hydrodynamic Fin Systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-32 bg-[#0A0A0A] relative overflow-hidden border-t border-[#171717]">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+            
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-secondary/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
+
+            <div class="container mx-auto px-4 md:px-8 relative z-10 flex justify-center">
+                <div class="w-full max-w-4xl border border-[#262626] bg-[#121212]/80 backdrop-blur-xl rounded-[3rem] p-10 md:p-20 text-center shadow-2xl">
+                    
+                    <span class="inline-block bg-secondary text-[#0A0A0A] px-4 py-1.5 rounded-full font-semibold text-xs uppercase tracking-widest mb-8 shadow-[0_0_15px_rgba(255,107,53,0.4)]">Limited Availability</span>
+                    
+                    <h2 class="text-4xl md:text-6xl font-display font-semibold text-white mb-6 leading-tight">Claim Your Spot on the <br/><span class="text-primary">Next Expedition.</span></h2>
+                    
+                    <p class="text-lg text-gray-400 font-medium mb-10 max-w-xl mx-auto">Our extreme routes are strictly capped at 8 paddlers to ensure safety and minimal environmental impact. The next drop is closing fast.</p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="packages.html" class="bg-primary text-[#0A0A0A] px-10 py-5 rounded-full font-semibold text-lg hover:bg-white transition-all shadow-[0_0_30px_rgba(0,212,255,0.3)] hover:-translate-y-1">
+                            Book Adventure Now
+                        </a>
+                        <a href="faq.html" class="bg-transparent border-2 border-white text-white px-10 py-5 rounded-full font-medium text-lg hover:bg-white hover:text-[#0A0A0A] transition-all">
+                            View Requirements
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-bgDark text-gray-300 pt-20 pb-10 border-t border-[#121212]">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <a href="index.html" class="flex items-center gap-3 mb-6 group inline-flex">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
+                            <i class="fa-solid fa-water"></i>
+                        </div>
+                        <span class="font-display text-2xl font-semibold text-white">Paddle<span class="text-primary">Nest</span></span>
+                    </a>
+                    <p class="text-gray-400 font-medium mb-6 text-sm leading-relaxed">
+                        Premium eco-tours and paddleboard rentals bridging the gap between humans and nature.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#121212] border border-white/5 flex items-center justify-center hover:bg-primary hover:text-[#0A0A0A] transition-all"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#121212] border border-white/5 flex items-center justify-center hover:bg-primary hover:text-[#0A0A0A] transition-all"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#121212] border border-white/5 flex items-center justify-center hover:bg-primary hover:text-[#0A0A0A] transition-all"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Navigation</h4>
+                    <ul class="space-y-3 font-medium text-sm">
+                        <li><a href="about.html" class="hover:text-primary transition-colors block">About Us</a></li>
+                        <li><a href="packages.html" class="hover:text-primary transition-colors block">Tours & Packages</a></li>
+                        <li><a href="rentals.html" class="hover:text-primary transition-colors block">Rentals</a></li>
+                        <li><a href="faq.html" class="hover:text-primary transition-colors block">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Legal</h4>
+                    <ul class="space-y-3 font-medium text-sm">
+                        <li><a href="privacy.html" class="hover:text-primary transition-colors block">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-primary transition-colors block">Terms of Service</a></li>
+                        <li><a href="guidelines.html" class="hover:text-primary transition-colors block">Guidelines</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Contact HQ</h4>
+                    <ul class="space-y-4 font-medium text-sm">
+                        <li class="flex items-start gap-3 cursor-default">
+                            <i class="fas fa-map-marker-alt mt-1 text-primary"></i>
+                            <span>123 Ocean Drive,<br>Coastal Bay, FL 33101</span>
+                        </li>
+                        <li class="flex items-center gap-3 hover:text-secondary transition-colors cursor-pointer">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <a href="mailto:hello@paddlenest.com">hello@paddlenest.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-[#121212] pt-6 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-gray-500">
+                <p>&copy; 2026 PaddleNest. Minimalist Adventure Co.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Theme Toggle Logic ---
+        const htmlElement = document.documentElement;
+        const themeToggleBtns = document.querySelectorAll('.theme-toggle');
+
+        function updateTheme() {
+            const isDark = htmlElement.classList.contains('dark');
+            htmlElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            
+            themeToggleBtns.forEach(btn => {
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    if (isDark) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                }
+            });
+            
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        themeToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                updateTheme();
+            });
+        });
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        }
+        updateTheme();
+
+        // --- RTL Toggle Logic ---
+        const rtlToggleBtns = document.querySelectorAll('.rtl-toggle-btn');
+        rtlToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const currentDir = htmlElement.getAttribute('dir');
+                htmlElement.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+            });
+        });
+
+        // --- Navbar Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // --- Mobile Menu Logic ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        function openMobileMenu() {
+            // Tailwind based transform classes handling to fix RTL interaction
+            mobileMenu.classList.remove('-translate-x-full', 'rtl:translate-x-full');
+            mobileMenu.classList.add('translate-x-0', 'rtl:translate-x-0');
+            
+            mobileOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                mobileOverlay.classList.remove('opacity-0');
+                mobileOverlay.classList.add('opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeMobileMenuFunc() {
+            mobileMenu.classList.remove('translate-x-0', 'rtl:translate-x-0');
+            mobileMenu.classList.add('-translate-x-full', 'rtl:translate-x-full');
+
+            mobileOverlay.classList.remove('opacity-100');
+            mobileOverlay.classList.add('opacity-0');
+            setTimeout(() => {
+                mobileOverlay.classList.add('hidden');
+            }, 300); 
+            document.body.style.overflow = '';
+            
+            document.querySelectorAll('.mobile-dropdown-content.active').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.mobile-dropdown-btn.active').forEach(btn => btn.classList.remove('active'));
+        }
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+        if (closeMobileMenu) closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenuFunc);
+
+        window.toggleMobileDropdown = function(btnElement, targetId) {
+            const targetContent = document.getElementById(targetId);
+            
+            document.querySelectorAll('.mobile-dropdown-content').forEach(el => {
+                if (el.id !== targetId && el.classList.contains('active')) {
+                    el.classList.remove('active');
+                    const prevBtn = document.querySelector(`[onclick="toggleMobileDropdown(this, '${el.id}')"]`);
+                    if(prevBtn) prevBtn.classList.remove('active');
+                }
+            });
+
+            targetContent.classList.toggle('active');
+            btnElement.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="PaddleNest - Contact HQ and Launch Sites">
+    <title>Contact Us | PaddleNest Minimalist Adventures</title>
+     <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00D4FF',   /* Electric Cyan */
+                        secondary: '#FF6B35', /* Sunset Orange */
+                        bgLight: '#FFFFFF',   /* Pure White */
+                        bgDark: '#0A0A0A',    /* Space Black */
+                        cardLight: '#F9FAFB', /* Light Card */
+                        cardDark: '#121212',  /* Dark Card */
+                        textLight: '#0A0A0A', /* Space Black Text */
+                        textDark: '#FFFFFF'   /* Pure White Text */
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    screens: {
+                        'xs': '360px', 
+                        'sm': '390px', 
+                        'md': '768px', 
+                        'lg': '1024px', 
+                        'xl': '1280px', 
+                        '2xl': '1536px', 
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #0A0A0A;
+            --text-muted: #4B5563;
+            --card-bg: #F9FAFB;
+            --border-color: #E5E7EB;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #0A0A0A;
+            --text-color: #FFFFFF;
+            --text-muted: #9CA3AF;
+            --card-bg: #121212;
+            --border-color: #262626;
+            --nav-bg: rgba(10, 10, 10, 0.85);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .text-body-muted { color: var(--text-muted); transition: color 0.3s ease; }
+        .bg-card { background-color: var(--card-bg); border-color: var(--border-color); }
+        .border-theme { border-color: var(--border-color); }
+
+        /* Minimalist Glass Navbar */
+        .glass-nav {
+            background: var(--nav-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Clean Animated Nav Links */
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            transition: color 0.3s;
+            color: var(--text-color);
+            padding: 0.5rem 0;
+            white-space: nowrap;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #00D4FF; 
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover::after, .nav-link.active::after { 
+            transform: scaleX(1); 
+            transform-origin: left;
+        }
+        .nav-link:hover, .nav-link.active { color: #00D4FF; }
+
+        /* Dropdowns */
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%); 
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: var(--bg-color); 
+        }
+        html[dir="rtl"] .mobile-menu {
+            transform: translateX(100%);
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        
+        .mobile-dropdown-content {
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background-color: var(--card-bg); 
+            border-radius: 8px;
+        }
+        .mobile-dropdown-content.active { 
+            max-height: 300px; 
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+            margin: 4px 0; 
+        }
+
+        .dropdown-arrow { transition: transform 0.3s ease; }
+        .mobile-dropdown-btn.active .dropdown-arrow { transform: rotate(180deg); }
+
+        /* Text Gradients */
+        .text-gradient { background: linear-gradient(to right, #00D4FF, #FF6B35); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color); }
+        ::-webkit-scrollbar-thumb { background: #00D4FF; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF6B35; }
+        
+        /* Form Focus Styles */
+        .input-field {
+            background-color: var(--bg-color);
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #00D4FF;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
+        }
+        [data-theme="dark"] .input-field {
+            background-color: #121212;
+            border-color: #262626;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden w-full relative">
+
+    <nav class="fixed w-full top-0 z-[100] glass-nav transition-all duration-300 py-2">
+        <div class="max-w-[1920px] mx-auto px-4 md:px-6">
+            <div class="flex items-center justify-between h-16 md:h-20 w-full gap-4">
+                
+                <a href="index.html" class="flex items-center gap-2 group shrink-0">
+                    <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
+                        <i class="fa-solid fa-water text-lg"></i>
+                    </div>
+                    <span class="font-display text-2xl font-semibold tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
+                </a>
+
+                <div class="hidden xl:flex flex-1 justify-center items-center gap-4 2xl:gap-6 px-4">
+                    <a href="index.html" class="nav-link text-sm 2xl:text-base">Home</a>
+                    <a href="about.html" class="nav-link text-sm 2xl:text-base">About</a>
+                    <a href="packages.html" class="nav-link text-sm 2xl:text-base">Packages</a>
+                    <a href="routes.html" class="nav-link text-sm 2xl:text-base">Routes</a>
+                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base">Rentals</a>
+                    <a href="guidelines.html" class="nav-link text-sm 2xl:text-base">Guidelines</a>
+                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base">Adventure</a>
+                    <a href="faq.html" class="nav-link text-sm 2xl:text-base">FAQ</a>
+                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base">Pricing</a>
+                    <a href="contact.html" class="nav-link active text-sm 2xl:text-base">Contact</a>
+
+                    <div class="relative group cursor-pointer py-6">
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <div class="dropdown-menu absolute z-50 top-full right-0 mt-[-10px] w-48 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
+                            <a href="user-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1"><i class="fas fa-user w-5 text-primary mr-2"></i> User</a>
+                            <a href="admin-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium"><i class="fas fa-shield-halved w-5 text-secondary mr-2"></i> Admin</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hidden xl:flex items-center justify-end gap-2 2xl:gap-3 shrink-0">
+                    <button class="rtl-toggle-btn w-9 h-9 rounded-full items-center justify-center border border-theme hover:border-primary hover:text-primary transition-all text-[var(--text-color)] bg-transparent font-medium text-xs">
+                        RTL
+                    </button>
+
+                    <button class="theme-toggle w-9 h-9 rounded-full items-center justify-center border border-theme hover:border-primary hover:text-primary transition-all text-[var(--text-color)] bg-transparent">
+                        <i class="fas fa-moon transition-transform hover:rotate-[360deg] duration-500 text-sm"></i>
+                    </button>
+
+                    <a href="login.html" class="font-medium text-[var(--text-color)] hover:text-primary transition-colors px-2 text-sm">Login</a>
+                    <a href="register.html" class="bg-primary text-[#0A0A0A] px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-secondary hover:text-[#0A0A0A] transition-all duration-300 shadow-md hover:shadow-secondary/40 transform hover:-translate-y-0.5 whitespace-nowrap border-2 border-transparent">Register</a>
+                </div>
+
+                <button id="mobile-menu-btn" class="flex xl:hidden items-center justify-center text-[var(--text-color)] hover:text-primary transition-colors bg-transparent border-0 cursor-pointer p-2 shrink-0">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/80 z-[9998] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div>
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 ltr:left-0 rtl:right-0 z-[9999] w-[85%] max-w-sm border-r border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-color)]">
+        <div class="p-5 flex flex-col h-full">
+            
+            <div class="flex items-center justify-between pb-6 border-b border-theme shrink-0">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
+                        <i class="fa-solid fa-water text-xs"></i>
+                    </div>
+                    <span class="font-display text-xl font-semibold text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
+                </a>
+                
+                <div class="flex items-center gap-2 shrink-0">
+                    <button class="rtl-toggle-btn w-9 h-9 rounded-full bg-card border border-theme flex items-center justify-center text-[var(--text-color)] font-medium text-[10px] hover:text-primary hover:border-primary transition-colors">
+                        RTL
+                    </button>
+                    <button class="theme-toggle w-9 h-9 rounded-full bg-card border border-theme flex items-center justify-center text-[var(--text-color)] hover:text-primary hover:border-primary transition-colors">
+                        <i class="fas fa-moon text-sm"></i>
+                    </button>
+                    <a href="register.html" class="w-9 h-9 rounded-full bg-primary border border-primary flex items-center justify-center text-[#0A0A0A] shadow-md shadow-primary/20 hover:bg-secondary hover:border-secondary transition-colors" title="Register">
+                        <i class="fas fa-user-plus text-sm"></i>
+                    </a>
+                    <button id="close-mobile-menu" class="w-9 h-9 flex items-center justify-center text-xl text-[var(--text-color)] hover:text-secondary transition-colors bg-transparent border-0 cursor-pointer ml-1">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex-grow overflow-y-auto py-6 space-y-1">
+                <a href="index.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Home</a>
+                <a href="about.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">About</a>
+                <a href="packages.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Packages</a>
+                <a href="routes.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Routes</a>
+                <a href="rentals.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Rentals</a>
+                <a href="guidelines.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Guidelines</a>
+                <a href="adventure.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Adventure</a>
+                <a href="faq.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">FAQ</a>
+                <a href="pricing.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Pricing</a>
+                <a href="contact.html" class="block font-sans text-base py-2 font-medium text-primary">Contact</a>
+                
+                <div class="pt-4 mt-2 border-t border-theme">
+                    <button class="mobile-dropdown-btn flex items-center gap-2 w-full text-left font-sans text-base py-2 text-[var(--text-color)] font-medium" onclick="toggleMobileDropdown(this, 'dashboard-mobile')">
+                        <span>Dashboard</span>
+                        <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
+                    </button>
+                    <div id="dashboard-mobile" class="mobile-dropdown-content px-4">
+                        <a href="user-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5 mr-1"></i> User Dashboard</a>
+                        <a href="admin-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5 mr-1"></i> Admin Panel</a>
+                    </div>
+                </div>
+
+                <a href="login.html" class="flex items-center gap-2 font-sans text-base py-2 font-medium text-secondary hover:text-primary transition-colors mt-2">
+                    <i class="fas fa-sign-in-alt w-5"></i> Login Account
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="w-full flex-grow overflow-x-hidden">
+
+        <section class="relative w-full h-[100dvh] flex flex-col items-center justify-center pt-20 overflow-hidden bg-bgDark border-b border-[#121212]">
+            <div class="absolute inset-0 z-0">
+                <img src="Images/contact.jpg" class="w-full h-full object-cover opacity-30 mix-blend-overlay grayscale" alt="PaddleNest Contact HQ">
+            </div>
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/70 to-[#0A0A0A]/40 z-10"></div>
+            
+            <div class="container mx-auto px-4 md:px-8 relative z-20 text-center flex flex-col items-center w-full">
+                
+                <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[#121212]/80 border border-primary/30 mb-8 backdrop-blur-md">
+                    <span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+                    <span class="text-white font-medium text-xs tracking-widest uppercase">We Are Online</span>
+                </div>
+                
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-white mb-6 leading-[1.05]">
+                    Reach The <br/>
+                    <span class="text-gradient">Basecamp.</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-gray-400 font-medium max-w-2xl mx-auto mb-12">
+                    Have a question about a route? Need to organize a custom expedition? Drop us a line, and our crew will get back to you before the next tide.
+                </p>
+
+                <div class="flex gap-4">
+                    <a href="#dispatch" class="bg-primary text-[#0A0A0A] px-8 py-4 rounded-full font-semibold text-lg hover:bg-secondary transition-all shadow-[0_0_20px_rgba(0,212,255,0.4)] transform hover:-translate-y-1">
+                        Send Dispatch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-[var(--bg-color)] border-b border-theme transition-colors">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="bg-card border border-theme p-8 rounded-[2rem] hover:border-primary transition-all duration-300 group shadow-sm flex flex-col justify-between min-h-[220px]">
+                        <div>
+                            <div class="w-12 h-12 bg-[var(--bg-color)] border border-theme rounded-xl flex items-center justify-center text-primary text-xl mb-6 shadow-sm group-hover:bg-primary group-hover:text-[#0A0A0A] transition-colors">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-body-muted uppercase tracking-widest text-xs mb-1">Email Support</h3>
+                            <p class="font-display font-semibold text-xl text-[var(--text-color)]">hello@paddlenest.com</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-card border border-theme p-8 rounded-[2rem] hover:border-secondary transition-all duration-300 group shadow-sm flex flex-col justify-between min-h-[220px]">
+                        <div>
+                            <div class="w-12 h-12 bg-[var(--bg-color)] border border-theme rounded-xl flex items-center justify-center text-secondary text-xl mb-6 shadow-sm group-hover:bg-secondary group-hover:text-[#0A0A0A] transition-colors">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-body-muted uppercase tracking-widest text-xs mb-1">Call Basecamp</h3>
+                            <p class="font-display font-semibold text-xl text-[var(--text-color)]">+1 (555) 123-4567</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-card border border-theme p-8 rounded-[2rem] hover:border-primary transition-all duration-300 group shadow-sm flex flex-col justify-between min-h-[220px]">
+                        <div>
+                            <div class="w-12 h-12 bg-[var(--bg-color)] border border-theme rounded-xl flex items-center justify-center text-primary text-xl mb-6 shadow-sm group-hover:bg-primary group-hover:text-[#0A0A0A] transition-colors">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-body-muted uppercase tracking-widest text-xs mb-1">Main HQ</h3>
+                            <p class="font-display font-semibold text-xl text-[var(--text-color)]">123 Ocean Drive,<br/>Coastal Bay, FL</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-card border border-theme p-8 rounded-[2rem] hover:border-secondary transition-all duration-300 group shadow-sm flex flex-col justify-between min-h-[220px]">
+                        <div>
+                            <div class="w-12 h-12 bg-[var(--bg-color)] border border-theme rounded-xl flex items-center justify-center text-secondary text-xl mb-6 shadow-sm group-hover:bg-secondary group-hover:text-[#0A0A0A] transition-colors">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-body-muted uppercase tracking-widest text-xs mb-1">Operating Hours</h3>
+                            <p class="font-display font-semibold text-xl text-[var(--text-color)]">Mon - Sun<br/>06:00 AM - 08:00 PM</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="dispatch" class="py-24 md:py-32 bg-[var(--bg-color)] border-b border-theme transition-colors overflow-hidden">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="flex flex-col lg:flex-row gap-16 lg:gap-24">
+                    
+                    <div class="w-full lg:w-5/12 flex flex-col justify-center">
+                        <span class="text-primary font-medium tracking-widest uppercase text-sm block mb-4 border-l-4 border-primary pl-4">Inquiries</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-[var(--text-color)] mb-8 leading-tight">Drop us a <br/><span class="text-gradient">Message.</span></h2>
+                        <p class="text-lg text-body-muted font-medium mb-10 leading-relaxed max-w-md">
+                            Whether you need to adjust an upcoming reservation, request a custom corporate package, or just want advice on which route fits your skill level, fill out the form. 
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4 text-[var(--text-color)]">
+                                <i class="fas fa-check-circle text-primary text-xl"></i>
+                                <span class="font-medium text-sm">Response within 2-4 hours.</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-[var(--text-color)]">
+                                <i class="fas fa-check-circle text-primary text-xl"></i>
+                                <span class="font-medium text-sm">Direct connection to route planners.</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-[var(--text-color)]">
+                                <i class="fas fa-check-circle text-primary text-xl"></i>
+                                <span class="font-medium text-sm">Secure and private transmission.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-7/12">
+                        <div class="bg-card border border-theme p-10 md:p-14 rounded-[3rem] shadow-xl relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] pointer-events-none"></div>
+                            
+                            <form action="#" method="POST" class="relative z-10 flex flex-col gap-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="flex flex-col gap-2">
+                                        <label for="firstName" class="text-sm font-medium text-[var(--text-color)] ml-1">First Name</label>
+                                        <input type="text" id="firstName" class="input-field w-full px-5 py-4 rounded-2xl" placeholder="John" required>
+                                    </div>
+                                    <div class="flex flex-col gap-2">
+                                        <label for="phoneNumber" class="text-sm font-medium text-[var(--text-color)] ml-1">Phone Number</label>
+                                        <input type="tel" id="phoneNumber" class="input-field w-full px-5 py-4 rounded-2xl" placeholder="(555) 000-0000" required>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col gap-2">
+                                    <label for="subject" class="text-sm font-medium text-[var(--text-color)] ml-1">Subject / Interest</label>
+                                    <select id="subject" class="input-field w-full px-5 py-4 rounded-2xl appearance-none" required>
+                                        <option value="" disabled selected>Select an option...</option>
+                                        <option value="rental">Gear Rental Inquiry</option>
+                                        <option value="guided">Guided Tour Question</option>
+                                        <option value="corporate">Corporate / Group Event</option>
+                                        <option value="other">Other Support</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex flex-col gap-2">
+                                    <label for="message" class="text-sm font-medium text-[var(--text-color)] ml-1">Your Message</label>
+                                    <textarea id="message" rows="5" class="input-field w-full px-5 py-4 rounded-2xl resize-none" placeholder="Tell us about your adventure..." required></textarea>
+                                </div>
+
+                                <button type="submit" class="w-full bg-primary text-[#0A0A0A] py-5 rounded-2xl font-semibold text-lg hover:bg-secondary transition-all shadow-[0_0_20px_rgba(0,212,255,0.3)] mt-2">
+                                    Send Dispatch
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-[var(--bg-color)] border-b border-theme transition-colors">
+            <div class="container mx-auto px-4 md:px-8">
+                <div class="text-center mb-16 max-w-2xl mx-auto">
+                    <span class="text-secondary font-medium tracking-widest uppercase text-sm block mb-2">Support Directory</span>
+                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4">Quick <span class="border-b-4 border-secondary">Answers</span></h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <div class="bg-card border border-theme p-8 rounded-3xl hover:border-primary transition-all duration-300">
+                        <i class="fas fa-cloud-sun text-3xl text-primary mb-4"></i>
+                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-3">Weather Policies</h3>
+                        <p class="text-body-muted font-medium text-sm leading-relaxed">If adverse weather conditions prevent your launch, we offer full rescheduling or a 100% refund up to 2 hours prior to departure.</p>
+                    </div>
+
+                    <div class="bg-card border border-theme p-8 rounded-3xl hover:border-secondary transition-all duration-300">
+                        <i class="fas fa-users text-3xl text-secondary mb-4"></i>
+                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-3">Group Bookings</h3>
+                        <p class="text-body-muted font-medium text-sm leading-relaxed">We accommodate groups of up to 24 paddlers. For parties larger than 8, please contact us directly to arrange specialized guides.</p>
+                    </div>
+
+                    <div class="bg-card border border-theme p-8 rounded-3xl hover:border-primary transition-all duration-300">
+                        <i class="fas fa-box-open text-3xl text-primary mb-4"></i>
+                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-3">Gear Returns</h3>
+                        <p class="text-body-muted font-medium text-sm leading-relaxed">All gear must be returned to the original launch site unless a one-way expedition was pre-arranged with our dispatch team.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-[#0A0A0A] border-y border-[#171717] relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/10 rounded-full blur-[120px] mix-blend-screen pointer-events-none"></div>
+
+            <div class="container mx-auto px-4 md:px-8 relative z-10 flex justify-center">
+                <div class="w-full max-w-5xl border-2 border-secondary/50 bg-[#121212]/80 backdrop-blur-xl rounded-[3rem] p-10 md:p-16 flex flex-col md:flex-row items-center gap-10 shadow-[0_0_40px_rgba(255,107,53,0.1)]">
+                    
+                    <div class="w-24 h-24 bg-secondary/20 rounded-full border border-secondary flex items-center justify-center shrink-0">
+                        <i class="fas fa-handshake text-4xl text-secondary"></i>
+                    </div>
+
+                    <div class="text-center md:text-left flex-grow">
+                        <h3 class="text-3xl font-display font-semibold text-white mb-3">Corporate & Partnerships</h3>
+                        <p class="text-gray-400 font-medium mb-6 leading-relaxed max-w-2xl">Looking to host a team-building retreat or collaborate on an eco-friendly brand activation? We build custom itineraries tailored for professional groups and environmental initiatives.</p>
+                        <a href="#dispatch" class="inline-block bg-secondary text-[#0A0A0A] px-8 py-3.5 rounded-full font-semibold text-lg hover:bg-white transition-all shadow-[0_0_20px_rgba(255,107,53,0.4)]">
+                            Partner With Us
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-24 bg-[var(--bg-color)] relative overflow-hidden">
+            <div class="container mx-auto px-4 md:px-8 flex justify-center">
+                <div class="w-full max-w-5xl bg-card rounded-[3rem] p-10 md:p-16 relative overflow-hidden shadow-sm border border-theme text-center">
+                    
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="flex gap-4 mb-8">
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary text-2xl"><i class="fab fa-instagram"></i></div>
+                            <div class="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center text-secondary text-2xl"><i class="fab fa-youtube"></i></div>
+                            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary text-2xl"><i class="fab fa-tiktok"></i></div>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4 leading-tight">Join Our <span class="text-primary">Community</span></h2>
+                        <p class="text-lg text-body-muted font-medium max-w-lg mx-auto mb-10">Follow us for weekly route inspiration, safety tips, and features from paddlers across the coast. Tag your journey with <strong class="text-[var(--text-color)] font-semibold">#PaddleNest</strong> to be featured.</p>
+
+                        <a href="#" class="bg-transparent border-2 border-[var(--text-color)] text-[var(--text-color)] px-8 py-3.5 rounded-full font-semibold hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition-colors">
+                            Explore The Gallery
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-bgDark text-gray-300 pt-20 pb-10 border-t border-[#121212]">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <a href="index.html" class="flex items-center gap-3 mb-6 group inline-flex">
+                        <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
+                            <i class="fa-solid fa-water"></i>
+                        </div>
+                        <span class="font-display text-2xl font-semibold text-white">Paddle<span class="text-primary">Nest</span></span>
+                    </a>
+                    <p class="text-gray-400 font-medium mb-6 text-sm leading-relaxed">
+                        Premium eco-tours and paddleboard rentals bridging the gap between humans and nature.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#121212] border border-white/5 flex items-center justify-center hover:bg-primary hover:text-[#0A0A0A] transition-all"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#121212] border border-white/5 flex items-center justify-center hover:bg-primary hover:text-[#0A0A0A] transition-all"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-[#121212] border border-white/5 flex items-center justify-center hover:bg-primary hover:text-[#0A0A0A] transition-all"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Navigation</h4>
+                    <ul class="space-y-3 font-medium text-sm">
+                        <li><a href="about.html" class="hover:text-primary transition-colors block">About Us</a></li>
+                        <li><a href="packages.html" class="hover:text-primary transition-colors block">Tours & Packages</a></li>
+                        <li><a href="rentals.html" class="hover:text-primary transition-colors block">Rentals</a></li>
+                        <li><a href="faq.html" class="hover:text-primary transition-colors block">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Legal</h4>
+                    <ul class="space-y-3 font-medium text-sm">
+                        <li><a href="privacy.html" class="hover:text-primary transition-colors block">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-primary transition-colors block">Terms of Service</a></li>
+                        <li><a href="guidelines.html" class="hover:text-primary transition-colors block">Guidelines</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Contact HQ</h4>
+                    <ul class="space-y-4 font-medium text-sm">
+                        <li class="flex items-start gap-3 cursor-default">
+                            <i class="fas fa-map-marker-alt mt-1 text-primary"></i>
+                            <span>123 Ocean Drive,<br>Coastal Bay, FL 33101</span>
+                        </li>
+                        <li class="flex items-center gap-3 hover:text-secondary transition-colors cursor-pointer">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <a href="mailto:hello@paddlenest.com">hello@paddlenest.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-[#121212] pt-6 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-gray-500">
+                <p>&copy; 2026 PaddleNest. Minimalist Adventure Co.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Theme Toggle Logic ---
+        const htmlElement = document.documentElement;
+        const themeToggleBtns = document.querySelectorAll('.theme-toggle');
+
+        function updateTheme() {
+            const isDark = htmlElement.classList.contains('dark');
+            htmlElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            
+            themeToggleBtns.forEach(btn => {
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    if (isDark) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                }
+            });
+            
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        themeToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                updateTheme();
+            });
+        });
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        }
+        updateTheme();
+
+        // --- Navbar Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // --- Mobile Menu Logic ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileOverlay.classList.remove('hidden');
+            setTimeout(() => {
+                mobileOverlay.classList.remove('opacity-0');
+                mobileOverlay.classList.add('opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeMobileMenuFunc() {
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('opacity-100');
+            mobileOverlay.classList.add('opacity-0');
+            setTimeout(() => {
+                mobileOverlay.classList.add('hidden');
+            }, 300); 
+            document.body.style.overflow = '';
+            
+            document.querySelectorAll('.mobile-dropdown-content.active').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.mobile-dropdown-btn.active').forEach(btn => btn.classList.remove('active'));
+        }
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+        if (closeMobileMenu) closeMobileMenu.addEventListener('click', closeMobileMenuFunc);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenuFunc);
+
+        window.toggleMobileDropdown = function(btnElement, targetId) {
+            const targetContent = document.getElementById(targetId);
+            
+            document.querySelectorAll('.mobile-dropdown-content').forEach(el => {
+                if (el.id !== targetId && el.classList.contains('active')) {
+                    el.classList.remove('active');
+                    const prevBtn = document.querySelector(`[onclick="toggleMobileDropdown(this, '${el.id}')"]`);
+                    if(prevBtn) prevBtn.classList.remove('active');
+                }
+            });
+
+            targetContent.classList.toggle('active');
+            btnElement.classList.toggle('active');
+        }
+
+        // --- Fixed RTL Toggle Logic ---
+        const rtlToggleBtns = document.querySelectorAll('.rtl-toggle-btn');
+        rtlToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 1. Temporarily disable the CSS transition on the mobile menu
+                if(mobileMenu) {
+                    mobileMenu.style.transition = 'none';
+                }
+                
+                // 2. Change the document direction
+                const currentDir = htmlElement.getAttribute('dir');
+                htmlElement.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+                
+                // 3. Force the browser to register the layout change instantly 
+                if(mobileMenu) {
+                    void mobileMenu.offsetWidth; 
+                    // 4. Re-enable the transition for normal menu open/close clicks
+                    mobileMenu.style.transition = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

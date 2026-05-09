@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Admin Command Center - PaddleNest">
+    <title>Command Center | PaddleNest Admin</title>
+     <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    
+    <script src="tailwind.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class', 
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#00D4FF',   /* Electric Cyan */
+                        secondary: '#FF6B35', /* Sunset Orange */
+                        bgLight: '#FFFFFF',   /* Pure White */
+                        bgDark: '#0A0A0A',    /* Space Black */
+                        cardLight: '#F9FAFB',
+                        cardDark: '#121212',
+                        textLight: '#0A0A0A',
+                        textDark: '#FFFFFF',
+                        mutedLight: '#4B5563',
+                        mutedDark: '#9CA3AF',
+                        borderLight: '#E5E7EB',
+                        borderDark: '#262626',
+                    },
+                    animation: {
+                        'fadeInUp': 'fadeInUp 0.4s ease-out forwards',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer components {
+            .sidebar-link {
+                @apply flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-mutedLight dark:text-mutedDark hover:bg-bgLight dark:hover:bg-bgDark hover:text-primary dark:hover:text-primary border-l-4 border-transparent cursor-pointer font-sans;
+            }
+            .sidebar-link.active {
+                @apply bg-cardLight dark:bg-bgDark shadow-sm text-primary border-l-4 border-primary;
+            }
+            .stat-card {
+                @apply bg-cardLight dark:bg-cardDark p-6 rounded-3xl shadow-sm border border-borderLight dark:border-borderDark transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg border-t-4 border-t-primary hover:border-primary;
+            }
+            .action-btn {
+                @apply bg-primary hover:bg-white text-[#0A0A0A] py-3 px-6 rounded-xl font-black text-sm transition-all duration-300 shadow-[0_4px_15px_rgba(0,212,255,0.3)] hover:shadow-[0_6px_20px_rgba(0,212,255,0.5)] transform hover:-translate-y-0.5 inline-flex items-center justify-center;
+            }
+            .card-section {
+                @apply bg-cardLight dark:bg-cardDark rounded-3xl shadow-sm border border-borderLight dark:border-borderDark p-6 md:p-8;
+            }
+            .badge-success {
+                @apply inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 border border-green-200 dark:border-green-800;
+            }
+            .badge-warning {
+                @apply inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 border border-orange-200 dark:border-orange-800;
+            }
+            .badge-danger {
+                @apply inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 border border-red-200 dark:border-red-800;
+            }
+            .badge-neutral {
+                @apply inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest bg-cardLight dark:bg-bgDark text-mutedLight dark:text-mutedDark border border-borderLight dark:border-borderDark;
+            }
+        }
+    </style>
+    
+    <style>
+        /* BASE STYLES */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden; 
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.4s ease-out forwards;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #00D4FF; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF6B35; }
+    </style>
+</head>
+<body class="font-sans flex flex-col h-screen bg-bgLight dark:bg-bgDark text-textLight dark:text-textDark transition-colors duration-300 overflow-x-hidden">
+
+    <nav class="bg-bgLight/90 dark:bg-bgDark/95 backdrop-blur-md shadow-sm flex-shrink-0 relative z-50 h-20 border-b border-borderLight dark:border-borderDark transition-colors duration-300">
+        <div class="max-w-[1920px] mx-auto px-4 md:px-6 lg:px-8 h-full flex justify-between items-center">
+            
+            <div class="flex items-center gap-2 sm:gap-4">
+                <button id="mobileMenuBtn" class="md:hidden text-textLight dark:text-textDark hover:text-primary transition-colors text-xl font-bold leading-none border-0 bg-transparent cursor-pointer p-2">
+                    <i class="fas fa-bars-staggered"></i>
+                </button>
+
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110 shrink-0">
+                        <i class="fa-solid fa-water text-lg"></i>
+                    </div>
+                    <span class="font-display text-xl sm:text-2xl font-black tracking-wide transition-colors text-[var(--text-color)] whitespace-nowrap">Paddle<span class="text-primary">Nest</span></span>
+                </a>
+            </div>
+
+
+            <div class="flex items-center gap-2 sm:gap-3 md:gap-5">
+                
+                <div class="flex items-center gap-1 sm:gap-2 ltr:mr-2 rtl:ml-2 border-r border-borderLight dark:border-borderDark ltr:pr-2 sm:ltr:pr-4 rtl:pl-2 sm:rtl:pl-4">
+                    <button class="w-10 h-10 bg-cardLight dark:bg-cardDark rounded-full border border-borderLight dark:border-borderDark flex items-center justify-center text-textLight dark:text-textDark transition-all duration-300 hover:border-primary hover:text-primary shrink-0 shadow-sm cursor-pointer" id="rtl-toggle-btn" title="Toggle RTL">
+                        <span class="text-[10px] font-black">RTL</span>
+                    </button>
+                    <button class="w-10 h-10 bg-cardLight dark:bg-cardDark rounded-full border border-borderLight dark:border-borderDark flex items-center justify-center text-textLight dark:text-textDark transition-all duration-300 hover:border-primary hover:text-primary shrink-0 shadow-sm cursor-pointer" id="theme-toggle-btn" title="Toggle Dark Mode">
+                        <i class="fas fa-moon transition-transform hover:rotate-[360deg] duration-500 text-sm" id="theme-icon"></i>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-3 cursor-pointer group">
+                    <div class="ltr:text-right rtl:text-left hidden lg:block">
+                        <p class="text-sm font-bold text-textLight dark:text-textDark leading-tight">Cmdr. Marcus</p>
+                        <p class="text-[10px] font-black uppercase tracking-wider text-secondary">System Admin</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-secondary text-[#0A0A0A] flex items-center justify-center font-black text-sm border-2 border-transparent transition-all shadow-[0_0_10px_rgba(255,107,53,0.4)] group-hover:scale-105 tracking-widest relative overflow-hidden">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="flex flex-1 overflow-hidden relative">
+        
+        <aside id="sidebar" class="w-64 bg-cardLight dark:bg-cardDark border-r border-borderLight dark:border-borderDark flex-shrink-0 flex flex-col transition-transform duration-300 absolute md:relative z-40 h-full ltr:-translate-x-full ltr:md:translate-x-0 rtl:translate-x-full rtl:md:translate-x-0 shadow-2xl md:shadow-none">
+            <div class="p-5 flex-1 overflow-y-auto space-y-2 mt-4">
+                <p class="text-[10px] font-black text-mutedLight dark:text-mutedDark uppercase tracking-widest mb-4 ltr:ml-4 rtl:mr-4">Command Center</p>
+                
+                <a class="sidebar-link active" onclick="switchTab(event, 'section-overview')">
+                    <i class="fas fa-chart-pie w-5 text-center"></i> Overview
+                </a>
+                <a class="sidebar-link" onclick="switchTab(event, 'section-bookings')">
+                    <i class="fas fa-calendar-check w-5 text-center"></i> Bookings
+                    <span class="ml-auto bg-primary text-[#0A0A0A] text-[10px] px-2 py-0.5 rounded-full font-black">12</span>
+                </a>
+                <a class="sidebar-link" onclick="switchTab(event, 'section-fleet')">
+                    <i class="fas fa-anchor w-5 text-center"></i> Fleet Operations
+                </a>
+                <a class="sidebar-link" onclick="switchTab(event, 'section-dispatches')">
+                    <i class="fas fa-inbox w-5 text-center"></i> Dispatches
+                    <span class="ml-auto bg-secondary text-[#0A0A0A] text-[10px] px-2 py-0.5 rounded-full font-black">3</span>
+                </a>
+                
+                <div class="my-6 border-t border-borderLight dark:border-borderDark"></div>
+                
+                <p class="text-[10px] font-black text-mutedLight dark:text-mutedDark uppercase tracking-widest mb-4 ltr:ml-4 rtl:mr-4">System</p>
+                <a class="sidebar-link" onclick="switchTab(event, 'section-settings')">
+                    <i class="fas fa-cog w-5 text-center"></i> Global Settings
+                </a>
+                
+                <a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all duration-300 text-secondary hover:text-[#0A0A0A] hover:bg-secondary mt-4 border-none cursor-pointer no-underline shadow-sm hover:shadow-md">
+                    <i class="fas fa-power-off w-5 text-center ltr:rotate-0 rtl:rotate-180"></i>
+                    Logout
+                </a>
+            </div>
+        </aside>
+
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-30 hidden md:hidden"></div>
+
+        <main class="flex-1 overflow-y-auto p-4 md:p-8 lg:p-10 relative">
+            <div class="max-w-[1400px] mx-auto pb-12 space-y-12">
+                
+                <div id="section-overview" class="page-section block animate-fade-in-up space-y-8">
+                    
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-borderLight dark:border-borderDark pb-6">
+                        <div>
+                            <h1 class="font-display text-3xl md:text-5xl font-black text-[var(--text-color)] tracking-tight mb-2">
+                                Basecamp Overview
+                            </h1>
+                            <p class="text-mutedLight dark:text-mutedDark text-sm font-bold uppercase tracking-widest">System Status: <span class="text-green-500">Nominal</span></p>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="bg-cardLight dark:bg-cardDark border border-borderLight dark:border-borderDark text-[var(--text-color)] py-3 px-6 rounded-xl font-bold text-sm hover:border-primary transition-all">
+                                Export Report
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-secondary/20 to-transparent border-l-4 border-secondary p-6 rounded-2xl flex items-start gap-4 shadow-sm relative overflow-hidden">
+                        <div class="absolute -right-10 -top-10 w-32 h-32 bg-secondary/10 rounded-full blur-2xl pointer-events-none"></div>
+                        <i class="fas fa-triangle-exclamation text-secondary text-2xl mt-1"></i>
+                        <div>
+                            <h3 class="font-black text-[var(--text-color)] text-lg">Small Craft Advisory Active</h3>
+                            <p class="text-mutedLight dark:text-mutedDark text-sm font-medium mt-1">Sustained winds exceeding 15 knots expected after 14:00. All Level 3 (Offshore) routes are currently restricted.</p>
+                            <div class="mt-3 flex gap-4">
+                                <button class="text-xs font-black text-secondary uppercase tracking-widest hover:underline">Message Affected Paddlers</button>
+                                <button class="text-xs font-black text-[var(--text-color)] uppercase tracking-widest hover:text-primary">Dismiss</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="stat-card group hover:border-primary">
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="text-primary text-xs font-black uppercase tracking-wider bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20"><i class="fas fa-sack-dollar mr-1"></i> Revenue</div>
+                                <span class="text-green-500 text-xs font-black"><i class="fas fa-arrow-trend-up"></i> +12%</span>
+                            </div>
+                            <h3 class="text-mutedLight dark:text-mutedDark text-xs font-bold uppercase tracking-widest mb-1">Today's Gross</h3>
+                            <p class="font-sans text-3xl font-black text-textLight dark:text-textDark group-hover:text-primary transition-colors">$4,250</p>
+                        </div>
+
+                        <div class="stat-card group hover:border-primary">
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="text-primary text-xs font-black uppercase tracking-wider bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20"><i class="fas fa-users mr-1"></i> Activity</div>
+                            </div>
+                            <h3 class="text-mutedLight dark:text-mutedDark text-xs font-bold uppercase tracking-widest mb-1">Active Paddlers</h3>
+                            <p class="font-sans text-3xl font-black text-textLight dark:text-textDark group-hover:text-primary transition-colors">34 <span class="text-sm font-bold text-mutedLight dark:text-mutedDark">on water</span></p>
+                        </div>
+
+                        <div class="stat-card group hover:border-secondary border-t-secondary">
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="text-secondary text-xs font-black uppercase tracking-wider bg-secondary/10 px-3 py-1.5 rounded-lg border border-secondary/20"><i class="fas fa-bell mr-1"></i> Actions</div>
+                                <span class="bg-secondary/20 text-secondary text-[10px] font-black px-2 py-0.5 rounded-full">Requires Attention</span>
+                            </div>
+                            <h3 class="text-mutedLight dark:text-mutedDark text-xs font-bold uppercase tracking-widest mb-1">Pending Approvals</h3>
+                            <p class="font-sans text-3xl font-black text-textLight dark:text-textDark group-hover:text-secondary transition-colors">12</p>
+                        </div>
+
+                        <div class="stat-card group hover:border-primary">
+                            <div class="flex justify-between items-start mb-6">
+                                <div class="text-primary text-xs font-black uppercase tracking-wider bg-primary/10 px-3 py-1.5 rounded-lg border border-primary/20"><i class="fas fa-anchor mr-1"></i> Fleet</div>
+                            </div>
+                            <h3 class="text-mutedLight dark:text-mutedDark text-xs font-bold uppercase tracking-widest mb-1">Gear Utilization</h3>
+                            <p class="font-sans text-3xl font-black text-textLight dark:text-textDark group-hover:text-primary transition-colors">85%</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                        <div class="bg-cardLight dark:bg-cardDark border border-borderLight dark:border-borderDark rounded-[2rem] p-8 flex items-center justify-between group hover:border-primary transition-colors cursor-pointer" onclick="switchTab(event, 'section-fleet')">
+                            <div>
+                                <h4 class="font-display font-black text-xl text-[var(--text-color)]">Log New Equipment</h4>
+                                <p class="text-sm font-medium text-mutedLight dark:text-mutedDark mt-1">Add received boards to inventory.</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-[var(--bg-color)] border border-theme flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+
+                        <div class="bg-cardLight dark:bg-cardDark border border-borderLight dark:border-borderDark rounded-[2rem] p-8 flex items-center justify-between group hover:border-secondary transition-colors cursor-pointer" onclick="switchTab(event, 'section-dispatches')">
+                            <div>
+                                <h4 class="font-display font-black text-xl text-[var(--text-color)]">Review Incoming Comms</h4>
+                                <p class="text-sm font-medium text-mutedLight dark:text-mutedDark mt-1">3 unresolved dispatches require replies.</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-[var(--bg-color)] border border-theme flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+                                <i class="fas fa-envelope-open-text"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section-bookings" class="page-section hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+                        <h2 class="font-display text-3xl md:text-4xl font-black text-[var(--text-color)] tracking-tight">Booking Management</h2>
+                        <div class="relative">
+                            <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-mutedLight dark:text-mutedDark"></i>
+                            <input type="text" placeholder="Search ID or Name..." class="pl-12 pr-4 py-3 bg-bgLight dark:bg-bgDark border border-borderLight dark:border-borderDark rounded-xl text-sm font-medium focus:outline-none focus:border-primary text-[var(--text-color)]">
+                        </div>
+                    </div>
+
+                    <div class="card-section p-0 overflow-hidden border border-theme">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-bgLight dark:bg-bgDark border-b border-borderLight dark:border-borderDark">
+                                        <th class="px-6 py-5 text-xs font-black text-mutedLight dark:text-mutedDark uppercase tracking-widest whitespace-nowrap">ID</th>
+                                        <th class="px-6 py-5 text-xs font-black text-mutedLight dark:text-mutedDark uppercase tracking-widest whitespace-nowrap">Client</th>
+                                        <th class="px-6 py-5 text-xs font-black text-mutedLight dark:text-mutedDark uppercase tracking-widest whitespace-nowrap">Details</th>
+                                        <th class="px-6 py-5 text-xs font-black text-mutedLight dark:text-mutedDark uppercase tracking-widest whitespace-nowrap">Date / Time</th>
+                                        <th class="px-6 py-5 text-xs font-black text-mutedLight dark:text-mutedDark uppercase tracking-widest whitespace-nowrap">Status</th>
+                                        <th class="px-6 py-5 text-xs font-black text-mutedLight dark:text-mutedDark uppercase tracking-widest whitespace-nowrap ltr:text-right rtl:text-left">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-borderLight dark:divide-borderDark">
+                                    
+                                    <tr class="hover:bg-bgLight dark:hover:bg-bgDark transition-colors group">
+                                        <td class="px-6 py-5 text-sm font-bold text-textLight dark:text-textDark whitespace-nowrap">#PN-8472</td>
+                                        <td class="px-6 py-5">
+                                            <div class="flex items-center gap-3">
+                                                <img src="https://ui-avatars.com/api/?name=Sarah+J&background=0A0A0A&color=fff" class="w-8 h-8 rounded-full border border-theme" alt="User">
+                                                <span class="text-sm font-bold text-textLight dark:text-textDark">Sarah Jenkins</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-5 min-w-[200px]">
+                                            <span class="text-sm font-bold text-textLight dark:text-textDark block">Bioluminescent Trail</span>
+                                            <span class="text-xs text-mutedLight dark:text-mutedDark font-medium">Guided • 2 Pax</span>
+                                        </td>
+                                        <td class="px-6 py-5 text-sm font-medium text-mutedLight dark:text-mutedDark whitespace-nowrap">
+                                            <span class="block text-[var(--text-color)] font-bold">Tomorrow</span>
+                                            08:00 PM
+                                        </td>
+                                        <td class="px-6 py-5 whitespace-nowrap">
+                                            <span class="badge-warning">Pending</span>
+                                        </td>
+                                        <td class="px-6 py-5 ltr:text-right rtl:text-left whitespace-nowrap">
+                                            <button class="text-green-500 hover:text-green-400 bg-green-500/10 px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest mr-2 transition-colors">Approve</button>
+                                            <button class="text-secondary hover:text-red-400 bg-secondary/10 px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-widest transition-colors">Decline</button>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="hover:bg-bgLight dark:hover:bg-bgDark transition-colors group">
+                                        <td class="px-6 py-5 text-sm font-bold text-textLight dark:text-textDark whitespace-nowrap">#PN-8471</td>
+                                        <td class="px-6 py-5">
+                                            <div class="flex items-center gap-3">
+                                                <img src="https://ui-avatars.com/api/?name=Mike+R&background=0A0A0A&color=fff" class="w-8 h-8 rounded-full border border-theme" alt="User">
+                                                <span class="text-sm font-bold text-textLight dark:text-textDark">Mike Ross</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-5 min-w-[200px]">
+                                            <span class="text-sm font-bold text-textLight dark:text-textDark block">Explorer Board Rental</span>
+                                            <span class="text-xs text-mutedLight dark:text-mutedDark font-medium">Full-Day • Delivery</span>
+                                        </td>
+                                        <td class="px-6 py-5 text-sm font-medium text-mutedLight dark:text-mutedDark whitespace-nowrap">
+                                            <span class="block text-[var(--text-color)] font-bold">Nov 15, 2026</span>
+                                            09:00 AM
+                                        </td>
+                                        <td class="px-6 py-5 whitespace-nowrap">
+                                            <span class="badge-success">Confirmed</span>
+                                        </td>
+                                        <td class="px-6 py-5 ltr:text-right rtl:text-left whitespace-nowrap">
+                                            <button class="text-mutedLight dark:text-mutedDark hover:text-primary transition-colors p-2"><i class="fas fa-ellipsis-v"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="hover:bg-bgLight dark:hover:bg-bgDark transition-colors group">
+                                        <td class="px-6 py-5 text-sm font-bold text-textLight dark:text-textDark whitespace-nowrap">#PN-8469</td>
+                                        <td class="px-6 py-5">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-full bg-cardLight dark:bg-cardDark border border-theme flex items-center justify-center font-black text-xs">EL</div>
+                                                <span class="text-sm font-bold text-textLight dark:text-textDark">Emma Lawson</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-5 min-w-[200px]">
+                                            <span class="text-sm font-bold text-textLight dark:text-textDark block">Mangrove Safari</span>
+                                            <span class="text-xs text-mutedLight dark:text-mutedDark font-medium">Guided • 4 Pax</span>
+                                        </td>
+                                        <td class="px-6 py-5 text-sm font-medium text-mutedLight dark:text-mutedDark whitespace-nowrap">
+                                            <span class="block text-[var(--text-color)] font-bold">Nov 12, 2026</span>
+                                            14:00 PM
+                                        </td>
+                                        <td class="px-6 py-5 whitespace-nowrap">
+                                            <span class="badge-danger">Cancelled</span>
+                                        </td>
+                                        <td class="px-6 py-5 ltr:text-right rtl:text-left whitespace-nowrap">
+                                            <span class="text-xs font-bold text-mutedLight dark:text-mutedDark">Refunded</span>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="section-fleet" class="page-section hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+                        <h2 class="font-display text-3xl md:text-4xl font-black text-[var(--text-color)] tracking-tight">Fleet Operations</h2>
+                        <div class="flex gap-2">
+                            <button class="bg-cardLight dark:bg-cardDark border border-borderLight dark:border-borderDark text-[var(--text-color)] py-2.5 px-4 rounded-xl font-bold text-sm hover:border-primary transition-all">Filter</button>
+                            <button class="bg-primary text-[#0A0A0A] border border-primary py-2.5 px-4 rounded-xl font-black text-sm hover:bg-white transition-all shadow-sm">Add Gear</button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        
+                        <div class="bg-cardLight dark:bg-cardDark border border-borderLight dark:border-borderDark rounded-3xl p-6 flex flex-col hover:border-primary transition-colors shadow-sm group">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-12 h-12 bg-bgLight dark:bg-bgDark rounded-xl flex items-center justify-center text-primary shadow-sm border border-theme"><i class="fas fa-water"></i></div>
+                                <span class="badge-success">Available</span>
+                            </div>
+                            <h3 class="font-black text-lg text-[var(--text-color)] mb-1">Explorer Board #04</h3>
+                            <p class="text-xs font-bold text-mutedLight dark:text-mutedDark uppercase tracking-widest mb-6">Type: Touring 12'6"</p>
+                            <div class="mt-auto pt-4 border-t border-theme flex justify-between items-center">
+                                <span class="text-xs font-bold text-[var(--text-color)]">Loc: HQ Rack A</span>
+                                <button class="text-xs font-black text-secondary hover:underline">Mark Damaged</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-cardLight dark:bg-cardDark border border-borderLight dark:border-borderDark rounded-3xl p-6 flex flex-col hover:border-primary transition-colors shadow-sm group">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-12 h-12 bg-bgLight dark:bg-bgDark rounded-xl flex items-center justify-center text-primary shadow-sm border border-theme"><i class="fas fa-water"></i></div>
+                                <span class="badge-warning">On Water</span>
+                            </div>
+                            <h3 class="font-black text-lg text-[var(--text-color)] mb-1">Explorer Board #07</h3>
+                            <p class="text-xs font-bold text-mutedLight dark:text-mutedDark uppercase tracking-widest mb-6">Type: Touring 12'6"</p>
+                            <div class="mt-auto pt-4 border-t border-theme flex justify-between items-center">
+                                <span class="text-xs font-bold text-[var(--text-color)]">Return: 14:00</span>
+                                <span class="text-xs font-bold text-mutedLight dark:text-mutedDark">#PN-8422</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-cardLight dark:bg-cardDark border border-borderLight dark:border-borderDark rounded-3xl p-6 flex flex-col hover:border-secondary transition-colors shadow-sm group">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-12 h-12 bg-bgLight dark:bg-bgDark rounded-xl flex items-center justify-center text-secondary shadow-sm border border-theme"><i class="fas fa-tools"></i></div>
+                                <span class="badge-danger">Maintenance</span>
+                            </div>
+                            <h3 class="font-black text-lg text-[var(--text-color)] mb-1">Foundation Board #02</h3>
+                            <p class="text-xs font-bold text-mutedLight dark:text-mutedDark uppercase tracking-widest mb-6">Type: All-Around 10'6"</p>
+                            <div class="mt-auto pt-4 border-t border-theme flex justify-between items-center">
+                                <span class="text-xs font-bold text-secondary">Fin Box Repair</span>
+                                <button class="text-xs font-black text-primary hover:underline">Resolve</button>
+                            </div>
+                        </div>
+
+                        <div class="bg-cardLight dark:bg-cardDark border border-borderLight dark:border-borderDark rounded-3xl p-6 flex flex-col hover:border-primary transition-colors shadow-sm group">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-12 h-12 bg-bgLight dark:bg-bgDark rounded-xl flex items-center justify-center text-[var(--text-color)] shadow-sm border border-theme"><i class="fas fa-camera"></i></div>
+                                <span class="badge-success">Available</span>
+                            </div>
+                            <h3 class="font-black text-lg text-[var(--text-color)] mb-1">GoPro Action #01</h3>
+                            <p class="text-xs font-bold text-mutedLight dark:text-mutedDark uppercase tracking-widest mb-6">Type: Add-on Gear</p>
+                            <div class="mt-auto pt-4 border-t border-theme flex justify-between items-center">
+                                <span class="text-xs font-bold text-green-500">100% Charged</span>
+                                <button class="text-xs font-black text-secondary hover:underline">Mark Damaged</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="section-dispatches" class="page-section hidden space-y-6">
+                    <h2 class="font-display text-3xl md:text-4xl font-black text-[var(--text-color)] tracking-tight mb-2">Dispatch Inquiries</h2>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        
+                        <div class="lg:col-span-1 flex flex-col gap-4">
+                            <div class="bg-cardLight dark:bg-cardDark border-l-4 border-l-secondary border-y border-r border-borderLight dark:border-borderDark p-5 rounded-r-2xl cursor-pointer hover:bg-bgLight dark:hover:bg-bgDark transition-colors shadow-sm">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-black text-[var(--text-color)]">Corporate Retreat</h4>
+                                    <span class="text-[10px] font-bold text-mutedLight dark:text-mutedDark">10m ago</span>
+                                </div>
+                                <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-2">David L.</p>
+                                <p class="text-sm font-medium text-mutedLight dark:text-mutedDark line-clamp-2">We have a team of 25 looking to do a full buyout of the morning routes...</p>
+                            </div>
+
+                            <div class="bg-cardLight dark:bg-cardDark border-l-4 border-l-transparent border-y border-r border-borderLight dark:border-borderDark p-5 rounded-r-2xl cursor-pointer hover:bg-bgLight dark:hover:bg-bgDark transition-colors shadow-sm">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-black text-[var(--text-color)]">Rental Time Change</h4>
+                                    <span class="text-[10px] font-bold text-mutedLight dark:text-mutedDark">2h ago</span>
+                                </div>
+                                <p class="text-xs font-bold text-primary uppercase tracking-widest mb-2">Maria S.</p>
+                                <p class="text-sm font-medium text-mutedLight dark:text-mutedDark line-clamp-2">Is it possible to pick up the boards at 7am instead of 8am tomorrow?</p>
+                            </div>
+
+                            <div class="bg-cardLight dark:bg-cardDark border-l-4 border-l-transparent border-y border-r border-borderLight dark:border-borderDark p-5 rounded-r-2xl cursor-pointer hover:bg-bgLight dark:hover:bg-bgDark transition-colors shadow-sm">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h4 class="font-black text-[var(--text-color)]">Route Difficulty</h4>
+                                    <span class="text-[10px] font-bold text-mutedLight dark:text-mutedDark">Yesterday</span>
+                                </div>
+                                <p class="text-xs font-bold text-primary uppercase tracking-widest mb-2">John T.</p>
+                                <p class="text-sm font-medium text-mutedLight dark:text-mutedDark line-clamp-2">I have experience on lakes but not the ocean. Is the Level 2 route safe for me?</p>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-2 bg-cardLight dark:bg-cardDark border border-borderLight dark:border-borderDark rounded-[2rem] flex flex-col overflow-hidden shadow-sm h-[600px]">
+                            <div class="p-6 border-b border-theme bg-bgLight dark:bg-bgDark flex justify-between items-center">
+                                <div>
+                                    <h3 class="font-display font-black text-xl text-[var(--text-color)] mb-1">Corporate Retreat Inquiry</h3>
+                                    <p class="text-xs font-bold text-mutedLight dark:text-mutedDark">From: David L. (david.l@techcorp.com)</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="w-10 h-10 rounded-full border border-theme flex items-center justify-center hover:bg-secondary hover:text-[#0A0A0A] hover:border-secondary transition-colors text-[var(--text-color)]"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="p-8 flex-grow overflow-y-auto">
+                                <p class="text-sm font-medium text-[var(--text-color)] leading-relaxed mb-4">
+                                    Hi PaddleNest Team,
+                                </p>
+                                <p class="text-sm font-medium text-[var(--text-color)] leading-relaxed mb-4">
+                                    We are organizing our Q3 company retreat and are interested in doing a full buyout of your morning guided tours on Friday the 18th. We have exactly 25 team members.
+                                </p>
+                                <p class="text-sm font-medium text-[var(--text-color)] leading-relaxed mb-4">
+                                    A few questions:
+                                    <br>1. Can you accommodate 25 people on the water at once?
+                                    <br>2. Do you offer catering or partnerships with local restaurants for lunch afterward?
+                                    <br>3. What is the process for getting waivers signed for a large group?
+                                </p>
+                                <p class="text-sm font-medium text-[var(--text-color)] leading-relaxed">
+                                    Looking forward to hearing from you.
+                                    <br><br>Best,<br>David
+                                </p>
+                            </div>
+
+                            <div class="p-6 border-t border-theme bg-bgLight dark:bg-bgDark">
+                                <textarea class="input-field w-full mb-4 resize-none" rows="3" placeholder="Write your reply to David..."></textarea>
+                                <div class="flex justify-between items-center">
+                                    <button class="text-mutedLight dark:text-mutedDark hover:text-primary"><i class="fas fa-paperclip"></i> Attach File</button>
+                                    <button class="bg-primary text-[#0A0A0A] px-6 py-2.5 rounded-xl font-black text-sm hover:bg-white transition-all shadow-md">Send Dispatch <i class="fas fa-paper-plane ml-2 text-xs"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="section-settings" class="page-section hidden space-y-6">
+                     <h2 class="font-display text-3xl font-black text-[var(--text-color)] tracking-tight">System Settings</h2>
+                     <div class="card-section text-center py-20 border border-theme">
+                         <i class="fas fa-cogs text-6xl text-mutedLight dark:text-mutedDark opacity-20 mb-6"></i>
+                         <h3 class="text-xl font-bold text-[var(--text-color)] mb-2">Configuration Hub</h3>
+                         <p class="text-sm text-mutedLight dark:text-mutedDark font-medium">Platform configurations, staff accounts, and global pricing controls are managed here.</p>
+                     </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // --- 1. THEME TOGGLE LOGIC ---
+        const htmlElement = document.documentElement;
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        
+        function updateTheme() {
+            const isDark = htmlElement.classList.contains('dark');
+            htmlElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            
+            if (themeIcon) {
+                if (isDark) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            }
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                updateTheme();
+            });
+        }
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        }
+        updateTheme();
+
+        // --- 2. RTL TOGGLE LOGIC ---
+        const rtlToggleBtn = document.getElementById('rtl-toggle-btn');
+        const currentDir = localStorage.getItem('direction') || 'ltr';
+        htmlElement.setAttribute('dir', currentDir);
+        
+        function toggleRTL() {
+            const direction = htmlElement.getAttribute('dir') === 'rtl' ? 'ltr' : 'rtl';
+            htmlElement.setAttribute('dir', direction);
+            localStorage.setItem('direction', direction);
+        }
+        if (rtlToggleBtn) rtlToggleBtn.addEventListener('click', toggleRTL);
+
+        // --- 3. TAB SWITCHING LOGIC ---
+        function switchTab(event, targetId) {
+            if(event) event.preventDefault();
+            const allSections = document.querySelectorAll('.page-section');
+
+            allSections.forEach(section => {
+                section.classList.remove('block', 'animate-fade-in-up');
+                section.classList.add('hidden');
+                void section.offsetWidth; 
+            });
+
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                targetSection.classList.add('block', 'animate-fade-in-up');
+            }
+
+            if (event && event.currentTarget.classList.contains('sidebar-link')) {
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                event.currentTarget.classList.add('active');
+            }
+
+            if (window.innerWidth < 768) {
+                const sidebar = document.getElementById('sidebar');
+                const sidebarOverlay = document.getElementById('sidebarOverlay');
+                if (htmlElement.getAttribute('dir') === 'rtl') {
+                    sidebar.classList.add('rtl:translate-x-full');
+                } else {
+                    sidebar.classList.add('ltr:-translate-x-full');
+                }
+                sidebarOverlay.classList.add('hidden');
+            }
+        }
+
+        window.onload = () => {
+            switchTab(null, 'section-overview');
+        };
+
+        // --- 4. MOBILE SIDEBAR LOGIC ---
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        function toggleSidebar() {
+            const isRTL = htmlElement.getAttribute('dir') === 'rtl';
+            const closedClass = isRTL ? 'rtl:translate-x-full' : 'ltr:-translate-x-full';
+            
+            const isClosed = sidebar.classList.contains(closedClass);
+            
+            if (isClosed) {
+                sidebar.classList.remove(closedClass);
+                sidebarOverlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add(closedClass);
+                sidebarOverlay.classList.add('hidden');
+            }
+        }
+
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleSidebar);
+        if (sidebarOverlay) sidebarOverlay.addEventListener('click', toggleSidebar);
+    </script>
+</body>
+</html>
