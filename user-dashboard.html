@@ -97,29 +97,29 @@
 <body class="font-sans flex flex-col h-screen bg-bgLight dark:bg-bgDark text-textLight dark:text-textDark transition-colors duration-300 overflow-x-hidden">
 
     <nav class="bg-bgLight/90 dark:bg-bgDark/95 backdrop-blur-md shadow-sm flex-shrink-0 relative z-50 h-20 border-b border-borderLight dark:border-borderDark transition-colors duration-300">
-        <div class="max-w-[1920px] mx-auto px-4 md:px-6 lg:px-8 h-full flex justify-between items-center">
+        <div class="max-w-[1920px] mx-auto px-2 sm:px-4 md:px-6 lg:px-8 h-full flex justify-between items-center">
             
-            <div class="flex items-center gap-2 sm:gap-4">
-                <button id="mobileMenuBtn" class="md:hidden text-textLight dark:text-textDark hover:text-primary transition-colors text-xl font-bold leading-none border-0 bg-transparent cursor-pointer p-2">
+            <div class="flex items-center gap-1 sm:gap-4">
+                <button id="mobileMenuBtn" class="md:hidden text-textLight dark:text-textDark hover:text-primary transition-colors text-xl font-bold leading-none border-0 bg-transparent cursor-pointer p-1 sm:p-2">
                     <i class="fas fa-bars"></i>
                 </button>
 
-                <a href="index.html" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110 shrink-0">
-                        <i class="fa-solid fa-water text-lg"></i>
+                <a href="index.html" class="flex items-center gap-1.5 sm:gap-3 group">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110 shrink-0">
+                        <i class="fa-solid fa-water text-base sm:text-lg"></i>
                     </div>
-                    <span class="font-display text-xl sm:text-2xl font-black tracking-wide transition-colors text-[var(--text-color)] whitespace-nowrap">Paddle<span class="text-primary">Nest</span></span>
+                    <span class="font-display text-lg sm:text-2xl font-black tracking-wide transition-colors text-[var(--text-color)] whitespace-nowrap">Paddle<span class="text-primary">Nest</span></span>
                 </a>
             </div>
 
-            <div class="flex items-center gap-2 sm:gap-3 md:gap-5">
+            <div class="flex items-center gap-1.5 sm:gap-3 md:gap-5">
                 
-                <div class="flex items-center gap-1 sm:gap-2 ltr:mr-2 rtl:ml-2 border-r border-borderLight dark:border-borderDark ltr:pr-2 sm:ltr:pr-4 rtl:pl-2 sm:rtl:pl-4">
-                    <button class="w-10 h-10 bg-cardLight dark:bg-cardDark rounded-full border border-borderLight dark:border-borderDark flex items-center justify-center text-textLight dark:text-textDark transition-all duration-300 hover:border-primary hover:text-primary shrink-0 shadow-sm cursor-pointer" id="rtl-toggle-btn" title="Toggle RTL">
-                        <span class="text-[10px] font-black">RTL</span>
+                <div class="flex items-center gap-1 sm:gap-2 ltr:mr-1 rtl:ml-1 sm:ltr:mr-2 sm:rtl:ml-2 border-r border-borderLight dark:border-borderDark ltr:pr-1.5 sm:ltr:pr-4 rtl:pl-1.5 sm:rtl:pl-4">
+                    <button class="w-8 h-8 sm:w-10 sm:h-10 bg-cardLight dark:bg-cardDark rounded-full border border-borderLight dark:border-borderDark flex items-center justify-center text-textLight dark:text-textDark transition-all duration-300 hover:border-primary hover:text-primary shrink-0 shadow-sm cursor-pointer" id="rtl-toggle-btn" title="Toggle RTL">
+                        <span class="text-[9px] sm:text-[10px] font-black">RTL</span>
                     </button>
-                    <button class="w-10 h-10 bg-cardLight dark:bg-cardDark rounded-full border border-borderLight dark:border-borderDark flex items-center justify-center text-textLight dark:text-textDark transition-all duration-300 hover:border-primary hover:text-primary shrink-0 shadow-sm cursor-pointer" id="theme-toggle-btn" title="Toggle Dark Mode">
-                        <i class="fas fa-moon transition-transform hover:rotate-[360deg] duration-500 text-sm" id="theme-icon"></i>
+                    <button class="w-8 h-8 sm:w-10 sm:h-10 bg-cardLight dark:bg-cardDark rounded-full border border-borderLight dark:border-borderDark flex items-center justify-center text-textLight dark:text-textDark transition-all duration-300 hover:border-primary hover:text-primary shrink-0 shadow-sm cursor-pointer" id="theme-toggle-btn" title="Toggle Dark Mode">
+                        <i class="fas fa-moon transition-transform hover:rotate-[360deg] duration-500 text-xs sm:text-sm" id="theme-icon"></i>
                     </button>
                 </div>
 
@@ -128,7 +128,7 @@
                         <p class="text-sm font-bold text-textLight dark:text-textDark leading-tight">Alex Rivera</p>
                         <p class="text-[10px] font-black uppercase tracking-wider text-primary">Wave Rider VIP</p>
                     </div>
-                    <div class="w-10 h-10 rounded-full bg-primary text-[#0A0A0A] flex items-center justify-center font-black text-sm border-2 border-transparent transition-all shadow-[0_0_10px_rgba(0,212,255,0.4)] group-hover:scale-105 tracking-widest relative overflow-hidden">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-primary text-[#0A0A0A] flex items-center justify-center font-black text-sm border-2 border-transparent transition-all shadow-[0_0_10px_rgba(0,212,255,0.4)] group-hover:scale-105 tracking-widest relative overflow-hidden shrink-0">
                         <img src="https://ui-avatars.com/api/?name=Alex+Rivera&background=00D4FF&color=0A0A0A&bold=true" class="w-full h-full object-cover" alt="User">
                     </div>
                 </div>

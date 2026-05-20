@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth">
+<html lang="en" data-theme="light" dir="ltr" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,9 +9,10 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Fonts strictly loaded at 400 and 500 weights to maintain readability constraints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
     
     <script src="tailwind.js"></script>
     <script>
@@ -126,15 +127,21 @@
 
         /* Mobile Menu */
         .mobile-menu {
+            left: 0;
+            right: auto;
             transform: translateX(-100%); 
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
             background-color: var(--bg-color); 
+            visibility: hidden; 
         }
         html[dir="rtl"] .mobile-menu {
+            left: auto;
+            right: 0;
             transform: translateX(100%);
         }
-        .mobile-menu.active, html[dir="rtl"] .mobile-menu.active { 
+        .mobile-menu.active { 
             transform: translateX(0); 
+            visibility: visible;
         }
         
         .mobile-dropdown-content {
@@ -164,8 +171,9 @@
         ::-webkit-scrollbar-thumb:hover { background: #FF6B35; }
     </style>
 </head>
-<body class="antialiased overflow-x-hidden">
+<body class="antialiased overflow-x-hidden w-full relative">
 
+    <!-- Unified Navbar Structure -->
     <nav class="fixed w-full top-0 z-[100] glass-nav transition-all duration-300 py-2">
         <div class="max-w-[1920px] mx-auto px-4 md:px-6">
             <div class="flex items-center justify-between h-16 md:h-20 w-full gap-4">
@@ -174,26 +182,35 @@
                     <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
                         <i class="fa-solid fa-water text-lg"></i>
                     </div>
-                    <span class="font-display text-2xl font-semibold tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
+                    <span class="font-display text-2xl font-medium tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
                 </a>
 
                 <div class="hidden xl:flex flex-1 justify-center items-center gap-4 2xl:gap-6 px-4">
-                    <a href="index.html" class="nav-link active text-sm 2xl:text-base">Home</a>
-                    <a href="about.html" class="nav-link text-sm 2xl:text-base">About</a>
-                    <a href="packages.html" class="nav-link text-sm 2xl:text-base">Packages</a>
-                    <a href="routes.html" class="nav-link text-sm 2xl:text-base">Routes</a>
-                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base">Rentals</a>
-                    <a href="guidelines.html" class="nav-link text-sm 2xl:text-base">Guidelines</a>
-                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base">Adventure</a>
-                    <a href="faq.html" class="nav-link text-sm 2xl:text-base">FAQ</a>
-                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base">Pricing</a>
-                    <a href="contact.html" class="nav-link text-sm 2xl:text-base">Contact</a>
+                    
+                    <!-- Home Dropdown marked as Active -->
+                    <div class="relative group cursor-pointer py-6">
+                        <span class="nav-link active flex items-center gap-1 text-sm 2xl:text-base font-medium">Home <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <div class="dropdown-menu absolute z-50 top-full left-0 mt-[-10px] w-40 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
+                            <a href="index.html" class="flex items-center px-4 py-3 text-primary bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1">Home 1</a>
+                            <a href="home-2.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] hover:text-primary rounded-lg transition-colors font-medium">Home 2</a>
+                        </div>
+                    </div>
+
+                    <a href="about.html" class="nav-link text-sm 2xl:text-base font-medium">About</a>
+                    <a href="packages.html" class="nav-link text-sm 2xl:text-base font-medium">Packages</a>
+                    <a href="routes.html" class="nav-link text-sm 2xl:text-base font-medium">Routes</a>
+                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base font-medium">Rentals</a>
+                    <a href="guidelines.html" class="nav-link text-sm 2xl:text-base font-medium">Guidelines</a>
+                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base font-medium">Adventure</a>
+                    <a href="faq.html" class="nav-link text-sm 2xl:text-base font-medium">FAQ</a>
+                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base font-medium">Pricing</a>
+                    <a href="contact.html" class="nav-link text-sm 2xl:text-base font-medium">Contact</a>
 
                     <div class="relative group cursor-pointer py-6">
-                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
-                        <div class="dropdown-menu absolute z-50 top-full right-0 mt-[-10px] w-48 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
-                            <a href="user-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1"><i class="fas fa-user w-5 text-primary mr-2"></i> User</a>
-                            <a href="admin-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium"><i class="fas fa-shield-halved w-5 text-secondary mr-2"></i> Admin</a>
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base font-medium">Dashboard <i class="fas fa-chevron-down text-[10px] ltr:ml-1 rtl:mr-1"></i></span>
+                        <div class="dropdown-menu absolute z-50 top-full ltr:right-0 rtl:left-0 mt-[-10px] w-48 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
+                            <a href="user-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1"><i class="fas fa-user w-5 text-primary ltr:mr-2 rtl:ml-2"></i> User</a>
+                            <a href="admin-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium"><i class="fas fa-shield-halved w-5 text-secondary ltr:mr-2 rtl:ml-2"></i> Admin</a>
                         </div>
                     </div>
                 </div>
@@ -218,9 +235,9 @@
         </div>
     </nav>
 
-    <!-- Added xl:hidden to both overlay and mobile menu to prevent them from showing on desktop toggles -->
+    <!-- Unified Mobile Menu Structure -->
     <div id="mobile-overlay" class="fixed inset-0 bg-black/80 z-[9998] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm xl:hidden"></div>
-    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 ltr:left-0 rtl:right-0 z-[9999] w-[85%] max-w-sm border-r border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-color)] xl:hidden">
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 z-[9999] w-[85%] max-w-sm border-r border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-color)] xl:hidden">
         <div class="p-5 flex flex-col h-full">
             
             <div class="flex items-center justify-between pb-6 border-b border-theme shrink-0">
@@ -228,7 +245,7 @@
                     <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
                         <i class="fa-solid fa-water text-xs"></i>
                     </div>
-                    <span class="font-display text-xl font-semibold text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
+                    <span class="font-display text-xl font-medium text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
                 </a>
                 
                 <div class="flex items-center gap-2 shrink-0">
@@ -248,7 +265,19 @@
             </div>
             
             <div class="flex-grow overflow-y-auto py-6 space-y-1">
-                <a href="index.html" class="block font-sans text-base py-2 font-medium text-primary">Home</a>
+                
+                <!-- Mobile Home Dropdown marked as Active -->
+                <div>
+                    <button class="mobile-dropdown-btn active flex items-center justify-between w-full text-left font-sans text-base py-2 text-primary font-medium" onclick="toggleMobileDropdown(this, 'home-mobile')">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-down dropdown-arrow text-xs text-primary"></i>
+                    </button>
+                    <div id="home-mobile" class="mobile-dropdown-content active px-4">
+                        <a href="index.html" class="block py-2.5 font-medium text-primary">Home 1</a>
+                        <a href="home-2.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary">Home 2</a>
+                    </div>
+                </div>
+
                 <a href="about.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">About</a>
                 <a href="packages.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Packages</a>
                 <a href="routes.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Routes</a>
@@ -265,13 +294,13 @@
                         <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
                     </button>
                     <div id="dashboard-mobile" class="mobile-dropdown-content px-4">
-                        <a href="user-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5"></i> User Dashboard</a>
-                        <a href="admin-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5"></i> Admin Panel</a>
+                        <a href="user-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5 text-center"></i> <span>User Dashboard</span></a>
+                        <a href="admin-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5 text-center"></i> <span>Admin Panel</span></a>
                     </div>
                 </div>
 
-                <a href="login.html" class="block font-sans text-base py-2 font-medium text-secondary hover:text-primary transition-colors mt-2">
-                    <i class="fas fa-sign-in-alt w-5"></i> Login Account
+                <a href="login.html" class="flex items-center gap-2 font-sans text-base py-2 font-medium text-secondary hover:text-primary transition-colors mt-2">
+                    <i class="fas fa-sign-in-alt w-5 text-center"></i> <span>Login Account</span>
                 </a>
             </div>
         </div>
@@ -282,30 +311,30 @@
         <section class="relative w-full h-[100dvh] min-h-[700px] flex items-center pt-20 overflow-hidden bg-bgDark">
             <img src="Images/homehero.jpg" alt="Hero Background" class="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-screen">
             
-            <div class="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/80 to-[#0A0A0A]/40 z-10"></div>
             
-            <div class="container mx-auto px-4 md:px-8 relative z-20">
-                <div class="max-w-3xl border-l-4 border-primary pl-8 py-4">
-                    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-[#121212]/80 border border-white/10 mb-6 backdrop-blur-md">
+            <div class="container mx-auto px-4 md:px-8 relative z-20 flex flex-col items-center justify-center text-center">
+                <div class="max-w-4xl py-4 flex flex-col items-center">
+                    <div class="inline-flex items-center justify-center gap-3 px-5 py-2 rounded-full bg-[#121212]/80 border border-white/10 mb-8 backdrop-blur-md">
                         <span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
                         <span class="text-white font-medium text-xs tracking-widest uppercase">Redefining Exploration</span>
                     </div>
                     
-                    <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-white mb-6 leading-[1.05]">
+                    <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-medium text-white mb-6 leading-[1.1]">
                         Conquer the <br/>
                         <span class="text-gradient">Wild Waters</span>
                     </h1>
                     
-                    <p class="text-lg md:text-xl text-gray-300 mb-10 font-medium max-w-xl leading-relaxed">
+                    <p class="text-lg md:text-xl text-gray-300 mb-10 font-medium max-w-2xl mx-auto leading-relaxed">
                         Immersive eco-tours and premium paddleboard rentals crafted for the modern adventurer. Unplug and reconnect.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#" class="flex items-center justify-center bg-primary text-[#0A0A0A] px-8 py-4 rounded-full font-medium text-lg hover:bg-secondary transition-all transform hover:-translate-y-1">
-                            Book Adventure <i class="fas fa-arrow-right ml-3"></i>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 w-full">
+                        <a href="#" class="flex items-center justify-center bg-primary text-[#0A0A0A] px-8 py-4 rounded-full font-medium text-lg hover:bg-secondary transition-all transform hover:-translate-y-1 shadow-lg shadow-primary/20">
+                            Book Adventure <i class="fas fa-arrow-right ltr:ml-3 rtl:mr-3 rtl:rotate-180"></i>
                         </a>
-                        <a href="#" class="flex items-center justify-center bg-transparent border border-white/30 text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-white hover:text-[#0A0A0A] transition-all backdrop-blur-sm">
-                            <i class="fas fa-play mr-3 text-primary group-hover:text-[#0A0A0A]"></i> Watch Video
+                        <a href="#" class="group flex items-center justify-center bg-transparent border border-white/30 text-white px-8 py-4 rounded-full font-medium text-lg hover:bg-white hover:text-[#0A0A0A] transition-all backdrop-blur-sm">
+                            <i class="fas fa-play ltr:mr-3 rtl:ml-3 rtl:rotate-180 text-primary group-hover:text-[#0A0A0A]"></i> Watch Video
                         </a>
                     </div>
                 </div>
@@ -317,12 +346,12 @@
         
         <!-- Section Header -->
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div class="max-w-2xl border-l-4 border-secondary pl-6">
+            <div class="max-w-2xl ltr:border-l-4 rtl:border-r-4 border-secondary ltr:pl-6 rtl:pr-6">
                 <span class="text-secondary font-medium tracking-widest uppercase text-sm block mb-2">
                     Expeditions
                 </span>
 
-                <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)]">
+                <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)]">
                     Signature Routes
                 </h2>
             </div>
@@ -330,7 +359,7 @@
             <a href="#"
                class="font-medium text-[var(--text-color)] hover:text-secondary pb-1 border-b-2 border-transparent hover:border-secondary transition-all">
                 View All Tours
-                <i class="fas fa-arrow-right text-sm ml-1"></i>
+                <i class="fas fa-arrow-right text-sm ltr:ml-1 rtl:mr-1 rtl:rotate-180"></i>
             </a>
         </div>
 
@@ -363,7 +392,7 @@
                                 </span>
                             </div>
 
-                            <h3 class="text-3xl md:text-4xl font-display font-semibold mb-4 text-[var(--text-color)]">
+                            <h3 class="text-3xl md:text-4xl font-display font-medium mb-4 text-[var(--text-color)]">
                                 Sunrise Glide
                             </h3>
 
@@ -373,7 +402,7 @@
                         </div>
 
                         <div class="flex items-center justify-between mt-10 pt-6 border-t border-theme">
-                            <span class="font-semibold text-3xl text-[var(--text-color)]">
+                            <span class="font-medium text-3xl text-[var(--text-color)]">
                                 $89
                             </span>
 
@@ -411,7 +440,7 @@
                                 </span>
                             </div>
 
-                            <h3 class="text-3xl md:text-4xl font-display font-semibold mb-4 text-[var(--text-color)]">
+                            <h3 class="text-3xl md:text-4xl font-display font-medium mb-4 text-[var(--text-color)]">
                                 Mangrove Safari
                             </h3>
 
@@ -421,7 +450,7 @@
                         </div>
 
                         <div class="flex items-center justify-between mt-10 pt-6 border-t border-theme">
-                            <span class="font-semibold text-3xl text-[var(--text-color)]">
+                            <span class="font-medium text-3xl text-[var(--text-color)]">
                                 $120
                             </span>
 
@@ -439,32 +468,32 @@
 
         <section class="py-24 bg-[var(--bg-color)] text-[var(--text-color)] border-b border-theme transition-colors">
             <div class="container mx-auto px-4 md:px-8">
-                <div class="mb-16 border-l-4 border-primary pl-6">
+                <div class="mb-16 ltr:border-l-4 rtl:border-r-4 border-primary ltr:pl-6 rtl:pr-6">
                     <span class="text-primary font-medium tracking-widest uppercase text-sm block mb-2">Advantage</span>
-                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)]">The PaddleNest <span class="text-primary border-b-4 border-primary">Difference</span></h2>
+                    <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)]">The PaddleNest <span class="text-primary border-b-4 border-primary">Difference</span></h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="md:col-span-2 bg-card p-10 md:p-12 rounded-[2rem] border border-theme hover:border-primary transition-colors duration-300 relative overflow-hidden group">
-                        <i class="fas fa-shield-halved text-[12rem] absolute -right-10 -bottom-10 text-[var(--text-muted)] opacity-5 group-hover:scale-110 group-hover:text-primary transition-all duration-700"></i>
+                        <i class="fas fa-shield-halved text-[12rem] absolute ltr:-right-10 rtl:-left-10 -bottom-10 text-[var(--text-muted)] opacity-5 group-hover:scale-110 group-hover:text-primary transition-all duration-700"></i>
                         <div class="relative z-10 w-full md:w-3/4">
                             <div class="w-14 h-14 bg-[var(--bg-color)] border border-theme rounded-2xl flex items-center justify-center text-2xl mb-6 text-primary shadow-sm">
                                 <i class="fas fa-life-ring"></i>
                             </div>
-                            <h3 class="text-2xl font-display font-semibold mb-4">Uncompromising Safety</h3>
+                            <h3 class="text-2xl font-display font-medium mb-4">Uncompromising Safety</h3>
                             <p class="text-body-muted text-lg font-medium leading-relaxed">Every guide is locally certified in water rescue. We use exclusively ultra-stable, multi-chambered boards ensuring your adventure is completely risk-free.</p>
                         </div>
                     </div>
                     
                     <div class="bg-[var(--bg-color)] border border-theme p-10 rounded-[2rem] flex flex-col justify-end min-h-[280px] group overflow-hidden relative shadow-sm hover:border-primary transition-colors">
-                        <i class="fas fa-leaf text-7xl absolute top-6 right-6 text-primary/20 group-hover:rotate-12 transition-transform duration-500"></i>
-                        <h3 class="text-2xl font-display font-semibold mb-2 relative z-10">Zero Trace</h3>
+                        <i class="fas fa-leaf text-7xl absolute top-6 ltr:right-6 rtl:left-6 text-primary/20 group-hover:rotate-12 transition-transform duration-500"></i>
+                        <h3 class="text-2xl font-display font-medium mb-2 relative z-10">Zero Trace</h3>
                         <p class="text-body-muted font-medium relative z-10">100% emission-free fleet.</p>
                     </div>
 
                     <div class="bg-[var(--bg-color)] border border-theme p-10 rounded-[2rem] flex flex-col justify-end min-h-[280px] group overflow-hidden relative shadow-sm hover:border-secondary transition-colors">
-                        <i class="fas fa-map text-7xl absolute top-6 right-6 text-secondary/20 group-hover:-rotate-12 transition-transform duration-500"></i>
-                        <h3 class="text-2xl font-display font-semibold mb-2 relative z-10">Secret Spots</h3>
+                        <i class="fas fa-map text-7xl absolute top-6 ltr:right-6 rtl:left-6 text-secondary/20 group-hover:-rotate-12 transition-transform duration-500"></i>
+                        <h3 class="text-2xl font-display font-medium mb-2 relative z-10">Secret Spots</h3>
                         <p class="text-body-muted font-medium relative z-10">Access local hidden routes.</p>
                     </div>
 
@@ -472,8 +501,8 @@
                         <div class="w-16 h-16 bg-[var(--bg-color)] rounded-full flex items-center justify-center text-2xl shrink-0 border border-theme text-primary">
                             <i class="fas fa-camera"></i>
                         </div>
-                        <div class="text-center sm:text-left">
-                            <h3 class="text-xl font-display font-semibold mb-2">Pro Photography Included</h3>
+                        <div class="text-center sm:ltr:text-left sm:rtl:text-right">
+                            <h3 class="text-xl font-display font-medium mb-2">Pro Photography Included</h3>
                             <p class="text-body-muted font-medium">Leave your phone behind. Our guides carry waterproof DSLR gear to capture your best moments in 4K resolution, free of charge.</p>
                         </div>
                     </div>
@@ -483,21 +512,21 @@
 
         <section class="py-24 relative bg-[var(--bg-color)] overflow-hidden border-b border-theme">
             <div class="container mx-auto px-4 md:px-8 text-center max-w-4xl">
-                <h2 class="text-4xl md:text-6xl font-display font-semibold text-[var(--text-color)] mb-10 leading-tight">
+                <h2 class="text-4xl md:text-6xl font-display font-medium text-[var(--text-color)] mb-10 leading-tight">
                     We only have <br/> <span class="text-primary">One Ocean.</span>
                 </h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-16">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 ltr:text-left rtl:text-right mb-16">
                     <div class="border-t-2 border-primary pt-4">
-                        <p class="text-4xl font-semibold text-[var(--text-color)] mb-2">5%</p>
+                        <p class="text-4xl font-medium text-[var(--text-color)] mb-2">5%</p>
                         <p class="text-body-muted font-medium">Of proceeds donated to coral restoration.</p>
                     </div>
                     <div class="border-t-2 border-secondary pt-4">
-                        <p class="text-4xl font-semibold text-[var(--text-color)] mb-2">0</p>
+                        <p class="text-4xl font-medium text-[var(--text-color)] mb-2">0</p>
                         <p class="text-body-muted font-medium">Single-use plastics on any tour.</p>
                     </div>
                     <div class="border-t-2 border-primary pt-4">
-                        <p class="text-4xl font-semibold text-[var(--text-color)] mb-2">2K+</p>
+                        <p class="text-4xl font-medium text-[var(--text-color)] mb-2">2K+</p>
                         <p class="text-body-muted font-medium">Pounds of trash removed annually.</p>
                     </div>
                 </div>
@@ -506,7 +535,7 @@
                     <img src="Images/Ocean Conservation.jpg" alt="Ocean Conservation" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700">
                     <div class="absolute inset-0 flex items-center justify-center">
                         <a href="#" class="w-20 h-20 bg-[var(--bg-color)] border border-theme rounded-full flex items-center justify-center text-[var(--text-color)] text-2xl hover:bg-primary hover:text-[#0A0A0A] transition-all transform hover:scale-110 shadow-lg">
-                            <i class="fas fa-play ml-1"></i>
+                            <i class="fas fa-play ltr:ml-1 rtl:mr-1 rtl:rotate-180"></i>
                         </a>
                     </div>
                 </div>
@@ -515,44 +544,45 @@
 
         <section class="py-24 bg-card border-b border-theme transition-colors">
             <div class="container mx-auto px-4 md:px-8">
-                <div class="text-center mb-16">
+                <!-- Aligned Reviews Header -->
+                <div class="mb-16 ltr:border-l-4 rtl:border-r-4 border-secondary ltr:pl-6 rtl:pr-6">
                     <span class="text-secondary font-medium tracking-widest uppercase text-sm block mb-2">Reviews</span>
-                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)]">Real Adventures</h2>
+                    <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)]">Real Adventures</h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-[var(--bg-color)] p-8 rounded-[2rem] border border-theme hover:border-primary transition-colors duration-300">
-                        <div class="flex text-primary mb-6 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="bg-[var(--bg-color)] p-8 rounded-[2rem] border border-theme hover:border-primary transition-colors duration-300 flex flex-col items-center text-center h-full">
+                        <div class="flex gap-1 justify-center text-primary mb-6 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p class="text-base font-medium text-body-muted mb-8 italic">"An absolutely pristine experience. The gear was top-notch and the guide knew everything about the local wildlife."</p>
-                        <div class="flex items-center gap-4">
+                        <div class="flex flex-col items-center gap-3 mt-auto">
                             <div class="w-12 h-12 rounded-full bg-card border border-theme flex items-center justify-center font-medium text-primary">SJ</div>
                             <div>
                                 <h4 class="font-medium text-[var(--text-color)] text-sm">Sarah Jenkins</h4>
-                                <p class="text-xs font-medium text-body-muted">Mangrove Explorer</p>
+                                <p class="text-xs font-medium text-body-muted mt-1">Mangrove Explorer</p>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="bg-[var(--text-color)] p-8 rounded-[2rem] shadow-lg">
-                        <div class="flex text-primary mb-6 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="bg-[var(--text-color)] p-8 rounded-[2rem] shadow-lg flex flex-col items-center text-center h-full">
+                        <div class="flex gap-1 justify-center text-primary mb-6 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p class="text-base font-medium text-[var(--bg-color)] mb-8 italic">"I've rented boards all over the world. PaddleNest has the cleanest operations and the best secret routes, hands down."</p>
-                        <div class="flex items-center gap-4">
+                        <div class="flex flex-col items-center gap-3 mt-auto">
                             <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center font-medium text-[#0A0A0A]">MR</div>
                             <div>
                                 <h4 class="font-medium text-[var(--bg-color)] text-sm">Mike Ross</h4>
-                                <p class="text-xs font-medium text-primary">Pro Paddler</p>
+                                <p class="text-xs font-medium text-primary mt-1">Pro Paddler</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-[var(--bg-color)] p-8 rounded-[2rem] border border-theme hover:border-primary transition-colors duration-300">
-                        <div class="flex text-primary mb-6 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="bg-[var(--bg-color)] p-8 rounded-[2rem] border border-theme hover:border-primary transition-colors duration-300 flex flex-col items-center text-center h-full">
+                        <div class="flex gap-1 justify-center text-primary mb-6 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                         <p class="text-base font-medium text-body-muted mb-8 italic">"Felt completely safe as a beginner. The photos they took for us were breathtaking. 10/10 will book again."</p>
-                        <div class="flex items-center gap-4">
+                        <div class="flex flex-col items-center gap-3 mt-auto">
                             <div class="w-12 h-12 rounded-full bg-card border border-theme flex items-center justify-center font-medium text-primary">EL</div>
                             <div>
                                 <h4 class="font-medium text-[var(--text-color)] text-sm">Emma Lawson</h4>
-                                <p class="text-xs font-medium text-body-muted">First Timer</p>
+                                <p class="text-xs font-medium text-body-muted mt-1">First Timer</p>
                             </div>
                         </div>
                     </div>
@@ -564,8 +594,8 @@
             <div class="container mx-auto px-4 md:px-8">
                 <div class="w-full bg-card rounded-[2.5rem] p-10 md:p-16 flex flex-col lg:flex-row items-center justify-between border border-theme">
                     
-                    <div class="max-w-xl text-center lg:text-left mb-8 lg:mb-0">
-                        <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4">Ready to Drop In?</h2>
+                    <div class="max-w-xl text-center lg:ltr:text-left lg:rtl:text-right mb-8 lg:mb-0">
+                        <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)] mb-4">Ready to Drop In?</h2>
                         <p class="text-lg text-body-muted font-medium">Secure your board or book a guided tour today. The water is calling.</p>
                     </div>
 
@@ -591,7 +621,7 @@
                         <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
                             <i class="fa-solid fa-water"></i>
                         </div>
-                        <span class="font-display text-2xl font-semibold text-white">Paddle<span class="text-primary">Nest</span></span>
+                        <span class="font-display text-2xl font-medium text-white">Paddle<span class="text-primary">Nest</span></span>
                     </a>
                     <p class="text-gray-400 font-medium mb-6 text-sm leading-relaxed">
                         Premium eco-tours and paddleboard rentals bridging the gap between humans and nature.
@@ -604,7 +634,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Navigation</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Navigation</h4>
                     <ul class="space-y-3 font-medium text-sm">
                         <li><a href="about.html" class="hover:text-primary transition-colors block">About Us</a></li>
                         <li><a href="packages.html" class="hover:text-primary transition-colors block">Tours & Packages</a></li>
@@ -614,7 +644,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Legal</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Legal</h4>
                     <ul class="space-y-3 font-medium text-sm">
                         <li><a href="privacy.html" class="hover:text-primary transition-colors block">Privacy Policy</a></li>
                         <li><a href="terms.html" class="hover:text-primary transition-colors block">Terms of Service</a></li>
@@ -623,7 +653,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Contact HQ</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Contact HQ</h4>
                     <ul class="space-y-4 font-medium text-sm">
                         <li class="flex items-start gap-3 cursor-default">
                             <i class="fas fa-map-marker-alt mt-1 text-primary"></i>
@@ -680,12 +710,22 @@
         }
         updateTheme();
 
-        // --- RTL Toggle Logic ---
+        // --- RTL Toggle Logic (Fixed layout jump bug) ---
         const rtlToggleBtns = document.querySelectorAll('.rtl-toggle-btn');
         rtlToggleBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if(mobileMenu) {
+                    mobileMenu.style.transition = 'none';
+                }
+                
                 const currentDir = htmlElement.getAttribute('dir');
                 htmlElement.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+                
+                if(mobileMenu) {
+                    void mobileMenu.offsetWidth; 
+                    mobileMenu.style.transition = '';
+                }
             });
         });
 

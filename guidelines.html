@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="PaddleNest - Safety Guidelines and Eco-Policies">
     <title>Guidelines | PaddleNest Minimalist Adventures</title>
-     <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
+    <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
 
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Fonts strictly loaded at 400 and 500 weights to maintain readability constraints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
     
     <script src="tailwind.js"></script>
     <script>
@@ -127,16 +127,21 @@
         /* Mobile Menu */
         .mobile-menu {
             left: 0;
+            right: auto;
             transform: translateX(-100%); 
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
             background-color: var(--bg-color); 
+            visibility: hidden; 
         }
         html[dir="rtl"] .mobile-menu {
             left: auto;
             right: 0;
             transform: translateX(100%);
         }
-        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu.active { 
+            transform: translateX(0); 
+            visibility: visible;
+        }
         
         .mobile-dropdown-content {
             max-height: 0; 
@@ -167,6 +172,7 @@
 </head>
 <body class="antialiased overflow-x-hidden w-full relative">
 
+    <!-- Unified Navbar Structure -->
     <nav class="fixed w-full top-0 z-[100] glass-nav transition-all duration-300 py-2">
         <div class="max-w-[1920px] mx-auto px-4 md:px-6">
             <div class="flex items-center justify-between h-16 md:h-20 w-full gap-4">
@@ -175,23 +181,33 @@
                     <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
                         <i class="fa-solid fa-water text-lg"></i>
                     </div>
-                    <span class="font-display text-2xl font-semibold tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
+                    <span class="font-display text-2xl font-medium tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
                 </a>
 
                 <div class="hidden xl:flex flex-1 justify-center items-center gap-4 2xl:gap-6 px-4">
-                    <a href="index.html" class="nav-link text-sm 2xl:text-base">Home</a>
-                    <a href="about.html" class="nav-link text-sm 2xl:text-base">About</a>
-                    <a href="packages.html" class="nav-link text-sm 2xl:text-base">Packages</a>
-                    <a href="routes.html" class="nav-link text-sm 2xl:text-base">Routes</a>
-                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base">Rentals</a>
-                    <a href="guidelines.html" class="nav-link active text-sm 2xl:text-base">Guidelines</a>
-                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base">Adventure</a>
-                    <a href="faq.html" class="nav-link text-sm 2xl:text-base">FAQ</a>
-                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base">Pricing</a>
-                    <a href="contact.html" class="nav-link text-sm 2xl:text-base">Contact</a>
+                    
+                    <!-- Home Dropdown -->
+                    <div class="relative group cursor-pointer py-6">
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base font-medium">Home <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <div class="dropdown-menu absolute z-50 top-full left-0 mt-[-10px] w-40 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
+                            <a href="index.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] hover:text-primary rounded-lg transition-colors font-medium mb-1">Home 1</a>
+                            <a href="home-2.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] hover:text-primary rounded-lg transition-colors font-medium">Home 2</a>
+                        </div>
+                    </div>
+
+                    <a href="about.html" class="nav-link text-sm 2xl:text-base font-medium">About</a>
+                    <a href="packages.html" class="nav-link text-sm 2xl:text-base font-medium">Packages</a>
+                    <a href="routes.html" class="nav-link text-sm 2xl:text-base font-medium">Routes</a>
+                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base font-medium">Rentals</a>
+                    <!-- Guidelines marked as Active -->
+                    <a href="guidelines.html" class="nav-link active text-sm 2xl:text-base font-medium">Guidelines</a>
+                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base font-medium">Adventure</a>
+                    <a href="faq.html" class="nav-link text-sm 2xl:text-base font-medium">FAQ</a>
+                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base font-medium">Pricing</a>
+                    <a href="contact.html" class="nav-link text-sm 2xl:text-base font-medium">Contact</a>
 
                     <div class="relative group cursor-pointer py-6">
-                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base font-medium">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
                         <div class="dropdown-menu absolute z-50 top-full right-0 mt-[-10px] w-48 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
                             <a href="user-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1"><i class="fas fa-user w-5 text-primary mr-2"></i> User</a>
                             <a href="admin-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium"><i class="fas fa-shield-halved w-5 text-secondary mr-2"></i> Admin</a>
@@ -219,9 +235,9 @@
         </div>
     </nav>
 
+    <!-- Unified Mobile Menu Structure -->
     <div id="mobile-overlay" class="fixed inset-0 bg-black/80 z-[9998] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div>
-    
-    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 z-[9999] w-[85%] max-w-sm border-x border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-color)] xl:hidden">
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 z-[9999] w-[85%] max-w-sm border-r border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden">
         <div class="p-5 flex flex-col h-full">
             
             <div class="flex items-center justify-between pb-6 border-b border-theme shrink-0">
@@ -229,7 +245,7 @@
                     <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
                         <i class="fa-solid fa-water text-xs"></i>
                     </div>
-                    <span class="font-display text-xl font-semibold text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
+                    <span class="font-display text-xl font-medium text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
                 </a>
                 
                 <div class="flex items-center gap-2 shrink-0">
@@ -249,11 +265,24 @@
             </div>
             
             <div class="flex-grow overflow-y-auto py-6 space-y-1">
-                <a href="index.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Home</a>
+                
+                <!-- Mobile Home Dropdown -->
+                <div>
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-left font-sans text-base py-2 text-[var(--text-color)] font-medium" onclick="toggleMobileDropdown(this, 'home-mobile')">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
+                    </button>
+                    <div id="home-mobile" class="mobile-dropdown-content px-4">
+                        <a href="index.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary">Home 1</a>
+                        <a href="home-2.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary">Home 2</a>
+                    </div>
+                </div>
+
                 <a href="about.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">About</a>
                 <a href="packages.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Packages</a>
                 <a href="routes.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Routes</a>
                 <a href="rentals.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Rentals</a>
+                <!-- Guidelines marked as active -->
                 <a href="guidelines.html" class="block font-sans text-base py-2 font-medium text-primary">Guidelines</a>
                 <a href="adventure.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Adventure</a>
                 <a href="faq.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">FAQ</a>
@@ -266,13 +295,13 @@
                         <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
                     </button>
                     <div id="dashboard-mobile" class="mobile-dropdown-content px-4">
-                        <a href="user-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5"></i> User Dashboard</a>
-                        <a href="admin-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5"></i> Admin Panel</a>
+                        <a href="user-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5 text-center"></i> <span>User Dashboard</span></a>
+                        <a href="admin-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5 text-center"></i> <span>Admin Panel</span></a>
                     </div>
                 </div>
 
-                <a href="login.html" class="block font-sans text-base py-2 font-medium text-secondary hover:text-primary transition-colors mt-2">
-                    <i class="fas fa-sign-in-alt w-5"></i> Login Account
+                <a href="login.html" class="flex items-center gap-2 font-sans text-base py-2 font-medium text-secondary hover:text-primary transition-colors mt-2">
+                    <i class="fas fa-sign-in-alt w-5 text-center"></i> <span>Login Account</span>
                 </a>
             </div>
         </div>
@@ -293,7 +322,7 @@
                     <span class="text-white font-medium text-xs tracking-widest uppercase">Policies & Preparation</span>
                 </div>
                 
-                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-white mb-6 leading-[1.05]">
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-medium text-white mb-6 leading-[1.05]">
                     The PaddleNest <br/>
                     <span class="text-gradient">Code.</span>
                 </h1>
@@ -314,7 +343,7 @@
             <div class="container mx-auto px-4 md:px-8">
                 <div class="text-center mb-16 max-w-3xl mx-auto">
                     <span class="text-secondary font-medium tracking-widest uppercase text-sm block mb-2">Non-Negotiable</span>
-                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4">The Golden <span class="border-b-4 border-secondary">Rules</span></h2>
+                    <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)] mb-4">The Golden <span class="border-b-4 border-secondary">Rules</span></h2>
                     <p class="text-lg text-body-muted font-normal">Your safety is our absolute priority. These rules apply to both guided tours and independent rentals.</p>
                 </div>
                 
@@ -323,7 +352,7 @@
                         <div class="w-20 h-20 bg-[var(--bg-color)] border border-theme rounded-full flex items-center justify-center mb-6 text-primary group-hover:bg-primary group-hover:text-[#0A0A0A] group-hover:border-primary transition-all duration-300">
                             <i class="fas fa-life-ring text-3xl"></i>
                         </div>
-                        <h3 class="text-2xl font-display font-semibold text-[var(--text-color)] mb-4">Always Wear a PFD</h3>
+                        <h3 class="text-2xl font-display font-medium text-[var(--text-color)] mb-4">Always Wear a PFD</h3>
                         <p class="text-body-muted font-normal">Personal Flotation Devices are mandatory. You must wear and securely fasten your provided Coast Guard-approved PFD at all times while on the water.</p>
                     </div>
 
@@ -331,7 +360,7 @@
                         <div class="w-20 h-20 bg-[var(--bg-color)] border border-theme rounded-full flex items-center justify-center mb-6 text-secondary group-hover:bg-secondary group-hover:text-[#0A0A0A] group-hover:border-secondary transition-all duration-300">
                             <i class="fas fa-link text-3xl"></i>
                         </div>
-                        <h3 class="text-2xl font-display font-semibold text-[var(--text-color)] mb-4">Stay Attached</h3>
+                        <h3 class="text-2xl font-display font-medium text-[var(--text-color)] mb-4">Stay Attached</h3>
                         <p class="text-body-muted font-normal">Your ankle leash is your lifeline to the board. It must remain securely fastened to your ankle or calf for the entire duration of the expedition.</p>
                     </div>
 
@@ -339,7 +368,7 @@
                         <div class="w-20 h-20 bg-[var(--bg-color)] border border-theme rounded-full flex items-center justify-center mb-6 text-[var(--text-color)] group-hover:bg-[var(--text-color)] group-hover:text-[var(--bg-color)] group-hover:border-[var(--text-color)] transition-all duration-300">
                             <i class="fas fa-ear-listen text-3xl"></i>
                         </div>
-                        <h3 class="text-2xl font-display font-semibold text-[var(--text-color)] mb-4">Follow the Guide</h3>
+                        <h3 class="text-2xl font-display font-medium text-[var(--text-color)] mb-4">Follow the Guide</h3>
                         <p class="text-body-muted font-normal">During guided tours, the lead instructor's word is law. Follow their route, maintain the set pace, and adhere to their safety signals instantly.</p>
                     </div>
                 </div>
@@ -360,7 +389,7 @@
 
                     <div class="w-full lg:w-1/2">
                         <span class="text-primary font-medium tracking-widest uppercase text-sm block mb-4 border-l-4 border-primary pl-4">Environmental Duty</span>
-                        <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-8 leading-tight">Respect the <span class="text-gradient">Locals.</span></h2>
+                        <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)] mb-8 leading-tight">Respect the <span class="text-gradient">Locals.</span></h2>
                         
                         <p class="text-lg text-body-muted font-normal mb-10 leading-relaxed">
                             We are visitors in these ecosystems. Our goal is to leave the waterways exactly as we found them, ensuring they thrive for future generations.
@@ -370,21 +399,21 @@
                             <li class="flex items-start gap-4">
                                 <div class="w-10 h-10 rounded-full bg-primary/10 border border-primary text-primary flex items-center justify-center shrink-0 mt-1"><i class="fas fa-fish"></i></div>
                                 <div>
-                                    <h4 class="font-semibold text-[var(--text-color)] text-xl mb-1">Maintain Distance</h4>
+                                    <h4 class="font-medium text-[var(--text-color)] text-xl mb-1">Maintain Distance</h4>
                                     <p class="text-body-muted font-normal text-sm">Stay at least 50 yards away from all marine wildlife. Do not chase, feed, or attempt to touch animals under any circumstances.</p>
                                 </div>
                             </li>
                             <li class="flex items-start gap-4">
                                 <div class="w-10 h-10 rounded-full bg-primary/10 border border-primary text-primary flex items-center justify-center shrink-0 mt-1"><i class="fas fa-ban"></i></div>
                                 <div>
-                                    <h4 class="font-semibold text-[var(--text-color)] text-xl mb-1">No Single-Use Plastics</h4>
+                                    <h4 class="font-medium text-[var(--text-color)] text-xl mb-1">No Single-Use Plastics</h4>
                                     <p class="text-body-muted font-normal text-sm">Plastic water bottles, wrappers, and grocery bags are strictly prohibited on our boards. Bring reusable thermoses only.</p>
                                 </div>
                             </li>
                             <li class="flex items-start gap-4">
                                 <div class="w-10 h-10 rounded-full bg-primary/10 border border-primary text-primary flex items-center justify-center shrink-0 mt-1"><i class="fas fa-sun"></i></div>
                                 <div>
-                                    <h4 class="font-semibold text-[var(--text-color)] text-xl mb-1">Reef-Safe Sunscreen Only</h4>
+                                    <h4 class="font-medium text-[var(--text-color)] text-xl mb-1">Reef-Safe Sunscreen Only</h4>
                                     <p class="text-body-muted font-normal text-sm">Chemical sunscreens destroy marine life. Ensure your sunblock is mineral-based (zinc oxide or titanium dioxide) and marked Reef-Safe.</p>
                                 </div>
                             </li>
@@ -399,13 +428,13 @@
             <div class="container mx-auto px-4 md:px-8">
                 <div class="text-center mb-16 max-w-2xl mx-auto">
                     <span class="text-[var(--text-color)] font-medium tracking-widest uppercase text-sm block mb-2">Preparation</span>
-                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4">The <span class="border-b-4 border-[var(--text-color)]">Packing List</span></h2>
+                    <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)] mb-4">The <span class="border-b-4 border-[var(--text-color)]">Packing List</span></h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
                     <div class="bg-[var(--bg-color)] p-8 md:p-12 rounded-[2rem] border-2 border-primary shadow-sm relative overflow-hidden group">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100%] z-0"></div>
-                        <h3 class="text-3xl font-display font-semibold text-[var(--text-color)] mb-8 relative z-10 flex items-center gap-3">
+                        <h3 class="text-3xl font-display font-medium text-[var(--text-color)] mb-8 relative z-10 flex items-center gap-3">
                             <i class="fas fa-check-circle text-primary"></i> Essentials
                         </h3>
                         <ul class="space-y-5 relative z-10">
@@ -434,7 +463,7 @@
 
                     <div class="bg-[var(--bg-color)] p-8 md:p-12 rounded-[2rem] border-2 border-secondary shadow-sm relative overflow-hidden group">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-bl-[100%] z-0"></div>
-                        <h3 class="text-3xl font-display font-semibold text-[var(--text-color)] mb-8 relative z-10 flex items-center gap-3">
+                        <h3 class="text-3xl font-display font-medium text-[var(--text-color)] mb-8 relative z-10 flex items-center gap-3">
                             <i class="fas fa-times-circle text-secondary"></i> Prohibited
                         </h3>
                         <ul class="space-y-5 relative z-10">
@@ -472,18 +501,18 @@
                 <div class="flex flex-col lg:flex-row gap-16 items-center">
                     <div class="w-full lg:w-1/2">
                         <span class="text-primary font-medium tracking-widest uppercase text-sm block mb-2">Weather Policy</span>
-                        <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6">Mother Nature is <br/><span class="text-gradient">The Boss.</span></h2>
+                        <h2 class="text-4xl md:text-5xl font-display font-medium text-white mb-6">Mother Nature is <br/><span class="text-gradient">The Boss.</span></h2>
                         <p class="text-gray-400 font-medium text-lg mb-8 leading-relaxed">
                             We monitor coastal weather stations constantly. Expeditions go out in light rain, but we draw a strict line at unsafe conditions.
                         </p>
                         
                         <div class="bg-[#121212] border border-[#262626] rounded-2xl p-6 mb-6">
-                            <h4 class="text-white font-semibold text-lg mb-2 flex items-center gap-2"><i class="fas fa-wind text-primary"></i> High Winds & Lightning</h4>
+                            <h4 class="text-white font-medium text-lg mb-2 flex items-center gap-2"><i class="fas fa-wind text-primary"></i> High Winds & Lightning</h4>
                             <p class="text-gray-500 text-sm font-normal">Tours are automatically canceled if sustained winds exceed 15 knots or if lightning is detected within 10 miles. You will receive a full refund or free reschedule.</p>
                         </div>
                         
                         <div class="bg-[#121212] border border-[#262626] rounded-2xl p-6">
-                            <h4 class="text-white font-semibold text-lg mb-2 flex items-center gap-2"><i class="fas fa-calendar-xmark text-secondary"></i> Cancellation Window</h4>
+                            <h4 class="text-white font-medium text-lg mb-2 flex items-center gap-2"><i class="fas fa-calendar-xmark text-secondary"></i> Cancellation Window</h4>
                             <p class="text-gray-500 text-sm font-normal">Need to bail? We require 48 hours notice for a full refund. Cancellations within 48 hours receive a 50% credit toward future bookings.</p>
                         </div>
                     </div>
@@ -492,22 +521,22 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-[#171717] rounded-[2rem] p-8 text-center border border-white/5 flex flex-col justify-center h-48">
                                 <i class="fas fa-cloud-rain text-3xl text-gray-400 mb-3"></i>
-                                <span class="text-white font-semibold">Light Rain</span>
+                                <span class="text-white font-medium">Light Rain</span>
                                 <span class="text-primary text-xs uppercase tracking-widest font-medium mt-1">We Paddle</span>
                             </div>
                             <div class="bg-[#171717] rounded-[2rem] p-8 text-center border border-white/5 flex flex-col justify-center h-48">
                                 <i class="fas fa-bolt text-3xl text-secondary mb-3"></i>
-                                <span class="text-white font-semibold">Lightning</span>
+                                <span class="text-white font-medium">Lightning</span>
                                 <span class="text-secondary text-xs uppercase tracking-widest font-medium mt-1">Canceled</span>
                             </div>
                             <div class="bg-[#171717] rounded-[2rem] p-8 text-center border border-white/5 flex flex-col justify-center h-48">
                                 <i class="fas fa-wind text-3xl text-gray-400 mb-3"></i>
-                                <span class="text-white font-semibold">Wind &lt; 10kts</span>
+                                <span class="text-white font-medium">Wind &lt; 10kts</span>
                                 <span class="text-primary text-xs uppercase tracking-widest font-medium mt-1">We Paddle</span>
                             </div>
                             <div class="bg-[#171717] rounded-[2rem] p-8 text-center border border-white/5 flex flex-col justify-center h-48">
                                 <i class="fas fa-water text-3xl text-secondary mb-3"></i>
-                                <span class="text-white font-semibold">Small Craft Adv.</span>
+                                <span class="text-white font-medium">Small Craft Adv.</span>
                                 <span class="text-secondary text-xs uppercase tracking-widest font-medium mt-1">Canceled</span>
                             </div>
                         </div>
@@ -522,7 +551,7 @@
                     
                     <div class="relative z-10">
                         <i class="fas fa-file-signature text-5xl text-[var(--text-color)] mb-6"></i>
-                        <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-6">Understand the Code?</h2>
+                        <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)] mb-6">Understand the Code?</h2>
                         <p class="text-lg text-body-muted font-normal mb-10 max-w-xl mx-auto">By booking a tour or renting gear, you acknowledge and agree to abide by all PaddleNest safety and environmental guidelines.</p>
 
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -548,9 +577,9 @@
                         <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
                             <i class="fa-solid fa-water"></i>
                         </div>
-                        <span class="font-display text-2xl font-semibold text-white">Paddle<span class="text-primary">Nest</span></span>
+                        <span class="font-display text-2xl font-medium text-white">Paddle<span class="text-primary">Nest</span></span>
                     </a>
-                    <p class="text-gray-400 font-normal mb-6 text-sm leading-relaxed">
+                    <p class="text-gray-400 font-medium mb-6 text-sm leading-relaxed">
                         Premium eco-tours and paddleboard rentals bridging the gap between humans and nature.
                     </p>
                     <div class="flex gap-3">
@@ -561,7 +590,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Navigation</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Navigation</h4>
                     <ul class="space-y-3 font-normal text-sm">
                         <li><a href="about.html" class="hover:text-primary transition-colors block">About Us</a></li>
                         <li><a href="packages.html" class="hover:text-primary transition-colors block">Tours & Packages</a></li>
@@ -571,7 +600,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Legal</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Legal</h4>
                     <ul class="space-y-3 font-normal text-sm">
                         <li><a href="privacy.html" class="hover:text-primary transition-colors block">Privacy Policy</a></li>
                         <li><a href="terms.html" class="hover:text-primary transition-colors block">Terms of Service</a></li>
@@ -580,7 +609,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Contact HQ</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Contact HQ</h4>
                     <ul class="space-y-4 font-normal text-sm">
                         <li class="flex items-start gap-3 cursor-default">
                             <i class="fas fa-map-marker-alt mt-1 text-primary"></i>
@@ -637,12 +666,22 @@
         }
         updateTheme();
 
-        // --- RTL Toggle Logic ---
+        // --- RTL Toggle Logic (Fixed layout jump bug) ---
         const rtlToggleBtns = document.querySelectorAll('.rtl-toggle-btn');
         rtlToggleBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if(mobileMenu) {
+                    mobileMenu.style.transition = 'none';
+                }
+                
                 const currentDir = htmlElement.getAttribute('dir');
                 htmlElement.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+                
+                if(mobileMenu) {
+                    void mobileMenu.offsetWidth; 
+                    mobileMenu.style.transition = '';
+                }
             });
         });
 

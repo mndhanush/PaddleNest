@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="PaddleNest - Contact HQ and Launch Sites">
     <title>Contact Us | PaddleNest Minimalist Adventures</title>
-     <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
+    <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Fonts strictly loaded at 400 and 500 weights to maintain readability constraints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
     
     <script src="tailwind.js"></script>
     <script>
@@ -125,14 +126,22 @@
 
         /* Mobile Menu */
         .mobile-menu {
+            left: 0;
+            right: auto;
             transform: translateX(-100%); 
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
             background-color: var(--bg-color); 
+            visibility: hidden; 
         }
         html[dir="rtl"] .mobile-menu {
+            left: auto;
+            right: 0;
             transform: translateX(100%);
         }
-        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu.active { 
+            transform: translateX(0); 
+            visibility: visible;
+        }
         
         .mobile-dropdown-content {
             max-height: 0; 
@@ -180,31 +189,42 @@
 </head>
 <body class="antialiased overflow-x-hidden w-full relative">
 
+    <!-- Unified Navbar Structure -->
     <nav class="fixed w-full top-0 z-[100] glass-nav transition-all duration-300 py-2">
         <div class="max-w-[1920px] mx-auto px-4 md:px-6">
             <div class="flex items-center justify-between h-16 md:h-20 w-full gap-4">
                 
-                <a href="index.html" class="flex items-center gap-2 group shrink-0">
+                <a href="index.html" class="flex items-center gap-2 group flex-shrink-0 w-auto lg:w-[200px]">
                     <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
                         <i class="fa-solid fa-water text-lg"></i>
                     </div>
-                    <span class="font-display text-2xl font-semibold tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
+                    <span class="font-display text-2xl font-medium tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
                 </a>
 
                 <div class="hidden xl:flex flex-1 justify-center items-center gap-4 2xl:gap-6 px-4">
-                    <a href="index.html" class="nav-link text-sm 2xl:text-base">Home</a>
-                    <a href="about.html" class="nav-link text-sm 2xl:text-base">About</a>
-                    <a href="packages.html" class="nav-link text-sm 2xl:text-base">Packages</a>
-                    <a href="routes.html" class="nav-link text-sm 2xl:text-base">Routes</a>
-                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base">Rentals</a>
-                    <a href="guidelines.html" class="nav-link text-sm 2xl:text-base">Guidelines</a>
-                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base">Adventure</a>
-                    <a href="faq.html" class="nav-link text-sm 2xl:text-base">FAQ</a>
-                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base">Pricing</a>
-                    <a href="contact.html" class="nav-link active text-sm 2xl:text-base">Contact</a>
+                    
+                    <!-- Home Dropdown -->
+                    <div class="relative group cursor-pointer py-6">
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base font-medium">Home <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <div class="dropdown-menu absolute z-50 top-full left-0 mt-[-10px] w-40 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
+                            <a href="index.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] hover:text-primary rounded-lg transition-colors font-medium mb-1">Home 1</a>
+                            <a href="home-2.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] hover:text-primary rounded-lg transition-colors font-medium">Home 2</a>
+                        </div>
+                    </div>
+
+                    <a href="about.html" class="nav-link text-sm 2xl:text-base font-medium">About</a>
+                    <a href="packages.html" class="nav-link text-sm 2xl:text-base font-medium">Packages</a>
+                    <a href="routes.html" class="nav-link text-sm 2xl:text-base font-medium">Routes</a>
+                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base font-medium">Rentals</a>
+                    <a href="guidelines.html" class="nav-link text-sm 2xl:text-base font-medium">Guidelines</a>
+                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base font-medium">Adventure</a>
+                    <a href="faq.html" class="nav-link text-sm 2xl:text-base font-medium">FAQ</a>
+                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base font-medium">Pricing</a>
+                    <!-- Contact marked as Active -->
+                    <a href="contact.html" class="nav-link active text-sm 2xl:text-base font-medium">Contact</a>
 
                     <div class="relative group cursor-pointer py-6">
-                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base font-medium">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
                         <div class="dropdown-menu absolute z-50 top-full right-0 mt-[-10px] w-48 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
                             <a href="user-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1"><i class="fas fa-user w-5 text-primary mr-2"></i> User</a>
                             <a href="admin-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium"><i class="fas fa-shield-halved w-5 text-secondary mr-2"></i> Admin</a>
@@ -232,8 +252,9 @@
         </div>
     </nav>
 
+    <!-- Unified Mobile Menu Structure -->
     <div id="mobile-overlay" class="fixed inset-0 bg-black/80 z-[9998] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div>
-    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 ltr:left-0 rtl:right-0 z-[9999] w-[85%] max-w-sm border-r border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-color)]">
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 z-[9999] w-[85%] max-w-sm border-r border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden">
         <div class="p-5 flex flex-col h-full">
             
             <div class="flex items-center justify-between pb-6 border-b border-theme shrink-0">
@@ -241,7 +262,7 @@
                     <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
                         <i class="fa-solid fa-water text-xs"></i>
                     </div>
-                    <span class="font-display text-xl font-semibold text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
+                    <span class="font-display text-xl font-medium text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
                 </a>
                 
                 <div class="flex items-center gap-2 shrink-0">
@@ -261,7 +282,19 @@
             </div>
             
             <div class="flex-grow overflow-y-auto py-6 space-y-1">
-                <a href="index.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Home</a>
+                
+                <!-- Mobile Home Dropdown -->
+                <div>
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-left font-sans text-base py-2 text-[var(--text-color)] font-medium" onclick="toggleMobileDropdown(this, 'home-mobile')">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
+                    </button>
+                    <div id="home-mobile" class="mobile-dropdown-content px-4">
+                        <a href="index.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary">Home 1</a>
+                        <a href="home-2.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary">Home 2</a>
+                    </div>
+                </div>
+
                 <a href="about.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">About</a>
                 <a href="packages.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Packages</a>
                 <a href="routes.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Routes</a>
@@ -270,21 +303,22 @@
                 <a href="adventure.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Adventure</a>
                 <a href="faq.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">FAQ</a>
                 <a href="pricing.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Pricing</a>
+                <!-- Contact marked as active -->
                 <a href="contact.html" class="block font-sans text-base py-2 font-medium text-primary">Contact</a>
                 
                 <div class="pt-4 mt-2 border-t border-theme">
-                    <button class="mobile-dropdown-btn flex items-center gap-2 w-full text-left font-sans text-base py-2 text-[var(--text-color)] font-medium" onclick="toggleMobileDropdown(this, 'dashboard-mobile')">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-left font-sans text-base py-2 text-[var(--text-color)] font-medium" onclick="toggleMobileDropdown(this, 'dashboard-mobile')">
                         <span>Dashboard</span>
                         <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
                     </button>
                     <div id="dashboard-mobile" class="mobile-dropdown-content px-4">
-                        <a href="user-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5 mr-1"></i> User Dashboard</a>
-                        <a href="admin-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5 mr-1"></i> Admin Panel</a>
+                        <a href="user-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5 text-center"></i> <span>User Dashboard</span></a>
+                        <a href="admin-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5 text-center"></i> <span>Admin Panel</span></a>
                     </div>
                 </div>
 
                 <a href="login.html" class="flex items-center gap-2 font-sans text-base py-2 font-medium text-secondary hover:text-primary transition-colors mt-2">
-                    <i class="fas fa-sign-in-alt w-5"></i> Login Account
+                    <i class="fas fa-sign-in-alt w-5 text-center"></i> <span>Login Account</span>
                 </a>
             </div>
         </div>
@@ -306,7 +340,7 @@
                     <span class="text-white font-medium text-xs tracking-widest uppercase">We Are Online</span>
                 </div>
                 
-                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-white mb-6 leading-[1.05]">
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-medium text-white mb-6 leading-[1.05]">
                     Reach The <br/>
                     <span class="text-gradient">Basecamp.</span>
                 </h1>
@@ -316,7 +350,7 @@
                 </p>
 
                 <div class="flex gap-4">
-                    <a href="#dispatch" class="bg-primary text-[#0A0A0A] px-8 py-4 rounded-full font-semibold text-lg hover:bg-secondary transition-all shadow-[0_0_20px_rgba(0,212,255,0.4)] transform hover:-translate-y-1">
+                    <a href="#dispatch" class="bg-primary text-[#0A0A0A] px-8 py-4 rounded-full font-medium text-lg hover:bg-secondary transition-all shadow-[0_0_20px_rgba(0,212,255,0.4)] transform hover:-translate-y-1">
                         Send Dispatch
                     </a>
                 </div>
@@ -325,7 +359,7 @@
 
         <section class="py-24 bg-[var(--bg-color)] border-b border-theme transition-colors">
             <div class="container mx-auto px-4 md:px-8">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                     
                     <div class="bg-card border border-theme p-8 rounded-[2rem] hover:border-primary transition-all duration-300 group shadow-sm flex flex-col justify-between min-h-[220px]">
                         <div>
@@ -333,7 +367,7 @@
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <h3 class="text-lg font-medium text-body-muted uppercase tracking-widest text-xs mb-1">Email Support</h3>
-                            <p class="font-display font-semibold text-xl text-[var(--text-color)]">hello@paddlenest.com</p>
+                            <p class="font-display font-medium text-xl text-[var(--text-color)] break-all">hello@paddlenest.com</p>
                         </div>
                     </div>
 
@@ -343,7 +377,7 @@
                                 <i class="fas fa-phone"></i>
                             </div>
                             <h3 class="text-lg font-medium text-body-muted uppercase tracking-widest text-xs mb-1">Call Basecamp</h3>
-                            <p class="font-display font-semibold text-xl text-[var(--text-color)]">+1 (555) 123-4567</p>
+                            <p class="font-display font-medium text-xl text-[var(--text-color)]">+1 (555) 123-4567</p>
                         </div>
                     </div>
 
@@ -353,7 +387,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <h3 class="text-lg font-medium text-body-muted uppercase tracking-widest text-xs mb-1">Main HQ</h3>
-                            <p class="font-display font-semibold text-xl text-[var(--text-color)]">123 Ocean Drive,<br/>Coastal Bay, FL</p>
+                            <p class="font-display font-medium text-xl text-[var(--text-color)]">123 Ocean Drive,<br/>Coastal Bay, FL</p>
                         </div>
                     </div>
 
@@ -363,21 +397,21 @@
                                 <i class="fas fa-clock"></i>
                             </div>
                             <h3 class="text-lg font-medium text-body-muted uppercase tracking-widest text-xs mb-1">Operating Hours</h3>
-                            <p class="font-display font-semibold text-xl text-[var(--text-color)]">Mon - Sun<br/>06:00 AM - 08:00 PM</p>
+                            <p class="font-display font-medium text-xl text-[var(--text-color)]">Mon - Sun<br/>06:00 AM - 08:00 PM</p>
                         </div>
                     </div>
 
                 </div>
             </div>
         </section>
-
+        
         <section id="dispatch" class="py-24 md:py-32 bg-[var(--bg-color)] border-b border-theme transition-colors overflow-hidden">
             <div class="container mx-auto px-4 md:px-8">
                 <div class="flex flex-col lg:flex-row gap-16 lg:gap-24">
                     
                     <div class="w-full lg:w-5/12 flex flex-col justify-center">
                         <span class="text-primary font-medium tracking-widest uppercase text-sm block mb-4 border-l-4 border-primary pl-4">Inquiries</span>
-                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-semibold text-[var(--text-color)] mb-8 leading-tight">Drop us a <br/><span class="text-gradient">Message.</span></h2>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-[var(--text-color)] mb-8 leading-tight">Drop us a <br/><span class="text-gradient">Message.</span></h2>
                         <p class="text-lg text-body-muted font-medium mb-10 leading-relaxed max-w-md">
                             Whether you need to adjust an upcoming reservation, request a custom corporate package, or just want advice on which route fits your skill level, fill out the form. 
                         </p>
@@ -430,7 +464,7 @@
                                     <textarea id="message" rows="5" class="input-field w-full px-5 py-4 rounded-2xl resize-none" placeholder="Tell us about your adventure..." required></textarea>
                                 </div>
 
-                                <button type="submit" class="w-full bg-primary text-[#0A0A0A] py-5 rounded-2xl font-semibold text-lg hover:bg-secondary transition-all shadow-[0_0_20px_rgba(0,212,255,0.3)] mt-2">
+                                <button type="submit" class="w-full bg-primary text-[#0A0A0A] py-5 rounded-2xl font-medium text-lg hover:bg-secondary transition-all shadow-[0_0_20px_rgba(0,212,255,0.3)] mt-2">
                                     Send Dispatch
                                 </button>
                             </form>
@@ -445,25 +479,25 @@
             <div class="container mx-auto px-4 md:px-8">
                 <div class="text-center mb-16 max-w-2xl mx-auto">
                     <span class="text-secondary font-medium tracking-widest uppercase text-sm block mb-2">Support Directory</span>
-                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4">Quick <span class="border-b-4 border-secondary">Answers</span></h2>
+                    <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)] mb-4">Quick <span class="border-b-4 border-secondary">Answers</span></h2>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                     <div class="bg-card border border-theme p-8 rounded-3xl hover:border-primary transition-all duration-300">
                         <i class="fas fa-cloud-sun text-3xl text-primary mb-4"></i>
-                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-3">Weather Policies</h3>
+                        <h3 class="text-xl font-display font-medium text-[var(--text-color)] mb-3">Weather Policies</h3>
                         <p class="text-body-muted font-medium text-sm leading-relaxed">If adverse weather conditions prevent your launch, we offer full rescheduling or a 100% refund up to 2 hours prior to departure.</p>
                     </div>
 
                     <div class="bg-card border border-theme p-8 rounded-3xl hover:border-secondary transition-all duration-300">
                         <i class="fas fa-users text-3xl text-secondary mb-4"></i>
-                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-3">Group Bookings</h3>
+                        <h3 class="text-xl font-display font-medium text-[var(--text-color)] mb-3">Group Bookings</h3>
                         <p class="text-body-muted font-medium text-sm leading-relaxed">We accommodate groups of up to 24 paddlers. For parties larger than 8, please contact us directly to arrange specialized guides.</p>
                     </div>
 
                     <div class="bg-card border border-theme p-8 rounded-3xl hover:border-primary transition-all duration-300">
                         <i class="fas fa-box-open text-3xl text-primary mb-4"></i>
-                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-3">Gear Returns</h3>
+                        <h3 class="text-xl font-display font-medium text-[var(--text-color)] mb-3">Gear Returns</h3>
                         <p class="text-body-muted font-medium text-sm leading-relaxed">All gear must be returned to the original launch site unless a one-way expedition was pre-arranged with our dispatch team.</p>
                     </div>
                 </div>
@@ -481,9 +515,9 @@
                     </div>
 
                     <div class="text-center md:text-left flex-grow">
-                        <h3 class="text-3xl font-display font-semibold text-white mb-3">Corporate & Partnerships</h3>
+                        <h3 class="text-3xl font-display font-medium text-white mb-3">Corporate & Partnerships</h3>
                         <p class="text-gray-400 font-medium mb-6 leading-relaxed max-w-2xl">Looking to host a team-building retreat or collaborate on an eco-friendly brand activation? We build custom itineraries tailored for professional groups and environmental initiatives.</p>
-                        <a href="#dispatch" class="inline-block bg-secondary text-[#0A0A0A] px-8 py-3.5 rounded-full font-semibold text-lg hover:bg-white transition-all shadow-[0_0_20px_rgba(255,107,53,0.4)]">
+                        <a href="#dispatch" class="inline-block bg-secondary text-[#0A0A0A] px-8 py-3.5 rounded-full font-medium text-lg hover:bg-white transition-all shadow-[0_0_20px_rgba(255,107,53,0.4)]">
                             Partner With Us
                         </a>
                     </div>
@@ -502,10 +536,10 @@
                             <div class="w-14 h-14 bg-secondary/10 rounded-full flex items-center justify-center text-secondary text-2xl"><i class="fab fa-youtube"></i></div>
                             <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center text-primary text-2xl"><i class="fab fa-tiktok"></i></div>
                         </div>
-                        <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4 leading-tight">Join Our <span class="text-primary">Community</span></h2>
-                        <p class="text-lg text-body-muted font-medium max-w-lg mx-auto mb-10">Follow us for weekly route inspiration, safety tips, and features from paddlers across the coast. Tag your journey with <strong class="text-[var(--text-color)] font-semibold">#PaddleNest</strong> to be featured.</p>
+                        <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)] mb-4 leading-tight">Join Our <span class="text-primary">Community</span></h2>
+                        <p class="text-lg text-body-muted font-medium max-w-lg mx-auto mb-10">Follow us for weekly route inspiration, safety tips, and features from paddlers across the coast. Tag your journey with <strong class="text-[var(--text-color)] font-medium">#PaddleNest</strong> to be featured.</p>
 
-                        <a href="#" class="bg-transparent border-2 border-[var(--text-color)] text-[var(--text-color)] px-8 py-3.5 rounded-full font-semibold hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition-colors">
+                        <a href="#" class="bg-transparent border-2 border-[var(--text-color)] text-[var(--text-color)] px-8 py-3.5 rounded-full font-medium hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition-colors">
                             Explore The Gallery
                         </a>
                     </div>
@@ -523,7 +557,7 @@
                         <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
                             <i class="fa-solid fa-water"></i>
                         </div>
-                        <span class="font-display text-2xl font-semibold text-white">Paddle<span class="text-primary">Nest</span></span>
+                        <span class="font-display text-2xl font-medium text-white">Paddle<span class="text-primary">Nest</span></span>
                     </a>
                     <p class="text-gray-400 font-medium mb-6 text-sm leading-relaxed">
                         Premium eco-tours and paddleboard rentals bridging the gap between humans and nature.
@@ -536,7 +570,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Navigation</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Navigation</h4>
                     <ul class="space-y-3 font-medium text-sm">
                         <li><a href="about.html" class="hover:text-primary transition-colors block">About Us</a></li>
                         <li><a href="packages.html" class="hover:text-primary transition-colors block">Tours & Packages</a></li>
@@ -546,7 +580,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Legal</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Legal</h4>
                     <ul class="space-y-3 font-medium text-sm">
                         <li><a href="privacy.html" class="hover:text-primary transition-colors block">Privacy Policy</a></li>
                         <li><a href="terms.html" class="hover:text-primary transition-colors block">Terms of Service</a></li>
@@ -555,7 +589,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Contact HQ</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Contact HQ</h4>
                     <ul class="space-y-4 font-medium text-sm">
                         <li class="flex items-start gap-3 cursor-default">
                             <i class="fas fa-map-marker-alt mt-1 text-primary"></i>
@@ -576,8 +610,13 @@
     </footer>
 
     <script>
-        // --- Theme Toggle Logic ---
         const htmlElement = document.documentElement;
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        // --- Theme Toggle Logic ---
         const themeToggleBtns = document.querySelectorAll('.theme-toggle');
 
         function updateTheme() {
@@ -612,6 +651,24 @@
         }
         updateTheme();
 
+        // --- RTL Toggle Logic (Fixed layout jump bug) ---
+        const rtlToggleBtns = document.querySelectorAll('.rtl-toggle-btn');
+        rtlToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if(mobileMenu) {
+                    mobileMenu.style.transition = 'none';
+                }
+                
+                const currentDir = htmlElement.getAttribute('dir');
+                htmlElement.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+                
+                if(mobileMenu) {
+                    void mobileMenu.offsetWidth; 
+                    mobileMenu.style.transition = '';
+                }
+            });
+        });
+
         // --- Navbar Scroll Effect ---
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
@@ -623,11 +680,6 @@
         });
 
         // --- Mobile Menu Logic ---
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileOverlay = document.getElementById('mobile-overlay');
-        const closeMobileMenu = document.getElementById('close-mobile-menu');
-
         function openMobileMenu() {
             mobileMenu.classList.add('active');
             mobileOverlay.classList.remove('hidden');
@@ -669,28 +721,6 @@
             targetContent.classList.toggle('active');
             btnElement.classList.toggle('active');
         }
-
-        // --- Fixed RTL Toggle Logic ---
-        const rtlToggleBtns = document.querySelectorAll('.rtl-toggle-btn');
-        rtlToggleBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 1. Temporarily disable the CSS transition on the mobile menu
-                if(mobileMenu) {
-                    mobileMenu.style.transition = 'none';
-                }
-                
-                // 2. Change the document direction
-                const currentDir = htmlElement.getAttribute('dir');
-                htmlElement.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
-                
-                // 3. Force the browser to register the layout change instantly 
-                if(mobileMenu) {
-                    void mobileMenu.offsetWidth; 
-                    // 4. Re-enable the transition for normal menu open/close clicks
-                    mobileMenu.style.transition = '';
-                }
-            });
-        });
     </script>
 </body>
-</html> 
+</html>

@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="PaddleNest - Frequently Asked Questions and Support">
     <title>FAQ & Support | PaddleNest Minimalist Adventures</title>
-     <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
+    <link rel="icon" type="image/jpeg" href="Images/WhatsApp Image 2026-05-07 at 15.59.02.jpg">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <!-- Fonts strictly loaded at 400 and 500 weights to maintain readability constraints -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Outfit:wght@400;500&display=swap" rel="stylesheet">
     
     <script src="tailwind.js"></script>
     <script>
@@ -69,6 +70,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
 
         .text-body-muted { color: var(--text-muted); transition: color 0.3s ease; }
@@ -125,14 +127,22 @@
 
         /* Mobile Menu */
         .mobile-menu {
+            left: 0;
+            right: auto;
             transform: translateX(-100%); 
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s;
             background-color: var(--bg-color); 
+            visibility: hidden; 
         }
         html[dir="rtl"] .mobile-menu {
+            left: auto;
+            right: 0;
             transform: translateX(100%);
         }
-        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu.active { 
+            transform: translateX(0); 
+            visibility: visible;
+        }
         
         .mobile-dropdown-content {
             max-height: 0; 
@@ -170,6 +180,7 @@
 </head>
 <body class="antialiased overflow-x-hidden w-full relative">
 
+    <!-- Unified Navbar Structure -->
     <nav class="fixed w-full top-0 z-[100] glass-nav transition-all duration-300 py-2">
         <div class="max-w-[1920px] mx-auto px-4 md:px-6">
             <div class="flex items-center justify-between h-16 md:h-20 w-full gap-4">
@@ -178,23 +189,33 @@
                     <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-[#0A0A0A] shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
                         <i class="fa-solid fa-water text-lg"></i>
                     </div>
-                    <span class="font-display text-2xl font-semibold tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
+                    <span class="font-display text-2xl font-medium tracking-tight text-[var(--text-color)]">Paddle<span class="text-primary">Nest</span></span>
                 </a>
 
                 <div class="hidden xl:flex flex-1 justify-center items-center gap-4 2xl:gap-6 px-4">
-                    <a href="index.html" class="nav-link text-sm 2xl:text-base">Home</a>
-                    <a href="about.html" class="nav-link text-sm 2xl:text-base">About</a>
-                    <a href="packages.html" class="nav-link text-sm 2xl:text-base">Packages</a>
-                    <a href="routes.html" class="nav-link text-sm 2xl:text-base">Routes</a>
-                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base">Rentals</a>
-                    <a href="guidelines.html" class="nav-link text-sm 2xl:text-base">Guidelines</a>
-                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base">Adventure</a>
-                    <a href="faq.html" class="nav-link active text-sm 2xl:text-base">FAQ</a>
-                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base">Pricing</a>
-                    <a href="contact.html" class="nav-link text-sm 2xl:text-base">Contact</a>
+                    
+                    <!-- Home Dropdown -->
+                    <div class="relative group cursor-pointer py-6">
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base font-medium">Home <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <div class="dropdown-menu absolute z-50 top-full left-0 mt-[-10px] w-40 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
+                            <a href="index.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] hover:text-primary rounded-lg transition-colors font-medium mb-1">Home 1</a>
+                            <a href="home-2.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] hover:text-primary rounded-lg transition-colors font-medium">Home 2</a>
+                        </div>
+                    </div>
+
+                    <a href="about.html" class="nav-link text-sm 2xl:text-base font-medium">About</a>
+                    <a href="packages.html" class="nav-link text-sm 2xl:text-base font-medium">Packages</a>
+                    <a href="routes.html" class="nav-link text-sm 2xl:text-base font-medium">Routes</a>
+                    <a href="rentals.html" class="nav-link text-sm 2xl:text-base font-medium">Rentals</a>
+                    <a href="guidelines.html" class="nav-link text-sm 2xl:text-base font-medium">Guidelines</a>
+                    <a href="adventure.html" class="nav-link text-sm 2xl:text-base font-medium">Adventure</a>
+                    <!-- FAQ marked as Active -->
+                    <a href="faq.html" class="nav-link active text-sm 2xl:text-base font-medium">FAQ</a>
+                    <a href="pricing.html" class="nav-link text-sm 2xl:text-base font-medium">Pricing</a>
+                    <a href="contact.html" class="nav-link text-sm 2xl:text-base font-medium">Contact</a>
 
                     <div class="relative group cursor-pointer py-6">
-                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
+                        <span class="nav-link flex items-center gap-1 text-sm 2xl:text-base font-medium">Dashboard <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
                         <div class="dropdown-menu absolute z-50 top-full right-0 mt-[-10px] w-48 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
                             <a href="user-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1"><i class="fas fa-user w-5 text-primary mr-2"></i> User</a>
                             <a href="admin-dashboard.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] rounded-lg transition-colors font-medium"><i class="fas fa-shield-halved w-5 text-secondary mr-2"></i> Admin</a>
@@ -222,8 +243,9 @@
         </div>
     </nav>
 
-    <div id="mobile-overlay" class="xl:hidden fixed inset-0 bg-black/80 z-[9998] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div>
-    <div id="mobile-menu" class="mobile-menu xl:hidden fixed inset-y-0 ltr:left-0 rtl:right-0 z-[9999] w-[85%] max-w-sm border-r border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden bg-[var(--bg-color)]">
+    <!-- Unified Mobile Menu Structure -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/80 z-[9998] hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm"></div>
+    <div id="mobile-menu" class="mobile-menu fixed inset-y-0 z-[9999] w-[85%] max-w-sm border-r border-theme shadow-2xl flex flex-col h-[100dvh] overflow-hidden">
         <div class="p-5 flex flex-col h-full">
             
             <div class="flex items-center justify-between pb-6 border-b border-theme shrink-0">
@@ -231,7 +253,7 @@
                     <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
                         <i class="fa-solid fa-water text-xs"></i>
                     </div>
-                    <span class="font-display text-xl font-semibold text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
+                    <span class="font-display text-xl font-medium text-[var(--text-color)] hidden sm:block">Paddle<span class="text-primary">Nest</span></span>
                 </a>
                 
                 <div class="flex items-center gap-2 shrink-0">
@@ -251,13 +273,26 @@
             </div>
             
             <div class="flex-grow overflow-y-auto py-6 space-y-1">
-                <a href="index.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Home</a>
+                
+                <!-- Mobile Home Dropdown -->
+                <div>
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-left font-sans text-base py-2 text-[var(--text-color)] font-medium" onclick="toggleMobileDropdown(this, 'home-mobile')">
+                        <span>Home</span>
+                        <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
+                    </button>
+                    <div id="home-mobile" class="mobile-dropdown-content px-4">
+                        <a href="index.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary">Home 1</a>
+                        <a href="home-2.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary">Home 2</a>
+                    </div>
+                </div>
+
                 <a href="about.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">About</a>
                 <a href="packages.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Packages</a>
                 <a href="routes.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Routes</a>
                 <a href="rentals.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Rentals</a>
                 <a href="guidelines.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Guidelines</a>
                 <a href="adventure.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Adventure</a>
+                <!-- FAQ marked as active -->
                 <a href="faq.html" class="block font-sans text-base py-2 font-medium text-primary">FAQ</a>
                 <a href="pricing.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Pricing</a>
                 <a href="contact.html" class="block font-sans text-base py-2 font-medium text-[var(--text-color)] hover:text-primary">Contact</a>
@@ -268,13 +303,13 @@
                         <i class="fas fa-chevron-down dropdown-arrow text-xs text-[var(--text-muted)]"></i>
                     </button>
                     <div id="dashboard-mobile" class="mobile-dropdown-content px-4">
-                        <a href="user-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5"></i> User Dashboard</a>
-                        <a href="admin-dashboard.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5"></i> Admin Panel</a>
+                        <a href="user-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-primary"><i class="fas fa-user text-primary w-5 text-center"></i> <span>User Dashboard</span></a>
+                        <a href="admin-dashboard.html" class="flex items-center gap-2 py-2.5 font-medium text-[var(--text-color)] hover:text-secondary"><i class="fas fa-shield text-secondary w-5 text-center"></i> <span>Admin Panel</span></a>
                     </div>
                 </div>
 
-                <a href="login.html" class="block font-sans text-base py-2 font-medium text-secondary hover:text-primary transition-colors mt-2">
-                    <i class="fas fa-sign-in-alt w-5"></i> Login Account
+                <a href="login.html" class="flex items-center gap-2 font-sans text-base py-2 font-medium text-secondary hover:text-primary transition-colors mt-2">
+                    <i class="fas fa-sign-in-alt w-5 text-center"></i> <span>Login Account</span>
                 </a>
             </div>
         </div>
@@ -291,7 +326,7 @@
             
             <div class="container mx-auto px-4 md:px-8 relative z-20 text-center flex flex-col items-center w-full">
                 
-                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-semibold text-white mb-6 leading-[1.05]">
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-medium text-white mb-6 leading-[1.05]">
                     How Can We <br/>
                     <span class="text-gradient">Help You?</span>
                 </h1>
@@ -320,7 +355,7 @@
                         <div class="w-16 h-16 bg-[var(--bg-color)] border border-theme rounded-full flex items-center justify-center text-primary text-2xl mx-auto mb-6 group-hover:bg-primary group-hover:text-[#0A0A0A] transition-colors shadow-sm">
                             <i class="fas fa-compass"></i>
                         </div>
-                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-2">Guided Tours</h3>
+                        <h3 class="text-xl font-display font-medium text-[var(--text-color)] mb-2">Guided Tours</h3>
                         <p class="text-body-muted text-sm font-medium">Itineraries, guides, and group sizes.</p>
                     </div>
 
@@ -328,7 +363,7 @@
                         <div class="w-16 h-16 bg-[var(--bg-color)] border border-theme rounded-full flex items-center justify-center text-secondary text-2xl mx-auto mb-6 group-hover:bg-secondary group-hover:text-[#0A0A0A] transition-colors shadow-sm">
                             <i class="fas fa-tools"></i>
                         </div>
-                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-2">Gear Rentals</h3>
+                        <h3 class="text-xl font-display font-medium text-[var(--text-color)] mb-2">Gear Rentals</h3>
                         <p class="text-body-muted text-sm font-medium">Pickup, drop-off, and equipment care.</p>
                     </div>
 
@@ -336,7 +371,7 @@
                         <div class="w-16 h-16 bg-[var(--bg-color)] border border-theme rounded-full flex items-center justify-center text-primary text-2xl mx-auto mb-6 group-hover:bg-primary group-hover:text-[#0A0A0A] transition-colors shadow-sm">
                             <i class="fas fa-life-ring"></i>
                         </div>
-                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-2">Safety Rules</h3>
+                        <h3 class="text-xl font-display font-medium text-[var(--text-color)] mb-2">Safety Rules</h3>
                         <p class="text-body-muted text-sm font-medium">Weather policies and emergency protocols.</p>
                     </div>
 
@@ -344,7 +379,7 @@
                         <div class="w-16 h-16 bg-[var(--bg-color)] border border-theme rounded-full flex items-center justify-center text-secondary text-2xl mx-auto mb-6 group-hover:bg-secondary group-hover:text-[#0A0A0A] transition-colors shadow-sm">
                             <i class="fas fa-credit-card"></i>
                         </div>
-                        <h3 class="text-xl font-display font-semibold text-[var(--text-color)] mb-2">Billing & Policies</h3>
+                        <h3 class="text-xl font-display font-medium text-[var(--text-color)] mb-2">Billing & Policies</h3>
                         <p class="text-body-muted text-sm font-medium">Cancellations, refunds, and waivers.</p>
                     </div>
 
@@ -356,7 +391,7 @@
             <div class="container mx-auto px-4 md:px-8 max-w-4xl">
                 <div class="text-center mb-16">
                     <span class="text-primary font-medium tracking-widest uppercase text-sm block mb-2">The Basics</span>
-                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-4">Top <span class="border-b-4 border-primary">Questions</span></h2>
+                    <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)] mb-4">Top <span class="border-b-4 border-primary">Questions</span></h2>
                 </div>
 
                 <div class="space-y-4">
@@ -425,7 +460,7 @@
 
                     <div class="w-full lg:w-1/2">
                         <span class="text-secondary font-medium tracking-widest uppercase text-sm block mb-4 border-l-4 border-secondary pl-4">Equipment</span>
-                        <h2 class="text-4xl md:text-5xl font-display font-semibold text-[var(--text-color)] mb-8 leading-tight">Safety & <span class="text-gradient">Gear.</span></h2>
+                        <h2 class="text-4xl md:text-5xl font-display font-medium text-[var(--text-color)] mb-8 leading-tight">Safety & <span class="text-gradient">Gear.</span></h2>
                         
                         <div class="space-y-6">
                             <div class="border-b border-theme pb-6">
@@ -455,7 +490,7 @@
             
             <div class="container mx-auto px-4 md:px-8 relative z-10">
                 <div class="text-center mb-16 max-w-2xl mx-auto">
-                    <h2 class="text-4xl md:text-5xl font-display font-semibold text-white mb-6">Booking <span class="text-secondary">Policies</span></h2>
+                    <h2 class="text-4xl md:text-5xl font-display font-medium text-white mb-6">Booking <span class="text-secondary">Policies</span></h2>
                     <p class="text-lg text-gray-400 font-medium">Clear, transparent rules regarding your money and reservations.</p>
                 </div>
                 
@@ -501,11 +536,11 @@
                     
                     <div class="relative z-10">
                         <i class="fas fa-headset text-5xl text-[var(--text-color)] mb-6"></i>
-                        <h2 class="text-4xl md:text-6xl font-display font-semibold text-[var(--text-color)] mb-6 leading-tight">Still Need <br/>Assistance?</h2>
+                        <h2 class="text-4xl md:text-6xl font-display font-medium text-[var(--text-color)] mb-6 leading-tight">Still Need <br/>Assistance?</h2>
                         <p class="text-xl text-body-muted font-medium mb-10 max-w-xl mx-auto">Can't find the answer you're looking for? Our HQ team is standing by to help you plan your perfect expedition.</p>
 
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="contact.html" class="bg-[var(--text-color)] text-[var(--bg-color)] px-10 py-5 rounded-full font-semibold text-lg hover:bg-primary hover:text-[#0A0A0A] transition-all shadow-lg hover:-translate-y-1 border-2 border-transparent">
+                            <a href="contact.html" class="bg-[var(--text-color)] text-[var(--bg-color)] px-10 py-5 rounded-full font-medium text-lg hover:bg-primary hover:text-[#0A0A0A] transition-all shadow-lg hover:-translate-y-1 border-2 border-transparent">
                                 Contact HQ
                             </a>
                             <a href="tel:+15551234567" class="bg-transparent border-2 border-[var(--text-color)] text-[var(--text-color)] px-10 py-5 rounded-full font-medium text-lg hover:bg-[var(--text-color)] hover:text-[var(--bg-color)] transition-all">
@@ -527,7 +562,7 @@
                         <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-[#0A0A0A]">
                             <i class="fa-solid fa-water"></i>
                         </div>
-                        <span class="font-display text-2xl font-semibold text-white">Paddle<span class="text-primary">Nest</span></span>
+                        <span class="font-display text-2xl font-medium text-white">Paddle<span class="text-primary">Nest</span></span>
                     </a>
                     <p class="text-gray-400 font-medium mb-6 text-sm leading-relaxed">
                         Premium eco-tours and paddleboard rentals bridging the gap between humans and nature.
@@ -540,7 +575,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Navigation</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Navigation</h4>
                     <ul class="space-y-3 font-medium text-sm">
                         <li><a href="about.html" class="hover:text-primary transition-colors block">About Us</a></li>
                         <li><a href="packages.html" class="hover:text-primary transition-colors block">Tours & Packages</a></li>
@@ -550,7 +585,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Legal</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Legal</h4>
                     <ul class="space-y-3 font-medium text-sm">
                         <li><a href="privacy.html" class="hover:text-primary transition-colors block">Privacy Policy</a></li>
                         <li><a href="terms.html" class="hover:text-primary transition-colors block">Terms of Service</a></li>
@@ -559,7 +594,7 @@
                 </div>
 
                 <div>
-                    <h4 class="font-semibold text-lg mb-6 text-white font-display">Contact HQ</h4>
+                    <h4 class="font-medium text-lg mb-6 text-white font-display">Contact HQ</h4>
                     <ul class="space-y-4 font-medium text-sm">
                         <li class="flex items-start gap-3 cursor-default">
                             <i class="fas fa-map-marker-alt mt-1 text-primary"></i>
@@ -580,8 +615,13 @@
     </footer>
 
     <script>
-        // --- Theme Toggle Logic ---
         const htmlElement = document.documentElement;
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+        // --- Theme Toggle Logic ---
         const themeToggleBtns = document.querySelectorAll('.theme-toggle');
 
         function updateTheme() {
@@ -616,12 +656,21 @@
         }
         updateTheme();
 
-        // --- RTL Toggle Logic ---
+        // --- RTL Toggle Logic (Fixed layout jump bug) ---
         const rtlToggleBtns = document.querySelectorAll('.rtl-toggle-btn');
         rtlToggleBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                if(mobileMenu) {
+                    mobileMenu.style.transition = 'none';
+                }
+                
                 const currentDir = htmlElement.getAttribute('dir');
                 htmlElement.setAttribute('dir', currentDir === 'ltr' ? 'rtl' : 'ltr');
+                
+                if(mobileMenu) {
+                    void mobileMenu.offsetWidth; 
+                    mobileMenu.style.transition = '';
+                }
             });
         });
 
@@ -636,11 +685,6 @@
         });
 
         // --- Mobile Menu Logic ---
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileOverlay = document.getElementById('mobile-overlay');
-        const closeMobileMenu = document.getElementById('close-mobile-menu');
-
         function openMobileMenu() {
             mobileMenu.classList.add('active');
             mobileOverlay.classList.remove('hidden');
