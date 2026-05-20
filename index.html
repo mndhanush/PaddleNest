@@ -191,7 +191,7 @@
                     <div class="relative group cursor-pointer py-6">
                         <span class="nav-link active flex items-center gap-1 text-sm 2xl:text-base font-medium">Home <i class="fas fa-chevron-down text-[10px] ml-1"></i></span>
                         <div class="dropdown-menu absolute z-50 top-full left-0 mt-[-10px] w-40 bg-card border border-theme shadow-xl rounded-xl overflow-hidden p-2">
-                            <a href="index.html" class="flex items-center px-4 py-3 text-primary bg-[var(--bg-color)] rounded-lg transition-colors font-medium mb-1">Home 1</a>
+                            <a href="index.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] hover:text-primary rounded-lg transition-colors font-medium mb-1">Home 1</a>
                             <a href="home-2.html" class="flex items-center px-4 py-3 text-[var(--text-color)] hover:bg-[var(--bg-color)] hover:text-primary rounded-lg transition-colors font-medium">Home 2</a>
                         </div>
                     </div>
@@ -266,14 +266,14 @@
             
             <div class="flex-grow overflow-y-auto py-6 space-y-1">
                 
-                <!-- Mobile Home Dropdown marked as Active -->
+                <!-- Mobile Home Dropdown (Highlight ONLY on the Home button) -->
                 <div>
-                    <button class="mobile-dropdown-btn active flex items-center justify-between w-full text-left font-sans text-base py-2 text-primary font-medium" onclick="toggleMobileDropdown(this, 'home-mobile')">
+                    <button class="mobile-dropdown-btn flex items-center justify-between w-full text-left font-sans text-base py-2 text-primary font-medium" onclick="toggleMobileDropdown(this, 'home-mobile')">
                         <span>Home</span>
                         <i class="fas fa-chevron-down dropdown-arrow text-xs text-primary"></i>
                     </button>
-                    <div id="home-mobile" class="mobile-dropdown-content active px-4">
-                        <a href="index.html" class="block py-2.5 font-medium text-primary">Home 1</a>
+                    <div id="home-mobile" class="mobile-dropdown-content px-4">
+                        <a href="index.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary">Home 1</a>
                         <a href="home-2.html" class="block py-2.5 font-medium text-[var(--text-color)] hover:text-primary">Home 2</a>
                     </div>
                 </div>
